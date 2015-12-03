@@ -15,13 +15,19 @@ export const Images = React.createClass({
     let imageComponents = [];
 
     this.props.images.map(image => {
-      imageComponents.push(<Image image={image} key={image.get('id')} />);
+      imageComponents.push(
+        <Image
+          updateModel={this.props.updateModel}
+          image={image}
+          key={image.get('id')}
+        />
+      );
     });
 
     return <div>
         <h2>Images</h2>
 
-        <button onClick={() => this.props.createModel('images')}>Luo</button>
+        <button onClick={() => this.props.createModel('images')}>Luo Kuva</button>
 
         <div className="images__list">
           {imageComponents}

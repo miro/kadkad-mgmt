@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
-
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {reduxForm} from 'redux-form';
 import classNames from 'classnames';
@@ -27,7 +25,6 @@ var PersonFormComponent = React.createClass({
   }
 });
 var PersonForm = reduxForm({
-  form: 'personForm',
   fields: ['fullName', 'displayName']
 })(PersonFormComponent);
 
@@ -37,17 +34,19 @@ var PersonForm = reduxForm({
 export default React.createClass({
   mixins: [PureRenderMixin],
 
-  getInitialState: () => { return { editMode: false } },
-
   update(newProps) {
     this.props.updateModel(this.props.person.get('id'), 'persons', newProps);
+  },
+
+  toggleEditMode() {
+    this.update({ meta: { editMode: !this.props.person.getIn(['meta', 'editMode']) }});
   },
 
 
   render: function() {
     let model = this.props.person.toJS();
 
-    if (model.meta && model.meta.editMode) {
+    if (this.props.person.getIn(['meta', 'editMode'])) {
       let formValues = { fullName: model.fullName, displayName: model.displayName };
 
       return <div>
@@ -60,7 +59,7 @@ export default React.createClass({
           initialValues={formValues}
           form={'personForm' + model.id} // so that each form will have different store.. is this wrong?
         />
-        <button onClick={this.toggleEditMode}>cancel</button>
+        <button onClick={this.toggleEditMode}>peruuta</button>
       </div>;
     }
     else {
@@ -68,9 +67,7 @@ export default React.createClass({
         <p>#{model.id}</p>
         <p>Koko nimi: {model.fullName}</p>
         <p>Näytettävä nimi: {model.displayName}</p>
-        <button onClick={() => {
-          this.update({ meta: { editMode: true }});
-        }}>edit</button>
+        <button onClick={this.toggleEditMode}>edit</button>
       </div>;
     }
   }

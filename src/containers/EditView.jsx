@@ -22,6 +22,7 @@ export const EditView = React.createClass({
 
         <Images
           images={images}
+          persons={persons}
           dispatch={dispatch}
           {...bindActionCreators(actionCreators, dispatch)} />
 

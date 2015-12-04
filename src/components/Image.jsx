@@ -1,7 +1,10 @@
 import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {reduxForm} from 'redux-form';
+import Select from 'react-select';
 import classNames from 'classnames';
+
+
 
 
 let ImageFormComponent = React.createClass({
@@ -27,8 +30,6 @@ let ImageForm = reduxForm({
 })(ImageFormComponent);
 
 
-
-
 export default React.createClass({
   mixins: [PureRenderMixin],
 
@@ -45,6 +46,12 @@ export default React.createClass({
     this.update(newProps);
   },
 
+  handleSelectChange(selectedItems) {
+    let linkedPersons = selectedItems.map(item => item.value).join(",");
+    console.log('linked list is', linkedPersons);
+    this.update({ linkedPersons: linkedPersons });
+  },
+
   update(newProps) {
     this.props.updateModel(this.props.image.get('id'), 'images', newProps);
   },
@@ -52,15 +59,28 @@ export default React.createClass({
 
   render: function() {
     let model = this.props.image.toJS();
+    console.log(model.linkedPersons);
 
     if (this.props.image.getIn(['meta', 'editMode'])) {
       let formValues = { title: model.title, description: model.description };
+      let personLinkValues = this.props.persons.map(person => {
+        return { value: person.get('id').toString(), label: person.get('id') + ' ' + person.get('displayName') };
+      });
+
+      console.log(personLinkValues);
 
       return <div>
         <ImageForm
           onSubmit={this.handleFormSubmit}
           initialValues={formValues}
           form={'imageForm-' + model.id}/>
+        <Select
+            name="image-person-keke"
+            options={personLinkValues}
+            multi={true}
+            onChange={this.handleSelectChange}
+            value={model.linkedPersons}
+        />
       </div>;
     }
     else {

@@ -32,6 +32,7 @@
     "react-dom": "^0.14.0",
     "react-redux": "^3.1.0",
     "react-router": "^1.0.0-rc3",
+    "react-select": "^1.0.0-beta6",
     "redux": "^3.0.4",
     "redux-form": "^3.1.0"
   }

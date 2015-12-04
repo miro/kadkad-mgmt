@@ -5,7 +5,8 @@ export function createModel(modelType) {
     modelType, // TODO: enum or something?
     model: {
       id: dummyIdGenerator(),
-      fullName: 'testName',
+      fullName: 'Koko Nimi',
+      displayName: 'Näyttönimi',
       meta: { editMode: false }
     }
   }

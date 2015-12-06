@@ -41,17 +41,6 @@ export const EditView = React.createClass({
 });
 
 
-function getItemArrayFromState(state, itemType) {
-  if (state.items.get(itemType)) {
-    return state.items.get(itemType).toArray();
-  }
-  else {
-    console.error('Corresponding items from state were not found by itemType', itemType);
-    return null;
-  }
-}
-
-
 function mapStateToProps(state) {
   return {
     images: state.items.get('images').toArray(),

@@ -3,13 +3,11 @@ import {connect} from 'react-redux';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import classNames from 'classnames';
 
-import * as actionCreators from '../actions/action_creators';
 import Image from './Image';
 
 
 export const Images = React.createClass({
   mixins: [PureRenderMixin],
-
 
   render: function() {
     let imageComponents = [];

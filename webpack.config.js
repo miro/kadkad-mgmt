@@ -28,6 +28,7 @@ module.exports = {
     contentBase: './dist',
     hot: true
   },
+  devtool: 'cheap-module-eval-source-map',
   plugins: [
     new webpack.HotModuleReplacementPlugin()
   ]

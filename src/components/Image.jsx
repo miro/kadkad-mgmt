@@ -10,7 +10,6 @@ import classNames from 'classnames';
 let ImageFormComponent = React.createClass({
   render() {
     const {fields: {title, description}, handleSubmit} = this.props;
-    console.log(description);
 
     return <form onSubmit={handleSubmit}>
       <div>
@@ -46,10 +45,13 @@ export default React.createClass({
     this.update(newProps);
   },
 
-  handleSelectChange(selectedItems) {
+  handlePersonSelectChange(selectedItems) {
     let linkedPersons = selectedItems.map(item => item.value).join(",");
-    console.log('linked list is', linkedPersons);
     this.update({ linkedPersons: linkedPersons });
+  },
+
+  handleSpotSelectChange(selectedItem) {
+    this.update({ spot: selectedItem.value });
   },
 
   update(newProps) {
@@ -59,28 +61,36 @@ export default React.createClass({
 
   render: function() {
     let model = this.props.image.toJS();
-    console.log(model.linkedPersons);
 
     if (this.props.image.getIn(['meta', 'editMode'])) {
+
       let formValues = { title: model.title, description: model.description };
-      let personLinkValues = this.props.persons.map(person => {
-        return { value: person.get('id').toString(), label: person.get('id') + ' ' + person.get('displayName') };
+      let personSelectValues = this.props.persons.map(person => {
+        return {
+          value: person.get('id').toString(),
+          label: (person.get('displayName')) ? person.get('displayName') : person.get('id')
+        };
+      });
+      let spotSelectValues = this.props.spots.map(spot => {
+        return { value: spot.get('id') + "", label: spot.get('title') };
       });
 
-      console.log(personLinkValues);
-
       return <div>
+        <Select
+            name="image-persons"
+            options={personSelectValues}
+            multi={true}
+            onChange={this.handlePersonSelectChange}
+            value={model.linkedPersons}/>
+        <Select
+            name="image-spots"
+            options={spotSelectValues}
+            onChange={this.handleSpotSelectChange}
+            value={model.spot}/>
         <ImageForm
           onSubmit={this.handleFormSubmit}
           initialValues={formValues}
           form={'imageForm-' + model.id}/>
-        <Select
-            name="image-person-keke"
-            options={personLinkValues}
-            multi={true}
-            onChange={this.handleSelectChange}
-            value={model.linkedPersons}
-        />
       </div>;
     }
     else {

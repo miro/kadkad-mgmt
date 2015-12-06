@@ -18,6 +18,7 @@ export const Images = React.createClass({
           updateModel={this.props.updateModel}
           image={image}
           persons={this.props.persons}
+          spots={this.props.spots}
           key={image.get('id')}
         />
       );

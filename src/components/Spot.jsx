@@ -2,11 +2,25 @@ import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import classNames from 'classnames';
 
-import {reduxForm} from 'redux-form';
-import {GoogleMapLoader, GoogleMap, Marker} from "react-google-maps";
+import {reduxForm, getValues} from 'redux-form';
+import {GoogleMapLoader, GoogleMap, SearchBox, Marker} from "react-google-maps";
 import Select from 'react-select';
 
 
+const searchBoxStyle = {
+  border: "1px solid transparent",
+  borderRadius: "1px",
+  boxShadow: "0 2px 6px rgba(0, 0, 0, 0.3)",
+  boxSizing: "border-box",
+  MozBoxSizing: "border-box",
+  fontSize: "14px",
+  height: "32px",
+  marginTop: "27px",
+  outline: "none",
+  padding: "0 12px",
+  textOverflow: "ellipses",
+  width: "400px"
+};
 
 
 let SpotFormComponent = React.createClass({
@@ -34,22 +48,65 @@ let SpotForm = reduxForm({
 export default React.createClass({
   mixins: [PureRenderMixin],
 
+  getInitialState() {
+    return {
+      bounds: null,
+      center: { lat: 64.2270644, lng: 27.7198246 }, // coords of KNI city centre
+      markers: []
+    };
+  },
+
   update(newProps) {
     this.props.updateModel(this.props.spot.get('id'), 'spots', newProps);
   },
 
   toggleEditMode() {
-    this.update({ meta: { editMode: !this.props.spot.getIn(['meta', 'editMode']) }});
+    this.updateSpotModel({ meta: { editMode: !this.props.spot.getIn(['meta', 'editMode']) }});
   },
 
   handleFormSubmit(formValues) {
     let newProps = Object.assign({}, formValues, { meta: { editMode: false }})
-    this.update(newProps);
+    this.updateSpotModel(newProps);
   },
 
   update(newProps) {
     this.props.updateModel(this.props.spot.get('id'), 'spots', newProps);
   },
+
+
+
+  handleBoundsChanged() {
+    this.setState({
+      bounds: this.refs.map.getBounds(),
+      center: this.refs.map.getCenter()
+    });
+  },
+
+  handlePlacesChanged() {
+    const places = this.refs.searchBox.getPlaces();
+    const markers = [];
+
+    // Add a marker for each place returned from search bar
+    places.forEach(function (place) {
+      markers.push({
+        position: place.geometry.location
+      });
+    });
+
+    // Set markers; set map center to first search result
+    const mapCenter = markers.length > 0 ? markers[0].position : this.state.center;
+
+    this.setState({
+      center: mapCenter,
+      markers: markers
+    });
+  },
+
+  handleSpotSave() {
+    debugger;
+  },
+
+
 
 
   render: function() {
@@ -65,7 +122,6 @@ export default React.createClass({
           form={'spotForm-' + model.id}/>
 
         <section style={{height: "400px"}}>
-
           <GoogleMapLoader
             containerElement={
               <div
@@ -77,16 +133,29 @@ export default React.createClass({
             }
             googleMapElement={
               <GoogleMap
-                ref={(map) => console.log(map)}
-                defaultZoom={3}
-                defaultCenter={{lat: -25.363882, lng: 131.044922}}
-                // onClick={::this.handleMapClick}>
+                ref="map"
+                defaultZoom={12}
+                center={this.state.center}
+                // onClick={this.handleMapClick}> // TODO!
                 >
+
+                <SearchBox
+                  bounds={this.state.bounds}
+                  controlPosition={google.maps.ControlPosition.TOP_LEFT}
+                  onPlacesChanged={this.handlePlacesChanged}
+                  ref="searchBox"
+                  style={searchBoxStyle} />
+
+                  {this.state.markers.map((marker, index) => (
+                    <Marker position={marker.position} key={index} />
+                  ))}
 
               </GoogleMap>
             }
           />
         </section>
+        <button onClick={this.handleSpotSave}>Tallenna</button>
+        <button onClick={this.toggleEditMode}>Peruuta</button>
       </div>;
     }
     else {

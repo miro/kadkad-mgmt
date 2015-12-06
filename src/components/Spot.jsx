@@ -2,7 +2,7 @@ import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import classNames from 'classnames';
 
-import {reduxForm, getValues} from 'redux-form';
+import {reduxForm} from 'redux-form';
 import {GoogleMapLoader, GoogleMap, SearchBox, Marker} from "react-google-maps";
 import Select from 'react-select';
 
@@ -25,7 +25,7 @@ const searchBoxStyle = {
 
 let SpotFormComponent = React.createClass({
   render() {
-    const {fields: {title, description}, handleSubmit} = this.props;
+    const {fields: {title, description}, handleSubmit, onCancel} = this.props;
 
     return <form onSubmit={handleSubmit}>
       <div>
@@ -37,6 +37,7 @@ let SpotFormComponent = React.createClass({
         <textarea {...description}></textarea>
       </div>
       <button type="submit" onClick={this.handleSubmit}>Tallenna</button>
+      <button onClick={onCancel}>Peruuta</button>
     </form>;
   }
 });
@@ -49,10 +50,22 @@ export default React.createClass({
   mixins: [PureRenderMixin],
 
   getInitialState() {
+    let markers = [];
+    if (this.props.spot.get('latitude')) {
+      // there was a latitude on this spot model -> there must also be a longitude
+      // init a marker for it
+      markers.push({
+        lat: this.props.spot.get('latitude'),
+        lng: this.props.spot.get('longitude'),
+        title: this.props.spot.get('title')
+      });
+    }
+
+
     return {
       bounds: null,
       center: { lat: 64.2270644, lng: 27.7198246 }, // coords of KNI city centre
-      markers: []
+      markers: markers
     };
   },
 
@@ -65,14 +78,19 @@ export default React.createClass({
   },
 
   handleFormSubmit(formValues) {
-    let newProps = Object.assign({}, formValues, { meta: { editMode: false }})
+    let newProps = Object.assign({}, formValues, { meta: { editMode: false }});
+
+    if (this.state.markers[0]) {
+      newProps.latitude = this.state.markers[0].position.lat();
+      newProps.longitude = this.state.markers[0].position.lng();
+    }
+
     this.updateSpotModel(newProps);
   },
 
-  update(newProps) {
+  updateSpotModel(newProps) {
     this.props.updateModel(this.props.spot.get('id'), 'spots', newProps);
   },
-
 
 
   handleBoundsChanged() {
@@ -102,12 +120,6 @@ export default React.createClass({
     });
   },
 
-  handleSpotSave() {
-    debugger;
-  },
-
-
-
 
   render: function() {
     let model = this.props.spot.toJS();
@@ -116,19 +128,12 @@ export default React.createClass({
       let formValues = { title: model.title, description: model.description };
 
       return <div>
-        <SpotForm
-          onSubmit={this.handleFormSubmit}
-          initialValues={formValues}
-          form={'spotForm-' + model.id}/>
-
         <section style={{height: "400px"}}>
           <GoogleMapLoader
             containerElement={
               <div
                 {...this.props}
-                style={{
-                  height: "100%",
-                }}
+                style={{ height: "100%" }}
               />
             }
             googleMapElement={
@@ -154,8 +159,12 @@ export default React.createClass({
             }
           />
         </section>
-        <button onClick={this.handleSpotSave}>Tallenna</button>
-        <button onClick={this.toggleEditMode}>Peruuta</button>
+
+        <SpotForm
+          onSubmit={this.handleFormSubmit}
+          onCancel={this.toggleEditMode}
+          initialValues={formValues}
+          form={'spotForm-' + model.id}/>
       </div>;
     }
     else {

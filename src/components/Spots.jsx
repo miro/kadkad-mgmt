@@ -10,25 +10,20 @@ export const Spots = React.createClass({
   mixins: [PureRenderMixin],
 
   render: function() {
-    let spotComponents = [];
-
-    this.props.spots.map(spot => {
-      spotComponents.push(
-        <Spot
-          updateModel={this.props.updateModel}
-          spot={spot}
-          key={spot.get('id')}
-        />
-      );
-    });
-
     return <div>
         <h2>Spotit</h2>
 
         <button onClick={() => this.props.createModel('spots')}>Luo Spotti</button>
 
         <div className="spots__list">
-          {spotComponents}
+          {this.props.spots.map(spot => {
+            return <Spot
+              updateModel={this.props.updateModel}
+              spot={spot}
+              key={spot.get('id')}
+            />
+          })
+        }
         </div>
     </div>;
   }

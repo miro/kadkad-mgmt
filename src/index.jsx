@@ -19,7 +19,7 @@ const reducers = {
 const reducer = combineReducers(reducers);
 
 const store = createStore(reducer, {
-  items: Immutable.fromJS({ persons: [], images: []}),
+  items: Immutable.fromJS({ persons: [], images: [], spots: [] }),
   form: {}
 });
 

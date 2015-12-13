@@ -26,3 +26,17 @@ export function uploadImage(imageFile) {
       });
   });
 }
+
+export function getModels(modelType) {
+  return new Promise((resolve, reject) => {
+    request
+      .get(baseUrl + modelType)
+      .end((error, response) => {
+        if (error) {
+          reject(error)
+        } else {
+          resolve(response.body);
+        }
+      })
+  });
+}

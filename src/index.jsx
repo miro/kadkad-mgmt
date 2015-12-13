@@ -8,8 +8,10 @@ import {reducer as formReducer} from 'redux-form';
 import thunk from 'redux-thunk';
 
 import Immutable from 'immutable';
+import Promise from 'bluebird';
 
 import modelReducer from './reducers/modelReducer';
+import {getModels} from './apiService';
 
 import Header from './containers/Header'
 import {EditViewContainer} from './containers/EditView';
@@ -30,6 +32,18 @@ const createStoreWithMiddleware = applyMiddleware(
 const store = createStoreWithMiddleware(reducer, {
   models: Immutable.fromJS({ persons: [], images: [], spots: [] }),
   form: {}
+
+// # -> Fetch initial state
+Promise.props({
+  images:     getModels('image'),
+  persons:    getModels('person'),
+  spots:      getModels('spot')
+})
+.then(data => {
+  store.dispatch({
+    type: 'SET_STATE',
+    state: {...data}
+  });
 });
 
 

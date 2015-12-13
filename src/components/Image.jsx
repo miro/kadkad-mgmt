@@ -61,6 +61,7 @@ export default React.createClass({
 
   render: function() {
     let model = this.props.image.toJS();
+    let imgUrl = 'https://storage.googleapis.com/dakdak-dev/' + model.storageId; // TODO get this from.. somewhere
 
     if (this.props.image.getIn(['meta', 'editMode'])) {
 
@@ -96,6 +97,7 @@ export default React.createClass({
     else {
       return <div>
         <p>#{model.id} / {model.title}</p>
+        <img src={imgUrl} className="image__preview--list"/>
         <button onClick={this.toggleEditMode}>edit</button>
       </div>;
     }

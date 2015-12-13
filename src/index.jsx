@@ -11,6 +11,7 @@ import Immutable from 'immutable';
 
 import modelReducer from './reducers/modelReducer';
 
+import Header from './containers/Header'
 import {EditViewContainer} from './containers/EditView';
 import {UploadViewContainer} from './containers/UploadView';
 
@@ -35,6 +36,7 @@ const store = createStoreWithMiddleware(reducer, {
 const App = React.createClass({
   render: function() {
     return <div>
+      <Header />
       {this.props.children}
     </div>
   }

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Router, {Route} from 'react-router';
+
 import {createStore, combineReducers, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 
@@ -8,7 +9,9 @@ import Immutable from 'immutable';
 import {reducer as formReducer} from 'redux-form';
 
 import itemReducer from './reducers/itemReducer';
+
 import {EditViewContainer} from './containers/EditView';
+import {UploadViewContainer} from './containers/UploadView';
 
 
 
@@ -33,6 +36,7 @@ const App = React.createClass({
 });
 const routes = <Route component={App}>
   <Route path="/" component={EditViewContainer} />
+  <Route path="/upload" component={UploadViewContainer} />
 </Route>;
 
 ReactDOM.render(

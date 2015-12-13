@@ -4,8 +4,8 @@ import {bindActionCreators} from 'redux'
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import classNames from 'classnames';
 
-import * as actionCreators from '../actions/action_creators';
 import Person from './Person';
+
 
 export const Persons = React.createClass({
   mixins: [PureRenderMixin],

@@ -25,7 +25,7 @@ export const Images = React.createClass({
     });
 
     return <div>
-        <h2>Images</h2>
+        <h2>Kuvat</h2>
 
         <button onClick={() => this.props.createModel('images')}>Luo Kuva</button>
 

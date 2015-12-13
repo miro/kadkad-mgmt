@@ -4,9 +4,10 @@ import Router, {Route} from 'react-router';
 
 import {createStore, combineReducers, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
+import {reducer as formReducer} from 'redux-form';
+import thunk from 'redux-thunk';
 
 import Immutable from 'immutable';
-import {reducer as formReducer} from 'redux-form';
 
 import itemReducer from './reducers/itemReducer';
 
@@ -21,7 +22,11 @@ const reducers = {
 }
 const reducer = combineReducers(reducers);
 
-const store = createStore(reducer, {
+const createStoreWithMiddleware = applyMiddleware(
+  thunk
+)(createStore);
+
+const store = createStoreWithMiddleware(reducer, {
   items: Immutable.fromJS({ persons: [], images: [], spots: [] }),
   form: {}
 });

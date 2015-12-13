@@ -1,13 +1,13 @@
 import {List, Map, fromJS, toJS} from 'immutable';
 import {expect} from 'chai';
 
-import itemReducer from '../src/reducers/itemReducer';
+import modelReducer from '../src/reducers/modelReducer';
 
 function getInitialState() {
   return fromJs({ persons: [], images: []});
 }
 
-describe('itemReducer', () => {
+describe('modelReducer', () => {
 
   it('handles SET_STATE', () => {
     const initialState = Map();
@@ -15,7 +15,7 @@ describe('itemReducer', () => {
       type: 'SET_STATE',
       state: {foo: 'bar' }
     };
-    const nextState = itemReducer(initialState, action);
+    const nextState = modelReducer(initialState, action);
 
     expect(nextState).to.equal(fromJS({ foo: 'bar' }));
   });
@@ -29,7 +29,7 @@ describe('itemReducer', () => {
         foo: 'bar'
       }
     };
-    const nextState = itemReducer(undefined, action);
+    const nextState = modelReducer(undefined, action);
 
     expect(nextState).to.equal(fromJS({
       images: [{ id: 3, name: 'foo'}, {id: 5, name: 'bar' }],
@@ -46,7 +46,7 @@ describe('itemReducer', () => {
       model: { id: 9, name: 'foo' }
     };
 
-    const nextState = itemReducer(initialState, action);
+    const nextState = modelReducer(initialState, action);
 
     expect(nextState).to.equal(fromJS({
       images: [{ id: 9, name: 'foo' }]
@@ -63,7 +63,7 @@ describe('itemReducer', () => {
       modelType: 'persons',
       model: { name: 'bar' }
     };
-    const nextState = itemReducer(initialState, action);
+    const nextState = modelReducer(initialState, action);
 
     expect(nextState).to.equal(fromJS({
       persons: [ { id: 9, name: 'bar' }]

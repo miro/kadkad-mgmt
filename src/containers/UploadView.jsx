@@ -34,7 +34,7 @@ export const UploadView = React.createClass({
 
 function mapStateToProps(state) {
   return {
-    images: state.items.get('images').toArray()
+    images: state.models.get('images').toArray()
   };
 }
 

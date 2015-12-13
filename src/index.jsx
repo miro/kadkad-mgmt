@@ -9,7 +9,7 @@ import thunk from 'redux-thunk';
 
 import Immutable from 'immutable';
 
-import itemReducer from './reducers/itemReducer';
+import modelReducer from './reducers/modelReducer';
 
 import {EditViewContainer} from './containers/EditView';
 import {UploadViewContainer} from './containers/UploadView';
@@ -17,7 +17,7 @@ import {UploadViewContainer} from './containers/UploadView';
 
 
 const reducers = {
-  items: itemReducer,
+  models: modelReducer,
   form: formReducer
 }
 const reducer = combineReducers(reducers);
@@ -27,7 +27,7 @@ const createStoreWithMiddleware = applyMiddleware(
 )(createStore);
 
 const store = createStoreWithMiddleware(reducer, {
-  items: Immutable.fromJS({ persons: [], images: [], spots: [] }),
+  models: Immutable.fromJS({ persons: [], images: [], spots: [] }),
   form: {}
 });
 

@@ -44,9 +44,9 @@ export const EditView = React.createClass({
 
 function mapStateToProps(state) {
   return {
-    images: state.items.get('images').toArray(),
-    persons: state.items.get('persons').toArray(),
-    spots: state.items.get('spots').toArray()
+    images: state.models.get('images').toArray(),
+    persons: state.models.get('persons').toArray(),
+    spots: state.models.get('spots').toArray()
   };
 }
 

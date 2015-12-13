@@ -1,3 +1,6 @@
+import request from 'superagent';
+
+
 export function createModel(modelType) {
   // TODO: filter unwanted modelTypes?
   return {
@@ -28,6 +31,25 @@ export function setState(state) {
     type: 'SET_STATE',
     state
   };
+}
+
+export function uploadImage(imageFile) {
+  return dispatch => {
+
+    let formData = new FormData();
+    formData.append('imageFile', imageFile);
+
+    // HOX: superagent has currently issue with multipart form data,
+    // read more fromhttps://github.com/visionmedia/superagent/issues/746
+    request.post('http://localhost:5000/api/v0/image')
+      .send(formData)
+      .end();
+
+    dispatch({
+      type: 'IMAGE_UPLOAD',
+      imageFile
+    });
+  }
 }
 
 function dummyIdGenerator() {

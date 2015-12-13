@@ -21,9 +21,15 @@ function updateModel(state, modelType, updatedModel) {
   return state.set(modelType, updatedList);
 }
 
+function imageUpload(state, imageFile) {
+  console.log('img', imageFile, state);
+  return state;
+}
+
+
+
 
 export default function(state = Map(), action) {
-
   switch (action.type) {
   case 'SET_STATE':
     return setState(state, action.state);
@@ -31,6 +37,8 @@ export default function(state = Map(), action) {
     return createModel(state, action.modelType, action.model);
   case 'MODEL_UPDATE':
     return updateModel(state, action.modelType, action.model);
+  case 'IMAGE_UPLOAD':
+    return imageUpload(state, action.imageFile);
   default:
     return state;
   }

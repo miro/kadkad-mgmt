@@ -42,6 +42,11 @@ export default React.createClass({
     this.update({ meta: { editMode: !this.props.person.getIn(['meta', 'editMode']) }});
   },
 
+  onFormSubmit(formValues) {
+    Object.assign({}, formValues, { meta: { editMode: false }});
+    this.update(formValues);
+  },
+
 
   render: function() {
     let model = this.props.person.toJS();
@@ -52,14 +57,11 @@ export default React.createClass({
       return <div>
         <p>#{model.id}</p>
         <PersonForm
-          onSubmit={(formValues) => {
-            Object.assign(formValues, {meta: {editMode: false}});
-            this.update(formValues);
-          }}
+          onSubmit={this.onFormSubmit}
           initialValues={formValues}
           form={'personForm' + model.id} // so that each form will have different store.. is this wrong?
         />
-        <button onClick={this.toggleEditMode}>peruuta</button>
+        <button onClick={this.toggleEditMode}>Peruuta</button>
       </div>;
     }
     else {

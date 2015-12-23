@@ -1,7 +1,40 @@
 import request from 'superagent';
 import Promise from 'bluebird';
 
-const baseUrl = 'http://localhost:5000/api/v0/';
+const baseUrl = 'http://localhost:5000/api/v0/'; // TODO: from cfg-file
+
+// TODO: handleresult-util-function(???)
+
+
+
+export function getModels(modelType) {
+  return new Promise((resolve, reject) => {
+    request.get(baseUrl + modelType)
+      .end((error, response) => {
+        if (error) {
+          reject(error)
+        } else {
+          resolve(response.body);
+        }
+      })
+  });
+}
+
+
+export function updateModel(modelType, model) {
+  return new Promise((resolve, reject) => {
+    request.post(baseUrl + modelType)
+      .send(model)
+      .end((error, response) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(response.body);
+        }
+      }
+    )
+  });
+}
 
 
 export function uploadImage(imageFile) {
@@ -27,16 +60,4 @@ export function uploadImage(imageFile) {
   });
 }
 
-export function getModels(modelType) {
-  return new Promise((resolve, reject) => {
-    request
-      .get(baseUrl + modelType)
-      .end((error, response) => {
-        if (error) {
-          reject(error)
-        } else {
-          resolve(response.body);
-        }
-      })
-  });
-}
+

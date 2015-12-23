@@ -30,14 +30,16 @@ const createStoreWithMiddleware = applyMiddleware(
 )(createStore);
 
 const store = createStoreWithMiddleware(reducer, {
-  models: Immutable.fromJS({ persons: [], images: [], spots: [] }),
-  form: {}
+  models: Immutable.fromJS({ persons: [], images: [], spots: [], uploads: [] }),
+  form: {} // for react-form
+});
+
 
 // # -> Fetch initial state
 Promise.props({
-  images:     getModels('image'),
-  persons:    getModels('person'),
-  spots:      getModels('spot')
+  images:     getModels('images'),
+  persons:    getModels('persons'),
+  spots:      getModels('spots')
 })
 .then(data => {
   store.dispatch({

@@ -8,7 +8,9 @@ function setState(state, newState) {
 
 function createModel(state, modelType, newModel) {
   let currentList = state.get(modelType) || [];
-  return state.set(modelType, List([...currentList, Map(newModel)]));
+  return state.set(modelType,List([
+    ...currentList, Map(newModel)
+  ]));
 }
 
 function updateModel(state, modelType, updatedModel) {
@@ -21,12 +23,6 @@ function updateModel(state, modelType, updatedModel) {
   return state.set(modelType, updatedList);
 }
 
-function imageUpload(state, imageFile) {
-  console.log('img', imageFile, state);
-  return state;
-}
-
-
 
 
 export default function(state = Map(), action) {
@@ -37,8 +33,6 @@ export default function(state = Map(), action) {
     return createModel(state, action.modelType, action.model);
   case 'MODEL_UPDATE':
     return updateModel(state, action.modelType, action.model);
-  case 'IMAGE_UPLOAD':
-    return imageUpload(state, action.imageFile);
   default:
     return state;
   }

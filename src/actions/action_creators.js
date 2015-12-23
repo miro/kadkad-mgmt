@@ -1,4 +1,15 @@
-import * as apiService from '../apiService.js';
+import * as api from '../apiService.js';
+
+
+// # "API"
+//
+
+export function setState(state) {
+  return {
+    type: 'SET_STATE',
+    state
+  };
+}
 
 export function createModel(modelType) {
   // TODO: filter unwanted modelTypes?
@@ -6,7 +17,7 @@ export function createModel(modelType) {
     type: 'MODEL_CREATE',
     modelType, // TODO: enum or something?
     model: {
-      id: dummyIdGenerator(),
+      id: _generateId(), // this will be replaced by the backend
       fullName: 'Koko Nimi',
       displayName: 'Näyttönimi',
       meta: { editMode: false }
@@ -25,16 +36,10 @@ export function updateModel(id, modelType, props) {
   }
 }
 
-export function setState(state) {
-  return {
-    type: 'SET_STATE',
-    state
-  };
-}
 
 export function uploadImage(imageFile) {
   return dispatch => {
-    apiService.uploadImage(imageFile)
+    api.uploadImage(imageFile)
     .then(imageModel => {
       dispatch({
         type: 'MODEL_CREATE',
@@ -45,7 +50,19 @@ export function uploadImage(imageFile) {
   }
 }
 
-function dummyIdGenerator() {
-  // Temp hack until we hook up a actual API into this.
-  return parseInt(Math.random() * 1000000, 10);
-}
+
+
+// # Utility functions
+//
+
+const _generateId = (function() {
+    // http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript
+    function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+       .toString(16)
+       .substring(1);
+    }
+    return function() {
+        return s4() + s4() + s4() + s4();
+    };
+})();

@@ -7,10 +7,10 @@ import {GoogleMapLoader, GoogleMap, SearchBox, Marker} from "react-google-maps";
 import Select from 'react-select';
 
 
-// TODO: persist map search string to backend
-
-
-const searchBoxStyle = {
+// Styles for the search input field on the map.
+// These can't be implemented via CSS, since these props will get copied into the element
+// which the react-google-maps will generate.
+const mapSearchBoxStyle = {
   border: "1px solid transparent",
   borderRadius: "1px",
   boxShadow: "0 2px 6px rgba(0, 0, 0, 0.3)",
@@ -134,13 +134,10 @@ export default React.createClass({
       let formValues = { name: model.name, description: model.description };
 
       return <div>
-        <section style={{height: "400px"}}>
+        <section className="spot__wrapper--editmode">
           <GoogleMapLoader
             containerElement={
-              <div
-                {...this.props}
-                style={{ height: "100%" }}
-              />
+              <div {...this.props} className="spot-map__container" />
             }
             googleMapElement={
               <GoogleMap
@@ -155,7 +152,9 @@ export default React.createClass({
                   controlPosition={google.maps.ControlPosition.TOP_LEFT}
                   onPlacesChanged={this.handlePlacesChanged}
                   ref="searchBox"
-                  style={searchBoxStyle} />
+                  placeholder="Hakusana"
+                  style={mapSearchBoxStyle}
+                />
 
                   {this.state.markers.map((marker, index) => (
                     <Marker position={marker.position} key={index} />

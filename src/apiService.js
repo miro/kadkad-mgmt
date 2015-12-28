@@ -21,9 +21,21 @@ export function getModels(modelType) {
 }
 
 
-export function updateModel(modelType, model) {
+export function createModel(modelType, model) {
   return new Promise((resolve, reject) => {
     request.post(baseUrl + modelType)
+      .send(model)
+      .end((error, response) => {
+        (error) ? reject(error) : resolve(response.body);
+      }
+    )
+  });
+}
+
+
+export function updateModel(modelType, modelId, model) {
+  return new Promise((resolve, reject) => {
+    request.put(baseUrl + modelType + '/' + modelId)
       .send(model)
       .end((error, response) => {
         if (error) {
@@ -44,8 +56,8 @@ export function uploadImage(imageFile) {
     formData.append('imageFile', imageFile);
 
     // HOX: superagent has currently issue with multipart form data,
-    // read more fromhttps://github.com/visionmedia/superagent/issues/746
-    request.post(baseUrl + 'image')
+    // read more from https://github.com/visionmedia/superagent/issues/746
+    request.post(baseUrl + 'images')
       .send(formData)
       .on('progress', function(e) {
         console.log('Percentage done: ', e.percent);

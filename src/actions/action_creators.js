@@ -13,26 +13,33 @@ export function setState(state) {
 
 export function createModel(modelType) {
   // TODO: filter unwanted modelTypes?
-  return {
-    type: 'MODEL_CREATE',
-    modelType, // TODO: enum or something?
-    model: {
-      id: _generateId(), // this will be replaced by the backend
+  // TODO: default values by modelType
+  return dispatch => {
+    api.createModel(modelType, {
       fullName: 'Koko Nimi',
-      displayName: 'Näyttönimi',
-      meta: { editMode: false }
-    }
+      displayName: 'Näyttönimi'
+    })
+    .then(model => dispatch({
+      type: 'MODEL_CREATE',
+      modelType,
+      model
+    }));
   }
 }
 
 export function updateModel(id, modelType, props) {
-  return {
-    type: 'MODEL_UPDATE',
-    modelType,
-    model: {
-      id,
-      ...props
-    }
+  return dispatch => {
+    api.updateModel(modelType, id, props)
+    .then(model => {
+      dispatch({
+        type: 'MODEL_UPDATE',
+        modelType,
+        model: {
+          id,
+          ...props
+        }
+      });
+    });
   }
 }
 

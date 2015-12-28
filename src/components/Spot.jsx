@@ -50,6 +50,9 @@ export default React.createClass({
   mixins: [PureRenderMixin],
 
   getInitialState() {
+    let state = { editMode: false };
+
+    // Google Map related state params
     let markers = [];
     if (this.props.spot.get('latitude')) {
       // there was a latitude on this spot model -> there must also be a longitude
@@ -61,12 +64,12 @@ export default React.createClass({
       });
     }
 
+    state.bounds = null;
+    state.center = { lat: 64.2270644, lng: 27.7198246 }; // coords of KNI city centre
+    state.markers = markers;
 
-    return {
-      bounds: null,
-      center: { lat: 64.2270644, lng: 27.7198246 }, // coords of KNI city centre
-      markers: markers
-    };
+
+    return state;
   },
 
   update(newProps) {
@@ -74,11 +77,11 @@ export default React.createClass({
   },
 
   toggleEditMode() {
-    this.updateSpotModel({ meta: { editMode: !this.props.spot.getIn(['meta', 'editMode']) }});
+    this.setState({ editMode: !this.state.editMode });
   },
 
   handleFormSubmit(formValues) {
-    let newProps = Object.assign({}, formValues, { meta: { editMode: false }});
+    let newProps = Object.assign({}, formValues);
 
     if (this.state.markers[0]) {
       newProps.latitude = this.state.markers[0].position.lat();
@@ -86,6 +89,7 @@ export default React.createClass({
     }
 
     this.updateSpotModel(newProps);
+    this.toggleEditMode();
   },
 
   updateSpotModel(newProps) {
@@ -124,7 +128,7 @@ export default React.createClass({
   render: function() {
     let model = this.props.spot.toJS();
 
-    if (this.props.spot.getIn(['meta', 'editMode'])) {
+    if (this.state.editMode) {
       let formValues = { title: model.title, description: model.description };
 
       return <div>

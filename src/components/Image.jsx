@@ -32,17 +32,23 @@ let ImageForm = reduxForm({
 export default React.createClass({
   mixins: [PureRenderMixin],
 
+  getInitialState() {
+    return { editMode: false }
+  },
+
+
   update(newProps) {
     this.props.updateModel(this.props.image.get('id'), 'images', newProps);
   },
 
   toggleEditMode() {
-    this.update({ meta: { editMode: !this.props.image.getIn(['meta', 'editMode']) }});
+    this.setState({ editMode: !this.state.editMode });
   },
 
   handleFormSubmit(formValues) {
-    let newProps = Object.assign({}, formValues, { meta: { editMode: false }})
+    let newProps = Object.assign({}, formValues)
     this.update(newProps);
+    this.toggleEditMode();
   },
 
   handlePersonSelectChange(selectedItems) {
@@ -63,7 +69,7 @@ export default React.createClass({
     let model = this.props.image.toJS();
     let imgUrl = 'https://storage.googleapis.com/dakdak-dev/' + model.storageId; // TODO get this from.. somewhere
 
-    if (this.props.image.getIn(['meta', 'editMode'])) {
+    if (this.state.editMode) {
 
       let formValues = { title: model.title, description: model.description };
       let personSelectValues = this.props.persons.map(person => {

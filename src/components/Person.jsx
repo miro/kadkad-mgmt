@@ -34,24 +34,28 @@ var PersonForm = reduxForm({
 export default React.createClass({
   mixins: [PureRenderMixin],
 
+  getInitialState() {
+    return { editMode: false }
+  },
+
   update(newProps) {
     this.props.updateModel(this.props.person.get('id'), 'persons', newProps);
   },
 
   toggleEditMode() {
-    this.update({ meta: { editMode: !this.props.person.getIn(['meta', 'editMode']) }});
+    this.setState({ editMode: !this.state.editMode });
   },
 
   onFormSubmit(formValues) {
-    Object.assign({}, formValues, { meta: { editMode: false }});
     this.update(formValues);
+    this.toggleEditMode();
   },
 
 
   render: function() {
     let model = this.props.person.toJS();
 
-    if (this.props.person.getIn(['meta', 'editMode'])) {
+    if (this.state.editMode) {
       let formValues = { fullName: model.fullName, displayName: model.displayName };
 
       return <div>

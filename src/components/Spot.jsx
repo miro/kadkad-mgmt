@@ -61,9 +61,11 @@ export default React.createClass({
       // there was a latitude on this spot model -> there must also be a longitude
       // init a marker for it
       markers.push({
-        lat: this.props.spot.get('latitude'),
-        lng: this.props.spot.get('longitude'),
-        name: this.props.spot.get('name')
+        name: this.props.spot.get('name'),
+        position: {
+          lat: this.props.spot.get('latitude'),
+          lng: this.props.spot.get('longitude')
+        }
       });
     }
 

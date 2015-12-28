@@ -21,11 +21,23 @@ export const UploadView = React.createClass({
     let { images, persons, spots, dispatch } = this.props;
 
     return <div>
-        <h2>UploadView</h2>
+        <h2>Kuvien uploadaus</h2>
 
         <Dropzone onDrop={this.onDrop}>
           <div>Raahaa kuvasi tähän, tai paina tästä valitaksesi lähetettävät kuvat</div>
         </Dropzone>
+
+        <h4>Käynnissä olevat uploadit</h4>
+        <div className="uploads__wrapper">
+          {this.props.uploads.map(item => {
+            const upload = item.toJS();
+
+            return <p key={upload.id}>
+              {upload.fileName} ({upload.size} kB)
+              {(upload.inProgress) ? ' unfinished' : ' finished!'}
+            </p>;
+          })}
+        </div>
 
     </div>;
   }
@@ -34,7 +46,8 @@ export const UploadView = React.createClass({
 
 function mapStateToProps(state) {
   return {
-    images: state.models.get('images').toArray()
+    images: state.models.get('images').toArray(),
+    uploads: state.models.get('uploads').toArray()
   };
 }
 

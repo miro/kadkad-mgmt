@@ -34,9 +34,7 @@ var PersonForm = reduxForm({
 export default React.createClass({
   mixins: [PureRenderMixin],
 
-  getInitialState() {
-    return { editMode: false }
-  },
+  getInitialState: () => ({ editMode: false }),
 
   update(newProps) {
     this.props.updateModel(this.props.person.get('id'), 'persons', newProps);

@@ -23,7 +23,7 @@ export const Persons = React.createClass({
     });
 
     return <div>
-        <h2>Persons</h2>
+        <h2>Henkilöt</h2>
         <button onClick={() => this.props.createModel('persons')}>Luo Henkilö</button>
         <div className="persons__list">
           {personComponents}

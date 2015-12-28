@@ -56,17 +56,29 @@ describe('modelReducer', () => {
 
   it('handles MODEL_UPDATE', () => {
     const initialState = fromJS({
-      persons: [ { id: 9, name: 'foo' }]
+      persons: [
+        { id: 9, name: 'foo' },
+        { id: 10, name: 'bar' },
+        { id: 1, name: 'zen' }
+      ]
     });
     const action = {
       type: 'MODEL_UPDATE',
       modelType: 'persons',
-      model: { name: 'bar' }
+      model: { id: 9, name: 'barfoo' }
     };
     const nextState = modelReducer(initialState, action);
 
     expect(nextState).to.equal(fromJS({
-      persons: [ { id: 9, name: 'bar' }]
+      persons: [
+        { id: 9, name: 'barfoo' },
+        { id: 10, name: 'bar' },
+        { id: 1, name: 'zen' }
+      ]
+    }));
+  });
+
+
     }));
   });
 });

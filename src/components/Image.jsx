@@ -32,10 +32,7 @@ let ImageForm = reduxForm({
 export default React.createClass({
   mixins: [PureRenderMixin],
 
-  getInitialState() {
-    return { editMode: false }
-  },
-
+  getInitialState: () => ({ editMode: false }),
 
   update(newProps) {
     this.props.updateModel(this.props.image.get('id'), 'images', newProps);
@@ -51,17 +48,13 @@ export default React.createClass({
     this.toggleEditMode();
   },
 
-  handlePersonSelectChange(selectedItems) {
-    let linkedPersons = selectedItems.map(item => item.value).join(",");
-    this.update({ linkedPersons: linkedPersons });
-  },
-
-  handleSpotSelectChange(selectedItem) {
-    this.update({ spot: selectedItem.value });
-  },
-
-  update(newProps) {
-    this.props.updateModel(this.props.image.get('id'), 'images', newProps);
+  // general handler factory for spotId, riderId etc
+  handleAttributeChange(attribute) {
+    return selectedItem => {
+      let newProps = {};
+      newProps[attribute] = selectedItem.value;
+      this.update(newProps);
+    }
   },
 
 
@@ -74,27 +67,25 @@ export default React.createClass({
       let formValues = { title: model.title, description: model.description };
       let personSelectValues = this.props.persons.map(person => {
         return {
-          value: person.get('id').toString(),
+          value: person.get('id'),
           label: (person.get('displayName')) ? person.get('displayName') : person.get('id')
         };
       });
       let spotSelectValues = this.props.spots.map(spot => {
-        return { value: spot.get('id') + "", label: spot.get('title') };
         return { value: spot.get('id'), label: spot.get('name') };
       });
 
       return <div>
         <Select
-            name="image-persons"
+            name="image-rider"
             options={personSelectValues}
-            multi={true}
-            onChange={this.handlePersonSelectChange}
-            value={model.linkedPersons}/>
+            onChange={this.handleAttributeChange('riderId')}
+            value={model.riderId}/>
         <Select
-            name="image-spots"
+            name="image-spot"
             options={spotSelectValues}
-            onChange={this.handleSpotSelectChange}
-            value={model.spot}/>
+            onChange={this.handleAttributeChange('spotId')}
+            value={model.spotId}/>
         <ImageForm
           onSubmit={this.handleFormSubmit}
           initialValues={formValues}

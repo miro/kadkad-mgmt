@@ -42,9 +42,11 @@ export function updateModel(id, modelType, props) {
 
 
 export function uploadImage(imageFile) {
-  console.log(imageFile);
-
   const uploadId = _generatePseudoId();
+
+  const handleUploadProgress = event => {
+    console.log(event);
+  };
 
   return dispatch => {
     // create model to uploads collection
@@ -60,7 +62,7 @@ export function uploadImage(imageFile) {
     });
 
     // init the actual upload
-    api.uploadImage(imageFile)
+    api.uploadImage(imageFile, handleUploadProgress)
     .then(imageModel => {
 
       // create the actual image model

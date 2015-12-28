@@ -49,7 +49,7 @@ export function updateModel(modelType, modelId, model) {
 }
 
 
-export function uploadImage(imageFile) {
+export function uploadImage(imageFile, handleProgressEvent) {
   return new Promise((resolve, reject) => {
 
     let formData = new FormData();
@@ -60,7 +60,7 @@ export function uploadImage(imageFile) {
     request.post(baseUrl + 'images')
       .send(formData)
       .on('progress', function(e) {
-        console.log('Percentage done: ', e.percent);
+        (handleProgressEvent) ? handleProgressEvent(e) : 'do nothing';
       })
       .end((error, response) => {
         if (error) {

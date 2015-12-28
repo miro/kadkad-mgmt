@@ -5,10 +5,10 @@ function setState(state, newState) {
   return state.merge(newState);
 }
 
-
 function createModel(state, modelType, newModel) {
   let currentList = state.get(modelType) || [];
-  return state.set(modelType,List([
+
+  return state.set(modelType, List([
     ...currentList, Map(newModel)
   ]));
 }
@@ -23,6 +23,19 @@ function updateModel(state, modelType, updatedModel) {
   return state.set(modelType, updatedList);
 }
 
+function deleteModel(state, modelType, model) {
+  const originalList = state.get(modelType);
+  const modelIndex = originalList.findIndex((item) => item.get('id') === model.id);
+
+  if (modelIndex < 0) {
+    // no model was found, return the state as it is
+    return state;
+  }
+  else {
+    return state.set(modelType, originalList.delete(modelIndex));
+  }
+}
+
 
 
 export default function(state = Map(), action) {
@@ -33,6 +46,8 @@ export default function(state = Map(), action) {
     return createModel(state, action.modelType, action.model);
   case 'MODEL_UPDATE':
     return updateModel(state, action.modelType, action.model);
+  case 'MODEL_DELETE':
+    return deleteModel(state, action.modelType, action.model);
   default:
     return state;
   }

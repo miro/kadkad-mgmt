@@ -79,6 +79,69 @@ describe('modelReducer', () => {
   });
 
 
+  it('handles MODEL_DELETE', () => {
+    const initialState = fromJS({
+      persons: [
+        { id: 9, name: 'foo' },
+        { id: 10, name: 'bar' },
+        { id: 1, name: 'zen' }
+      ]
+    });
+
+    const action = {
+      type: 'MODEL_DELETE',
+      modelType: 'persons',
+      model: { id: 9 }
+    };
+    const nextState = modelReducer(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      persons: [
+        { id: 10, name: 'bar' },
+        { id: 1, name: 'zen' }
+      ]
+    }));
+  });
+
+
+  it('handles MODEL_DELETE with unexistent id', () => {
+    const initialState = fromJS({
+      persons: [
+        { id: 10, name: 'bar' },
+        { id: 1, name: 'zen' }
+      ]
+    });
+
+    const action = {
+      type: 'MODEL_DELETE',
+      modelType: 'persons',
+      model: { id: 15 }
+    };
+    const nextState = modelReducer(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      persons: [
+        { id: 10, name: 'bar' },
+        { id: 1, name: 'zen' }
+      ]
+    }));
+  });
+
+
+  it('handles MODEL_DELETE with only one model', () => {
+    const initialState = fromJS({
+      persons: [{ id: 10, name: 'bar' }]
+    });
+
+    const action = {
+      type: 'MODEL_DELETE',
+      modelType: 'persons',
+      model: { id: 10 }
+    };
+    const nextState = modelReducer(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      persons: []
     }));
   });
 });

@@ -80,6 +80,7 @@ export default React.createClass({
       });
       let spotSelectValues = this.props.spots.map(spot => {
         return { value: spot.get('id') + "", label: spot.get('title') };
+        return { value: spot.get('id'), label: spot.get('name') };
       });
 
       return <div>

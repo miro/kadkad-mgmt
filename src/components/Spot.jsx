@@ -7,6 +7,9 @@ import {GoogleMapLoader, GoogleMap, SearchBox, Marker} from "react-google-maps";
 import Select from 'react-select';
 
 
+// TODO: persist map search string to backend
+
+
 const searchBoxStyle = {
   border: "1px solid transparent",
   borderRadius: "1px",
@@ -25,12 +28,12 @@ const searchBoxStyle = {
 
 let SpotFormComponent = React.createClass({
   render() {
-    const {fields: {title, description}, handleSubmit, onCancel} = this.props;
+    const {fields: {name, description}, handleSubmit, onCancel} = this.props;
 
     return <form onSubmit={handleSubmit}>
       <div>
         <label>Otsikko</label>
-        <input type="text" placeholder="Otsikko" {...title}/>
+        <input type="text" placeholder="Otsikko" {...name}/>
       </div>
       <div>
         <label>Kuvaus</label>
@@ -42,7 +45,7 @@ let SpotFormComponent = React.createClass({
   }
 });
 let SpotForm = reduxForm({
-  fields: ['title', 'description']
+  fields: ['name', 'description']
 })(SpotFormComponent);
 
 
@@ -60,7 +63,7 @@ export default React.createClass({
       markers.push({
         lat: this.props.spot.get('latitude'),
         lng: this.props.spot.get('longitude'),
-        title: this.props.spot.get('title')
+        name: this.props.spot.get('name')
       });
     }
 
@@ -96,7 +99,6 @@ export default React.createClass({
     this.props.updateModel(this.props.spot.get('id'), 'spots', newProps);
   },
 
-
   handleBoundsChanged() {
     this.setState({
       bounds: this.refs.map.getBounds(),
@@ -129,7 +131,7 @@ export default React.createClass({
     let model = this.props.spot.toJS();
 
     if (this.state.editMode) {
-      let formValues = { title: model.title, description: model.description };
+      let formValues = { name: model.name, description: model.description };
 
       return <div>
         <section style={{height: "400px"}}>
@@ -173,7 +175,7 @@ export default React.createClass({
     }
     else {
       return <div>
-        <p>#{model.id} / {model.title}</p>
+        <p>#{model.id} / {model.name}</p>
         <button onClick={this.toggleEditMode}>edit</button>
       </div>;
     }

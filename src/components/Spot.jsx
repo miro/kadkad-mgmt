@@ -70,9 +70,16 @@ export default React.createClass({
     }
 
     state.bounds = null;
-    state.center = { lat: 64.2270644, lng: 27.7198246 }; // coords of KNI city centre
     state.markers = markers;
 
+    // set map center based on if there are markers or not
+    if (markers.length > 0) {
+      state.center = markers[0].position;
+    } else {
+      // spot has no markers yet - set map center to Kajaani city
+      // TODO: get this value from config
+      state.center = { lat: 64.2270644, lng: 27.7198246 };
+    }
 
     return state;
   },

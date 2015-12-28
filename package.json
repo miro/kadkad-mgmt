@@ -46,6 +46,6 @@
     "redux": "^3.0.4",
     "redux-form": "^3.1.0",
     "redux-thunk": "^1.0.0",
-    "superagent": "^1.5.0"
+    "superagent": "1.6.1"
   }
 }

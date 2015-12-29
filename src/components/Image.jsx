@@ -6,7 +6,6 @@ import classNames from 'classnames';
 
 
 
-
 let ImageFormComponent = React.createClass({
   render() {
     const { fields: { title, description, trickName, year, month }, handleSubmit } = this.props;

@@ -1,9 +1,7 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {reduxForm} from 'redux-form';
 import classNames from 'classnames';
-
-
 
 
 var PersonFormComponent = React.createClass({
@@ -29,8 +27,6 @@ var PersonForm = reduxForm({
 })(PersonFormComponent);
 
 
-
-
 export default React.createClass({
   mixins: [PureRenderMixin],
 
@@ -54,13 +50,11 @@ export default React.createClass({
     let model = this.props.person.toJS();
 
     if (this.state.editMode) {
-      let formValues = { fullName: model.fullName, displayName: model.displayName };
-
       return <div>
         <p>#{model.id}</p>
         <PersonForm
           onSubmit={this.onFormSubmit}
-          initialValues={formValues}
+          initialValues={model}
           form={'personForm' + model.id} // so that each form will have different store.. is this wrong?
         />
         <button onClick={this.toggleEditMode}>Peruuta</button>

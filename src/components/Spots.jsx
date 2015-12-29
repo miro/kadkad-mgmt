@@ -1,5 +1,4 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import classNames from 'classnames';
 
@@ -22,8 +21,7 @@ export const Spots = React.createClass({
               spot={spot}
               key={spot.get('id')}
             />
-          })
-        }
+          })}
         </div>
     </div>;
   }

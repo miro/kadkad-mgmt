@@ -6,7 +6,6 @@ const baseUrl = 'http://localhost:5000/api/v0/'; // TODO: from cfg-file
 // TODO: handleresult-util-function(???)
 
 
-
 export function getModels(modelType) {
   return new Promise((resolve, reject) => {
     request.get(baseUrl + modelType)

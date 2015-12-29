@@ -57,7 +57,7 @@ export function uploadImage(imageFile) {
         id: uploadId,
         fileName: imageFile.name,
         size: imageFile.size / 1000, // convert to KBs
-        inProgress: true
+        status: 'in-progress'
       }
     });
 
@@ -76,9 +76,19 @@ export function uploadImage(imageFile) {
       dispatch({
         type: 'MODEL_UPDATE',
         modelType: 'uploads',
-        model: { id: uploadId, inProgress: false }
+        model: { id: uploadId, status: 'ready' }
+      });
+    })
+    .catch(error => {
+      console.log('error on upload', error);
+
+      dispatch({
+        type: 'MODEL_UPDATE',
+        modelType: 'uploads',
+        model: { id: uploadId, status: 'failed' }
       });
     });
+    // TODO error-block
   }
 }
 

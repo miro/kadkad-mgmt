@@ -3,11 +3,10 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux'
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import classNames from 'classnames';
-
 import Dropzone from 'react-dropzone';
 
+import Upload from '../components/Upload';
 import * as actionCreators from '../actions/action_creators';
-
 
 
 export const UploadView = React.createClass({
@@ -29,20 +28,12 @@ export const UploadView = React.createClass({
 
         <h4>Käynnissä olevat uploadit</h4>
         <div className="uploads__wrapper">
-          {this.props.uploads.map(item => {
-            const upload = item.toJS();
-
-            return <p key={upload.id}>
-              {upload.fileName} ({upload.size} kB)
-              {(upload.inProgress) ? ' unfinished' : ' finished!'}
-            </p>;
-          })}
+          {this.props.uploads.map(item => (<Upload {...item.toJS()} />))}
         </div>
 
     </div>;
   }
 });
-
 
 function mapStateToProps(state) {
   return {
@@ -50,7 +41,6 @@ function mapStateToProps(state) {
     uploads: state.models.get('uploads').toArray()
   };
 }
-
 
 export const UploadViewContainer = connect(
   mapStateToProps

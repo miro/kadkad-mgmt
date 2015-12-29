@@ -96,8 +96,8 @@ export default React.createClass({
     let newProps = Object.assign({}, formValues);
 
     if (this.state.markers[0]) {
-      newProps.latitude = this.state.markers[0].position.lat();
-      newProps.longitude = this.state.markers[0].position.lng();
+      newProps.latitude = this.state.markers[0].position.lat;
+      newProps.longitude = this.state.markers[0].position.lng;
     }
 
     this.updateSpotModel(newProps);
@@ -122,7 +122,10 @@ export default React.createClass({
     // Add a marker for each place returned from search bar
     places.forEach(function (place) {
       markers.push({
-        position: place.geometry.location
+        position: {
+          lat: place.geometry.location.lat(),
+          lng: place.geometry.location.lng()
+        }
       });
     });
 

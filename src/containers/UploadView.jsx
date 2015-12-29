@@ -28,7 +28,7 @@ export const UploadView = React.createClass({
 
         <h4>Käynnissä olevat uploadit</h4>
         <div className="uploads__wrapper">
-          {this.props.uploads.map(item => (<Upload {...item.toJS()} />))}
+          {this.props.uploads.map(item => (<Upload {...item.toJS()} key={item.toJS().id} />))}
         </div>
 
     </div>;

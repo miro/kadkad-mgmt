@@ -49,11 +49,15 @@ export function updateModel(modelType, modelId, model) {
 }
 
 
-export function uploadImage(imageFile, handleProgressEvent) {
+export function uploadImage(imageFile, metaData, handleProgressEvent) {
   return new Promise((resolve, reject) => {
 
     let formData = new FormData();
     formData.append('imageFile', imageFile);
+
+    for (var prop in metaData) {
+      formData.append(prop, metaData[prop]);
+    }
 
     // HOX: superagent has currently issue with multipart form data,
     // read more from https://github.com/visionmedia/superagent/issues/746

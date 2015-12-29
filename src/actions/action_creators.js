@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 import * as api from '../apiService.js';
 
 
@@ -61,8 +63,17 @@ export function uploadImage(imageFile) {
       }
     });
 
+    let imageMetaData = {};
+
+    // if image has last modified -information, parse it to Image model
+    if (imageFile.lastModified) {
+      let lastModified = moment(imageFile.lastModified);
+      imageMetaData.year = lastModified.format('YYYY');
+      imageMetaData.month = lastModified.format('M');
+    }
+
     // init the actual upload
-    api.uploadImage(imageFile, handleUploadProgress)
+    api.uploadImage(imageFile, imageMetaData, handleUploadProgress)
     .then(imageModel => {
 
       // create the actual image model
@@ -88,7 +99,6 @@ export function uploadImage(imageFile) {
         model: { id: uploadId, status: 'failed' }
       });
     });
-    // TODO error-block
   }
 }
 

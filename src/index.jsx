@@ -16,6 +16,7 @@ import {getModels} from './apiService';
 import Header from './containers/Header'
 import {EditViewContainer} from './containers/EditView';
 import {UploadViewContainer} from './containers/UploadView';
+import {LoginViewContainer} from './containers/LoginView';
 
 
 
@@ -60,6 +61,7 @@ const App = React.createClass({
 const routes = <Route component={App}>
   <Route path="/" component={EditViewContainer} />
   <Route path="/upload" component={UploadViewContainer} />
+  <Route path="/login" component={LoginViewContainer} />
 </Route>;
 
 ReactDOM.render(

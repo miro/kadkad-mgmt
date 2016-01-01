@@ -1,7 +1,7 @@
 import request from 'superagent';
 import Promise from 'bluebird';
 
-import {getToken} from './auth';
+import {getToken, removeToken} from './auth';
 
 const baseUrl = 'http://localhost:5000/api/v0/'; // TODO: from cfg-file
 
@@ -13,8 +13,8 @@ const end = request.Request.prototype.end;
 request.Request.prototype.end = function (callback) {
   return end.call(this, (error, response) => {
     if (response.unauthorized) {
-      console.log('UNAUTHZzzd');
-      // history.pushState(null, '/login');
+      console.error('unauthorized request!');
+      removeToken(); // delete token, it is invalid/expires
     } else {
       callback(error, response);
     }
@@ -24,7 +24,6 @@ request.Request.prototype.end = function (callback) {
 // sets the authorization header
 function authorizationHeader(request) {
   let token = getToken();
-  console.log(token, 'jodasjfioads');
   if (token) {
     request.set('Authorization', 'Bearer ' + token);
   }

@@ -6,37 +6,61 @@ import classNames from 'classnames';
 
 import {createPopup, createMessageListener} from '../utils/windowUtils';
 import * as actionCreators from '../actions/action_creators';
+import * as authService from '../services/auth';
 
 
 export const LoginView = React.createClass({
   mixins: [PureRenderMixin],
+  popupPoller: null,
 
-  getInitialState: () => ({ popupHandle: null }),
 
-  testClick() {
-    let handle = createPopup('http://localhost:5000/auth/facebook', 'dakdak-auth-popup', 600, 400);
-    console.log(handle);
+  componentWillUnmount() {
+    this.clearPopupPoller();
+  },
 
-    // ## WIP WIP WIP
-    // TODO: close the window on some point
-    // TODO: remove event listener after it isn't needed anymore
 
-    setInterval(function() {
+  onFbLoginLink() {
+    // Create popup window
+    // TODO: what dimensions to use? what about mobile devices?
+    let handle = createPopup('http://localhost:5000/auth/facebook', 'Kirjaudu sisään', 600, 400);
+
+    // Start polling the popup with events, so the popup will get handle to this window
+    this.popupPoller = setInterval(function() {
       console.log('Parent->Child event triggered');
       handle.postMessage('Test ping from parent->child', '*');
     }, 2000);
 
-    createMessageListener(
-      event => console.log('Message received', event.data),
-      'http://localhost:5000'); // TODO parameterize
+    // Listen for events from popup window - we should receive auth token from there
+    createMessageListener('http://localhost:5000', this.onPopupEvent);
   },
+
+  onLogoutClick() {
+    authService.removeToken();
+  },
+
+  onPopupEvent(event) {
+    console.log('Message received from popup window');
+    if (event.data) {
+      authService.setToken(event.data);
+      this.clearPopupPoller();
+      // TODO: event listener should be removed also?
+    }
+  },
+
+  clearPopupPoller() {
+    // Remove popupPoller, if it is set
+    if (this.popupPoller) {
+      window.clearInterval(this.popupPoller);
+      this.popupPoller = null;
+    }
+  },
+
 
   render() {
     return <div>
         <h2>Login-test</h2>
-
-        <button onClick={this.testClick}>login-test</button>
-
+        <button onClick={this.onFbLoginLink}>Kirjaudu Facebookin kautta</button>
+        <button onClick={this.onLogoutClick}>Logout</button>
     </div>;
   }
 });

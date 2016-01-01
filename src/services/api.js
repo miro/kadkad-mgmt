@@ -1,6 +1,8 @@
 import request from 'superagent';
 import Promise from 'bluebird';
+import {browserHistory} from 'react-router';
 
+import history from '../history';
 import {getToken, removeToken} from './auth';
 
 const baseUrl = 'http://localhost:5000/api/v0/'; // TODO: from cfg-file
@@ -15,6 +17,7 @@ request.Request.prototype.end = function (callback) {
     if (response.unauthorized) {
       console.error('unauthorized request!');
       removeToken(); // delete token, it is invalid/expires
+      history.replaceState(null, '/#login');
     } else {
       callback(error, response);
     }

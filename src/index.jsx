@@ -17,6 +17,7 @@ import Header from './containers/Header'
 import {EditViewContainer} from './containers/EditView';
 import {UploadViewContainer} from './containers/UploadView';
 import {LoginViewContainer} from './containers/LoginView';
+import {LandingViewContainer} from './containers/LandingView';
 
 
 
@@ -62,6 +63,7 @@ const routes = <Route component={App}>
   <Route path="/" component={EditViewContainer} />
   <Route path="/upload" component={UploadViewContainer} />
   <Route path="/login" component={LoginViewContainer} />
+  <Route path="/landing" component={LandingViewContainer} />
 </Route>;
 
 ReactDOM.render(

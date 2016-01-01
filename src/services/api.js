@@ -1,14 +1,28 @@
 import request from 'superagent';
 import Promise from 'bluebird';
 
+import {getToken} from './auth';
+
 const baseUrl = 'http://localhost:5000/api/v0/'; // TODO: from cfg-file
 
-// TODO: handleresult-util-function(???)
+
+
+
+// sets the authorization header
+function authorizationHeader(request) {
+  let token = getToken();
+  console.log(token, 'jodasjfioads');
+  if (token) {
+    request.set('Authorization', 'Bearer ' + token);
+  }
+}
+
 
 
 export function getModels(modelType) {
   return new Promise((resolve, reject) => {
     request.get(baseUrl + modelType)
+      .use(authorizationHeader)
       .end((error, response) => {
         if (error) {
           reject(error)
@@ -23,6 +37,7 @@ export function getModels(modelType) {
 export function createModel(modelType, model) {
   return new Promise((resolve, reject) => {
     request.post(baseUrl + modelType)
+      .use(authorizationHeader)
       .send(model)
       .end((error, response) => {
         (error) ? reject(error) : resolve(response.body);
@@ -35,6 +50,7 @@ export function createModel(modelType, model) {
 export function updateModel(modelType, modelId, model) {
   return new Promise((resolve, reject) => {
     request.put(baseUrl + modelType + '/' + modelId)
+      .use(authorizationHeader)
       .send(model)
       .end((error, response) => {
         if (error) {
@@ -61,6 +77,7 @@ export function uploadImage(imageFile, metaData, handleProgressEvent) {
     // HOX: superagent has currently issue with multipart form data,
     // read more from https://github.com/visionmedia/superagent/issues/746
     request.post(baseUrl + 'images')
+      .use(authorizationHeader)
       .send(formData)
       .on('progress', function(e) {
         (handleProgressEvent) ? handleProgressEvent(e) : 'do nothing';

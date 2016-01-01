@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux'
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import classNames from 'classnames';
 import Dropzone from 'react-dropzone';
@@ -17,8 +16,6 @@ export const UploadView = React.createClass({
   },
 
   render() {
-    let { images, persons, spots, dispatch } = this.props;
-
     return <div>
         <h2>Kuvien uploadaus</h2>
 
@@ -30,16 +27,12 @@ export const UploadView = React.createClass({
         <div className="uploads__wrapper">
           {this.props.uploads.map(item => (<Upload {...item.toJS()} key={item.toJS().id} />))}
         </div>
-
     </div>;
   }
 });
 
 function mapStateToProps(state) {
-  return {
-    images: state.models.get('images').toArray(),
-    uploads: state.models.get('uploads').toArray()
-  };
+  return { uploads: state.models.get('uploads').toArray() };
 }
 
 export const UploadViewContainer = connect(

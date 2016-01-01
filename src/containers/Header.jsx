@@ -11,8 +11,10 @@ export default React.createClass({
   render: function() {
     return <div className="header__wrapper">
       <ul>
+        <li><Link to={`/landing`}>Koti</Link></li>
         <li><Link to={`/`}>Muokkaa</Link></li>
         <li><Link to={`/upload`}>Uploadaa</Link></li>
+        <li><Link to={`/login`}>Login</Link></li>
       </ul>
     </div>;
   }

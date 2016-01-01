@@ -7,6 +7,19 @@ const baseUrl = 'http://localhost:5000/api/v0/'; // TODO: from cfg-file
 
 
 
+// Hack: create general handler for unauthorized responses
+// (from https://github.com/visionmedia/superagent/issues/165#issuecomment-166383362)
+const end = request.Request.prototype.end;
+request.Request.prototype.end = function (callback) {
+  return end.call(this, (error, response) => {
+    if (response.unauthorized) {
+      console.log('UNAUTHZzzd');
+      // history.pushState(null, '/login');
+    } else {
+      callback(error, response);
+    }
+  });
+};
 
 // sets the authorization header
 function authorizationHeader(request) {

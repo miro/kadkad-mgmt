@@ -9,7 +9,7 @@ export function createPopup(url, title, w, h) {
 }
 
 
-export function createMessageListener(callback, expectedSenderUrl) {
+export function createMessageListener(expectedSenderUrl, callback) {
   // Applied from http://stackoverflow.com/questions/8822907/html5-cross-browser-iframe-postmessage-child-to-parent
 
   const eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';

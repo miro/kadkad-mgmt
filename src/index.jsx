@@ -11,7 +11,7 @@ import Immutable from 'immutable';
 import Promise from 'bluebird';
 
 import modelReducer from './reducers/modelReducer';
-import {getModels} from './apiService';
+import {getModels} from './services/api';
 
 import Header from './containers/Header'
 import {EditViewContainer} from './containers/EditView';

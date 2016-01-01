@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-import * as api from '../apiService.js';
+import * as api from '../services/api.js';
 
 
 export function setState(state) {

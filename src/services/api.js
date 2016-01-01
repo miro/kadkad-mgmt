@@ -1,14 +1,43 @@
 import request from 'superagent';
 import Promise from 'bluebird';
+import {browserHistory} from 'react-router';
+
+import history from '../history';
+import {getToken, removeToken} from './auth';
 
 const baseUrl = 'http://localhost:5000/api/v0/'; // TODO: from cfg-file
 
-// TODO: handleresult-util-function(???)
+
+
+// Hack: create general handler for unauthorized responses
+// (from https://github.com/visionmedia/superagent/issues/165#issuecomment-166383362)
+const end = request.Request.prototype.end;
+request.Request.prototype.end = function (callback) {
+  return end.call(this, (error, response) => {
+    if (response.unauthorized) {
+      console.error('unauthorized request!');
+      removeToken(); // delete token, it is invalid/expires
+      history.replaceState(null, '/#login');
+    } else {
+      callback(error, response);
+    }
+  });
+};
+
+// sets the authorization header
+function authorizationHeader(request) {
+  let token = getToken();
+  if (token) {
+    request.set('Authorization', 'Bearer ' + token);
+  }
+}
+
 
 
 export function getModels(modelType) {
   return new Promise((resolve, reject) => {
     request.get(baseUrl + modelType)
+      .use(authorizationHeader)
       .end((error, response) => {
         if (error) {
           reject(error)
@@ -23,6 +52,7 @@ export function getModels(modelType) {
 export function createModel(modelType, model) {
   return new Promise((resolve, reject) => {
     request.post(baseUrl + modelType)
+      .use(authorizationHeader)
       .send(model)
       .end((error, response) => {
         (error) ? reject(error) : resolve(response.body);
@@ -35,6 +65,7 @@ export function createModel(modelType, model) {
 export function updateModel(modelType, modelId, model) {
   return new Promise((resolve, reject) => {
     request.put(baseUrl + modelType + '/' + modelId)
+      .use(authorizationHeader)
       .send(model)
       .end((error, response) => {
         if (error) {
@@ -61,6 +92,7 @@ export function uploadImage(imageFile, metaData, handleProgressEvent) {
     // HOX: superagent has currently issue with multipart form data,
     // read more from https://github.com/visionmedia/superagent/issues/746
     request.post(baseUrl + 'images')
+      .use(authorizationHeader)
       .send(formData)
       .on('progress', function(e) {
         (handleProgressEvent) ? handleProgressEvent(e) : 'do nothing';

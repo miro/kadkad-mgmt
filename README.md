@@ -9,7 +9,7 @@ Currently seems to be working only with node v0.12.x, see this [react-router iss
 
 ## Quick-start development
 
-For now ensure that your node version is 0.12.x
+You must have node version of >= 4.x
 
 * `npm install`
 * `npm run start:dev` to start webpack dev server at port 9010
@@ -18,8 +18,6 @@ For now ensure that your node version is 0.12.x
 
 
 ## Running tests
-
-In order for life not to be easy, running tests require node version >= 4.x.  `¯\_(ツ)_/¯`
 
 * `npm test` to run the tests once
 * `npm run test:watch` to run tests on each file update

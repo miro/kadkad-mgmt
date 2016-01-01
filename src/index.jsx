@@ -10,6 +10,8 @@ import thunk from 'redux-thunk';
 import Immutable from 'immutable';
 import Promise from 'bluebird';
 
+import history from './history'
+
 import modelReducer from './reducers/modelReducer';
 import {getModels} from './services/api';
 
@@ -50,7 +52,6 @@ Promise.props({
   });
 });
 
-
 const App = React.createClass({
   render: function() {
     return <div>
@@ -59,7 +60,7 @@ const App = React.createClass({
     </div>
   }
 });
-const routes = <Route component={App}>
+const routes = <Route component={App} history={history}>
   <Route path="/" component={EditViewContainer} />
   <Route path="/upload" component={UploadViewContainer} />
   <Route path="/login" component={LoginViewContainer} />

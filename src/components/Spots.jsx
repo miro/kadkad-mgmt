@@ -11,8 +11,10 @@ export const Spots = React.createClass({
   render: function() {
     return <div>
         <h2>Spotit</h2>
-
-        <button onClick={() => this.props.createModel('spots')}>Luo Spotti</button>
+        <button
+          onClick={() => this.props.createModel('spots')}
+          className="btn-primary">
+          Luo Spotti</button>
 
         <div className="spots__list">
           {this.props.spots.map(spot => {

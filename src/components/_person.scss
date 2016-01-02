@@ -1,0 +1,8 @@
+.person__infos {
+  & > span { margin-right: 10px; }
+
+  .person__display-name {
+    font-size: 1.1em;
+    font-weight: bold;
+  }
+}

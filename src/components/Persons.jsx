@@ -11,7 +11,12 @@ export const Persons = React.createClass({
   render: function() {
     return <div>
         <h2>Henkilöt</h2>
-        <button onClick={() => this.props.createModel('persons')}>Luo Henkilö</button>
+        <button
+          onClick={() => this.props.createModel('persons')}
+          className="btn-primary">
+          Luo Henkilö
+        </button>
+
         <div className="persons__list">
           {this.props.persons.map(person => {
             return <Person

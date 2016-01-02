@@ -9,12 +9,21 @@ export default React.createClass({
   mixins: [PureRenderMixin],
 
   render: function() {
-    return <div className="header__wrapper">
-      <ul>
-        <li><Link to={`/landing`}>Koti</Link></li>
-        <li><Link to={`/`}>Muokkaa</Link></li>
-        <li><Link to={`/upload`}>Uploadaa</Link></li>
-        <li><Link to={`/login`}>Login</Link></li>
+    return <div className="header__wrapper pure-menu pure-menu-horizontal">
+      <a href="#" className="pure-menu-heading pure-menu-link">BRAND</a>
+      <ul className="pure-menu-list">
+        <li className="pure-menu-item">
+          <Link to={`/landing`} className="pure-menu-link">Koti</Link>
+        </li>
+        <li className="pure-menu-item">
+          <Link to={`/`} className="pure-menu-link">Muokkaa</Link>
+        </li>
+        <li className="pure-menu-item">
+          <Link to={`/upload`} className="pure-menu-link">Uploadaa</Link>
+        </li>
+        <li className="pure-menu-item">
+          <Link to={`/login`} className="pure-menu-link">Login</Link>
+        </li>
       </ul>
     </div>;
   }

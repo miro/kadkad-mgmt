@@ -10,24 +10,30 @@ let ImageFormComponent = React.createClass({
   render() {
     const { fields: { title, description, trickName, year, month }, handleSubmit } = this.props;
 
-    return <form onSubmit={handleSubmit}>
-      <div>
-        <label>Otsikko</label>
-        <input type="text" placeholder="Otsikko" {...title}/>
-      </div>
-      <div>
-        <label>Tempun nimi</label>
-        <input type="text" placeholder="Nollie Kickflip 900 50-50" {...trickName}/>
-      </div>
-      <div>
-        <label>Kuvaus</label>
-        <textarea {...description}></textarea>
-      </div>
-      <div>
-        <input type="number" placeholder="Kuukausi (3)" {...month}/>
-        <input type="number" placeholder="Vuosi (2016)" {...year}/>
-      </div>
-      <button type="submit" onClick={this.handleSubmit}>Tallenna</button>
+    return <form onSubmit={handleSubmit} className="form--basic">
+      <fieldset>
+        <div className="form__group">
+          <label>Otsikko</label>
+          <input type="text" placeholder="Otsikko" {...title}/>
+        </div>
+        <div className="form__group">
+          <label>Tempun nimi</label>
+          <input type="text" placeholder="Nollie Kickflip 900 50-50" {...trickName}/>
+        </div>
+        <div className="form__group">
+          <label>Kuvaus</label>
+          <textarea {...description}></textarea>
+        </div>
+        <div className="form__group">
+          <input type="number" placeholder="Kuukausi (3)" {...month}/>
+          <input type="number" placeholder="Vuosi (2016)" {...year}/>
+        </div>
+
+        <div className="form__controls">
+          <button type="submit">Tallenna</button>
+          <button onClick={this.toggleEditMode}>Peruuta</button>
+        </div>
+      </fieldset>
     </form>;
   }
 });
@@ -81,7 +87,7 @@ export default React.createClass({
         return { value: spot.get('id'), label: spot.get('name') };
       });
 
-      return <div>
+      return <div className="image__wrapper card__wrapper">
         <label>Atleetti</label>
         <Select
             name="image-rider"
@@ -110,10 +116,16 @@ export default React.createClass({
       </div>;
     }
     else {
-      return <div>
-        <p>#{model.id} / {model.title}</p>
-        <img src={imgUrl + '--thumb'} className="image__preview--list"/>
-        <button onClick={this.toggleEditMode}>edit</button>
+      let cardCoverStyle = { backgroundImage: 'url(' + imgUrl + '--thumb)' };
+      return <div className="image__wrapper card__wrapper">
+        <div className="card__cover" style={cardCoverStyle}></div>
+
+        <div className="card__content">
+          <p>#{model.id} / {model.title}</p>
+          <div className="card__controls">
+            <button onClick={this.toggleEditMode}>edit</button>
+          </div>
+        </div>
       </div>;
     }
   }

@@ -30,17 +30,21 @@ let SpotFormComponent = React.createClass({
   render() {
     const {fields: {name, description}, handleSubmit, onCancel} = this.props;
 
-    return <form onSubmit={handleSubmit}>
-      <div>
-        <label>Otsikko</label>
-        <input type="text" placeholder="Otsikko" {...name}/>
-      </div>
-      <div>
-        <label>Kuvaus</label>
-        <textarea {...description}></textarea>
-      </div>
-      <button type="submit" onClick={this.handleSubmit}>Tallenna</button>
-      <button onClick={onCancel}>Peruuta</button>
+    return <form onSubmit={handleSubmit} className="form--basic">
+      <fieldset>
+        <div className="form__group">
+          <label>Otsikko</label>
+          <input type="text" placeholder="Otsikko" {...name}/>
+        </div>
+        <div className="form__group">
+          <label>Kuvaus</label>
+          <textarea {...description}></textarea>
+        </div>
+        <div className="form__controls">
+          <button type="submit">Tallenna</button>
+          <button onClick={onCancel}>Peruuta</button>
+        </div>
+      </fieldset>
     </form>;
   }
 });
@@ -145,19 +149,16 @@ export default React.createClass({
     if (this.state.editMode) {
       let formValues = { name: model.name, description: model.description };
 
-      return <div>
-        <section className="spot__wrapper--editmode">
+      return <div className="card__wrapper">
+        <section className="card__cover spot__map__wrapper">
           <GoogleMapLoader
-            containerElement={
-              <div {...this.props} className="spot-map__container" />
-            }
+            containerElement={<div {...this.props} className="spot-map__container" />}
             googleMapElement={
               <GoogleMap
                 ref="map"
                 defaultZoom={12}
-                center={this.state.center}
                 // onClick={this.handleMapClick}> // TODO!
-                >
+                center={this.state.center} >
 
                 <SearchBox
                   bounds={this.state.bounds}
@@ -165,29 +166,31 @@ export default React.createClass({
                   onPlacesChanged={this.handlePlacesChanged}
                   ref="searchBox"
                   placeholder="Hakusana"
-                  style={mapSearchBoxStyle}
-                />
+                  style={mapSearchBoxStyle} />
 
-                  {this.state.markers.map((marker, index) => (
-                    <Marker position={marker.position} key={index} />
-                  ))}
-
+                {this.state.markers.map((marker, index) => (
+                  <Marker position={marker.position} key={index} />
+                ))}
               </GoogleMap>
             }
           />
         </section>
 
-        <SpotForm
-          onSubmit={this.handleFormSubmit}
-          onCancel={this.toggleEditMode}
-          initialValues={formValues}
-          form={'spotForm-' + model.id}/>
+        <div className="card__content">
+          <SpotForm
+            onSubmit={this.handleFormSubmit}
+            onCancel={this.toggleEditMode}
+            initialValues={formValues}
+            form={'spotForm-' + model.id} />
+        </div>
       </div>;
     }
     else {
-      return <div>
+      return <div className="card__wrapper card__content spot__wrapper">
         <p>#{model.id} / {model.name}</p>
-        <button onClick={this.toggleEditMode}>edit</button>
+        <div className="card__controls">
+          <button onClick={this.toggleEditMode}>Muokkaa</button>
+        </div>
       </div>;
     }
   }

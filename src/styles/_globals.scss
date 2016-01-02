@@ -1,0 +1,57 @@
+.app-container {
+  margin: 20px auto 0 auto;
+  width: 90%;
+  max-width: 1020px;
+}
+
+
+
+// purecss extends
+button {
+  @extend .pure-button;
+}
+
+button.btn-primary { @extend .pure-button-primary; }
+form { @extend .pure-form; }
+
+
+
+.card__wrapper {
+  background-color: $bg-color--light;
+  margin-bottom: 10px;
+  overflow: hidden;
+
+}
+
+.card__content {
+  padding: 10px;
+  position: relative;
+}
+.card__controls {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+
+  button { height: 100%; }
+}
+
+
+.card__cover {
+  // card cover will have bg-image
+  background-size: cover;
+  background-position: center center;
+  height: 150px;
+  width: 100%;
+
+}
+
+
+form.form--basic {
+  @extend .pure-form-aligned;
+
+  button[type=submit] { @extend .btn-primary; }
+
+  .form__group { @extend .pure-control-group; }
+  .form__controls { @extend .pure-controls; }
+}

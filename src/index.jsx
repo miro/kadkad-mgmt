@@ -54,7 +54,7 @@ Promise.props({
 
 const App = React.createClass({
   render: function() {
-    return <div>
+    return <div className="app-container">
       <Header />
       {this.props.children}
     </div>

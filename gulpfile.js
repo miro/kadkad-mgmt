@@ -8,7 +8,8 @@ var sass        = require('gulp-sass');
 gulp.task('serve', ['sass'], function() {
 
     browserSync.init({
-        proxy: 'localhost:9010'
+        proxy: 'localhost:9010',
+        open: false
     });
 
     gulp.watch("src/**/*.scss", ['sass']);

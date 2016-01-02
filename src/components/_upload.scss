@@ -1,0 +1,25 @@
+$upload-card__height: 70px;
+
+.upload__wrapper {
+  position: relative;
+  height: $upload-card__height;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.upload__status {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+
+  line-height: $upload-card__height;
+
+  padding: 0 10px;
+}
+.upload__status--ready {
+  background-image: linear-gradient($color--ready, darken($color--ready, 5%));
+}
+.upload__status--failed {
+  background-image: linear-gradient($color--error, darken($color--error, 5%));
+}

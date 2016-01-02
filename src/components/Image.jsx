@@ -25,6 +25,7 @@ let ImageFormComponent = React.createClass({
           <textarea {...description}></textarea>
         </div>
         <div className="form__group">
+          <label>Ajankohta</label>
           <input type="number" placeholder="Kuukausi (3)" {...month}/>
           <input type="number" placeholder="Vuosi (2016)" {...year}/>
         </div>

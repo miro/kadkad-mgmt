@@ -13,6 +13,7 @@ function createModel(state, modelType, newModel) {
   ]));
 }
 
+// TODO: use .find() instead of .findIndex()
 function updateModel(state, modelType, updatedModel) {
   let modelIndex = state.get(modelType).findIndex((item) => item.get('id') === updatedModel.id);
 

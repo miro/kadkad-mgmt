@@ -55,6 +55,18 @@ export default React.createClass({
     this.setState({ editMode: !this.state.editMode });
   },
 
+  solveLinkedProperties() {
+    const {spots, persons, image} = this.props;
+
+    const riderModel = persons.find(person => person.get('id') === image.get('riderId'));
+    const spotModel = spots.find(spot => spot.get('id') === image.get('spotId'));
+
+    return {
+      riderName: (riderModel) ? riderModel.get('displayName') : 'Tuntematon sankari',
+      spotName: (spotModel) ? spotModel.get('title') : 'Tuntematon sijainti'
+    };
+  },
+
   handleFormSubmit(formValues) {
     const newProps = Object.assign({}, formValues);
     this.update(newProps);
@@ -78,7 +90,6 @@ export default React.createClass({
 
 
     if (this.state.editMode) {
-
       let personSelectValues = this.props.persons.map(person => {
         return {
           value: person.get('id'),
@@ -123,11 +134,16 @@ export default React.createClass({
       </div>;
     }
     else {
+      const solvedProps = this.solveLinkedProperties();
+
       return <div className="image__wrapper card__wrapper">
         <div className="card__cover" style={cardCoverStyle}></div>
 
         <div className="card__content">
-          <p>#{model.id} / {model.title}</p>
+          <h3 className="image__title">{model.title}</h3>
+          <p className="image__meta">
+            {solvedProps.riderName} @ {solvedProps.spotName}
+          </p>
           <div className="card__controls">
             <button onClick={this.toggleEditMode}>Muokkaa</button>
           </div>

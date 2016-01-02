@@ -10,7 +10,7 @@
     "test:watch": "npm run test -- --watch"
   },
   "author": "Miro Nieminen <miro.nieminen@gmail.com>",
-  "license": "TODO",
+  "license": "GPL-3.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/miro/kadkad-mgmt"

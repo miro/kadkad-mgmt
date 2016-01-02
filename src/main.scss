@@ -4,6 +4,7 @@
 @import '../node_modules/purecss-sass/vendor/assets/stylesheets/purecss'; // TODO: after dev include only modules which are used
 
 // # General styles
+@import './styles/_mixins.scss';
 @import './styles/_variables.scss'; // make sure this is first of your own style files!
 @import './styles/_icons.scss';
 @import './styles/_globals.scss';

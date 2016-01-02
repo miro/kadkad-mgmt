@@ -1,6 +1,7 @@
 node_modules
 dist/bundle.js
 dist/css/*
+dist/assets/*
 
 *.log
 

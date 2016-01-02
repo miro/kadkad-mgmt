@@ -3,6 +3,7 @@ var browserSync = require('browser-sync').create();
 var sass        = require('gulp-sass');
 
 // TODO: autoprefixer!
+// TODO: task to copy assets to dist!
 
 // Static Server + watching scss/html files
 gulp.task('serve', ['sass'], function() {

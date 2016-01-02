@@ -19,11 +19,12 @@ export const UploadView = React.createClass({
     return <div>
         <h2>Kuvien uploadaus</h2>
 
-        <Dropzone onDrop={this.onDrop}>
-          <div>Raahaa kuvasi tähän, tai paina tästä valitaksesi lähetettävät kuvat</div>
+        <Dropzone onDrop={this.onDrop} className="dropzone" activeClassName="dropzone--active">
+          <p className="dropzone__desc">
+            Raahaa kuvasi tähän, tai paina tästä valitaksesi lähetettävät kuvat
+          </p>
         </Dropzone>
 
-        <h4>Käynnissä olevat uploadit</h4>
         <div className="uploads__wrapper">
           {this.props.uploads.map(item => (<Upload {...item.toJS()} key={item.toJS().id} />))}
         </div>

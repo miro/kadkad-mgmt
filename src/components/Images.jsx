@@ -10,27 +10,24 @@ export const Images = React.createClass({
   mixins: [PureRenderMixin],
 
   render: function() {
-    let imageComponents = [];
-
-    this.props.images.map(image => {
-      imageComponents.push(
-        <Image
-          updateModel={this.props.updateModel}
-          image={image}
-          persons={this.props.persons}
-          spots={this.props.spots}
-          key={image.get('id')}
-        />
-      );
-    });
-
     return <div>
         <h2>Kuvat</h2>
 
-        <button onClick={() => this.props.createModel('images')}>Luo Kuva</button>
+        <button
+          onClick={() => this.props.createModel('images')}
+          className="btn-primary"
+          >Luo Kuva</button>
 
         <div className="images__list">
-          {imageComponents}
+          {this.props.images.map(image => {
+            return <Image
+              updateModel={this.props.updateModel}
+              image={image}
+              persons={this.props.persons}
+              spots={this.props.spots}
+              key={image.get('id')}
+            />;
+          })}
         </div>
     </div>;
   }

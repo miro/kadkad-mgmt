@@ -74,6 +74,8 @@ export default React.createClass({
   render: function() {
     let model = this.props.image.toJS();
     let imgUrl = 'https://storage.googleapis.com/dakdak-dev/' + model.storageId; // TODO get this from.. somewhere
+    let cardCoverStyle = { backgroundImage: 'url(' + imgUrl + '--thumb)' };
+
 
     if (this.state.editMode) {
 
@@ -87,43 +89,47 @@ export default React.createClass({
         return { value: spot.get('id'), label: spot.get('name') };
       });
 
-      return <div className="image__wrapper card__wrapper">
-        <label>Atleetti</label>
-        <Select
-            name="image-rider"
-            options={personSelectValues}
-            onChange={this.handleAttributeChange('riderId')}
-            value={model.riderId}/>
 
-        <label>Spotti</label>
-        <Select
-            name="image-spot"
-            options={spotSelectValues}
-            onChange={this.handleAttributeChange('spotId')}
-            value={model.spotId}/>
+      return <div className="image__wrapper image__wrapper--editmode card__wrapper">
+        <div className="card__cover" style={cardCoverStyle}></div>
 
-        <label>Kuvaaja</label>
-        <Select
-            name="image-photographer"
-            options={personSelectValues}
-            onChange={this.handleAttributeChange('photographerId')}
-            value={model.photographerId}/>
+        <div className="card__content">
+          <label>Atleetti</label>
+          <Select
+              name="image-rider"
+              options={personSelectValues}
+              onChange={this.handleAttributeChange('riderId')}
+              value={model.riderId}/>
 
-        <ImageForm
-          onSubmit={this.handleFormSubmit}
-          initialValues={model}
-          form={'imageForm-' + model.id}/>
+          <label>Spotti</label>
+          <Select
+              name="image-spot"
+              options={spotSelectValues}
+              onChange={this.handleAttributeChange('spotId')}
+              value={model.spotId}/>
+
+          <label>Kuvaaja</label>
+          <Select
+              name="image-photographer"
+              options={personSelectValues}
+              onChange={this.handleAttributeChange('photographerId')}
+              value={model.photographerId}/>
+
+          <ImageForm
+            onSubmit={this.handleFormSubmit}
+            initialValues={model}
+            form={'imageForm-' + model.id} />
+        </div>
       </div>;
     }
     else {
-      let cardCoverStyle = { backgroundImage: 'url(' + imgUrl + '--thumb)' };
       return <div className="image__wrapper card__wrapper">
         <div className="card__cover" style={cardCoverStyle}></div>
 
         <div className="card__content">
           <p>#{model.id} / {model.title}</p>
           <div className="card__controls">
-            <button onClick={this.toggleEditMode}>edit</button>
+            <button onClick={this.toggleEditMode}>Muokkaa</button>
           </div>
         </div>
       </div>;

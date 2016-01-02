@@ -2,3 +2,13 @@
   max-height: 200px;
   max-width: 300px;
 }
+
+.image__wrapper {
+  .card__cover {
+    transition: height 1s;
+  }
+}
+
+.image__wrapper--editmode {
+  .card__cover { height: 400px; }
+}

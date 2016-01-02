@@ -2,4 +2,6 @@ node_modules
 dist/bundle.js
 dist/css/*
 
+*.log
+
 *.sublime-*

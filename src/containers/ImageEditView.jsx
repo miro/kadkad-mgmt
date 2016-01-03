@@ -13,6 +13,10 @@ export const ImageEditView = React.createClass({
 
   getInitialState: () => ({ page: 0, itemsInPage: 10 }),
 
+  componentDidMount() {
+    this.props.dispatch(actionCreators.getAllModels('images'));
+  },
+
   // page related functions
   turnNextPage() { this.changePage(true, this.props.images.length) },
   turnPreviousPage() {this.changePage(false, this.props.images.length) },

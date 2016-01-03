@@ -9,6 +9,7 @@ export function setState(state) {
 }
 
 export function getAllModels(modelType) {
+  // NOTE: generate etag for server?
   return dispatch => {
     api.getModels(modelType)
     .then(models => {

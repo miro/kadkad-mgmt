@@ -39,20 +39,6 @@ const store = createStoreWithMiddleware(reducer, {
   form: {} // for react-form
 });
 
-
-// # -> Fetch initial state
-Promise.props({
-  images:     getModels('images'),
-  persons:    getModels('persons'),
-  spots:      getModels('spots')
-})
-.then(data => {
-  store.dispatch({
-    type: 'SET_STATE',
-    state: {...data}
-  });
-});
-
 const App = React.createClass({
   render: function() {
     return <div className="app-container">

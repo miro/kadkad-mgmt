@@ -1,6 +1,8 @@
-var gulp        = require('gulp');
-var browserSync = require('browser-sync').create();
-var sass        = require('gulp-sass');
+// # Imports
+var gulp                    = require('gulp');
+var browserSync             = require('browser-sync').create();
+var sass                    = require('gulp-sass');
+var autoprefixer            = require('gulp-autoprefixer');
 
 // TODO: autoprefixer!
 // TODO: task to copy assets to dist!
@@ -20,6 +22,7 @@ gulp.task('serve', ['sass'], function() {
 gulp.task('sass', function() {
     return gulp.src("src/**/*.scss")
         .pipe(sass())
+        .pipe(autoprefixer())
         .pipe(gulp.dest("dist/css"))
         .pipe(browserSync.stream());
 });

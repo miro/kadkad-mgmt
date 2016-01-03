@@ -19,7 +19,31 @@ module.exports = function(options) {
     filename: options.outputFilename
   };
 
+  var plugins = [];
 
+  if (options.useDevServer) {
+    plugins.push(new webpack.HotModuleReplacementPlugin());
+  }
+
+  if (options.minimize) {
+    plugins.push(
+      new webpack.optimize.UglifyJsPlugin({
+        compressor: {
+          warnings: false
+        }
+      }),
+      new webpack.optimize.DedupePlugin()
+    );
+
+    plugins.push(
+      new webpack.DefinePlugin({
+        "process.env": {
+          NODE_ENV: JSON.stringify("production")
+        }
+      }),
+      new webpack.NoErrorsPlugin()
+    );
+  }
 
   return {
     entry: entry,
@@ -31,6 +55,7 @@ module.exports = function(options) {
       extensions: ['', '.js', '.jsx']
     },
     output: output,
+    plugins: plugins,
 
     devServer: (options.useDevServer) ? {
       contentBase: './dist',
@@ -38,6 +63,5 @@ module.exports = function(options) {
     } : {},
 
     devtool: (options.sourcemaps) ? 'cheap-module-eval-source-map' : '',
-    plugins: (options.useDevServer) ? [new webpack.HotModuleReplacementPlugin()] : []
   };
 };

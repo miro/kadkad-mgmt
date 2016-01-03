@@ -7,7 +7,8 @@
     "start:dev": "webpack-dev-server --port 9010 --config webpack-dev.config.js --progress --profile --colors",
     "build-css:dev": "node ./node_modules/gulp/bin/gulp.js",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js 'test/**/*.@(js|jsx)'",
-    "test:watch": "npm run test -- --watch"
+    "test:watch": "npm run test -- --watch",
+    "build": "webpack --config webpack-production.config.js --progress --profile --colors"
   },
   "author": "Miro Nieminen <miro.nieminen@gmail.com>",
   "license": "GPL-3.0",

@@ -68,12 +68,13 @@ export default React.createClass({
     else {
       return <div className="person__wrapper card__wrapper card__content">
         <p className="person__infos">
-          <span className="person__id">#{model.id}</span>
           <span className="person__display-name">{model.displayName}</span>
           <span className="person__full-name">{model.fullName}</span>
         </p>
         <div className="card__controls">
-          <button onClick={this.toggleEditMode} className="person__edit">Muokkaa</button>
+          <button onClick={this.toggleEditMode} className="person__edit">
+            <i className="icon-muokkaa"> Muokkaa</i>
+          </button>
         </div>
       </div>;
     }

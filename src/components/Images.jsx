@@ -13,11 +13,6 @@ export const Images = React.createClass({
     return <div>
         <h2>Kuvat</h2>
 
-        <button
-          onClick={() => this.props.createModel('images')}
-          className="btn-primary"
-          >Luo Kuva</button>
-
         <div className="images__list">
           {this.props.images.map(image => {
             return <Image

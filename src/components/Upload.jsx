@@ -9,12 +9,18 @@ export default React.createClass({
   getStatusContent(status) {
     switch (status) {
       case 'in-progress':
-        return <i className="icon-lataus rotate360"></i>
+        return <span>
+          <i className="icon-lataus rotate360"></i> Uploadataan...
+        </span>;
       case 'ready':
-        return <i className="icon-ok"></i>
+        return <span>
+          <i className="icon-ok"></i> Onnistui!
+        </span>;
       case 'failed':
-        return <span>Epäonnistui <i className="icon-varoitus"></i></span>;
-      default: return <p>{this.props.status}</p>;
+        return <span>
+          <i className="icon-varoitus"></i> Jostain syystä uploadaus epäonnistui:(
+        </span>;
+      default: return <span>{this.props.status}</span>;
     }
   },
 

@@ -189,7 +189,9 @@ export default React.createClass({
       return <div className="card__wrapper card__content spot__wrapper">
         <h4>{model.name}</h4>
         <div className="card__controls">
-          <button onClick={this.toggleEditMode}>Muokkaa</button>
+          <button onClick={this.toggleEditMode}>
+            <i className="icon-muokkaa"></i> Muokkaa
+          </button>
         </div>
       </div>;
     }

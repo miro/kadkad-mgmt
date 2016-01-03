@@ -174,7 +174,9 @@ export default React.createClass({
             {solvedProps.riderName} @ {solvedProps.spotName}
           </p>
           <div className="card__controls">
-            <button onClick={this.toggleEditMode}><i className="icon-muokkaa"></i></button>
+            <button onClick={this.toggleEditMode}>
+              <i className="icon-muokkaa"></i> Muokkaa
+            </button>
           </div>
         </div>
       </div>;

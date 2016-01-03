@@ -22,7 +22,7 @@ export const LoginView = React.createClass({
   onFbLoginLink() {
     // Create popup window
     // TODO: what dimensions to use? what about mobile devices?
-    let handle = createPopup('http://localhost:5000/auth/facebook', 'Kirjaudu sisään', 600, 400);
+    let handle = createPopup(DAKDAK.baseUrl + '/auth/facebook', 'Kirjaudu sisään', 600, 400);
 
     // Start polling the popup with events, so the popup will get handle to this window
     this.popupPoller = setInterval(function() {
@@ -31,7 +31,7 @@ export const LoginView = React.createClass({
     }, 2000);
 
     // Listen for events from popup window - we should receive auth token from there
-    createMessageListener('http://localhost:5000', this.onPopupEvent);
+    createMessageListener(DAKDAK.baseUrl, this.onPopupEvent);
   },
 
   onLogoutClick() {

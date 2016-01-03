@@ -5,7 +5,7 @@ import {browserHistory} from 'react-router';
 import history from '../history';
 import {getToken, removeToken} from './auth';
 
-const baseUrl = 'http://localhost:5000/api/v0/'; // TODO: from cfg-file
+const baseUrl = DAKDAK.apiBaseUrl;
 
 
 

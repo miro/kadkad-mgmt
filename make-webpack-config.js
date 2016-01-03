@@ -19,7 +19,18 @@ module.exports = function(options) {
     filename: options.outputFilename
   };
 
+
   var plugins = [];
+
+  // Load config file based on environment
+  options.env = (options.env) ? options.env : 'development';
+  var envCfg = require('./configs/' + options.env);
+  console.log('Env config in use: [', options.env, ']');
+  console.log(envCfg);
+  plugins.push(
+    new webpack.DefinePlugin(envCfg)
+  );
+
 
   if (options.useDevServer) {
     plugins.push(new webpack.HotModuleReplacementPlugin());
@@ -32,15 +43,7 @@ module.exports = function(options) {
           warnings: false
         }
       }),
-      new webpack.optimize.DedupePlugin()
-    );
-
-    plugins.push(
-      new webpack.DefinePlugin({
-        "process.env": {
-          NODE_ENV: JSON.stringify("production")
-        }
-      }),
+      new webpack.optimize.DedupePlugin(),
       new webpack.NoErrorsPlugin()
     );
   }

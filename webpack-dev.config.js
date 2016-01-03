@@ -6,6 +6,8 @@ module.exports = require('./make-webpack-config')({
     'webpack/hot/only-dev-server',
   ],
 
+  env: 'development', // config file will be loaded based on this
+
   loaderType: 'react-hot!babel',
   outputFilename: 'bundle.js',
   useDevServer: true,

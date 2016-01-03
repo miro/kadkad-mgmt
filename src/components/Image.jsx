@@ -74,8 +74,7 @@ export default React.createClass({
     };
   },
 
-  // TODO get the full path from a config file
-  getImageUrl: (imageModel) => 'https://storage.googleapis.com/dakdak-dev/' + imageModel.storageId,
+  getImageUrl: (imageModel) => DAKDAK.storageUrl + imageModel.storageId,
 
   handleFormSubmit(formValues) {
     const newProps = Object.assign({}, formValues);

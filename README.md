@@ -9,12 +9,19 @@ Currently seems to be working only with node v0.12.x, see this [react-router iss
 
 ## Quick-start development
 
+The JavaScript-thingies on this app is built using *webpack*. Styles are built using *gulp*.
+
 You must have node version of >= 4.x
 
 * `npm install`
 * `npm run start:dev` to start webpack dev server at port 9010
-* `npm run build-css:dev` to start SCSS to CSS build and BrowserSync at port 3000   
+* `npm run build-css:dev` to start SCSS to CSS build and BrowserSync at port 3000
+* -> now you can open [localhost:3000](http://localhost:3000), and you should see the app with React hot-reload enabled and live injecting of CSS via BrowserSync!
 
+
+## Running in production
+
+To create a production build, run `npm run build`
 
 
 ## Running tests

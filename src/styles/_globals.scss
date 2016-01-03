@@ -61,8 +61,23 @@ form { @extend .pure-form; }
 form.form--basic {
   @extend .pure-form-aligned;
 
-  button[type=submit] { @extend .btn-primary; }
+  button, .btn { margin-right: 5px; }
 
+  button[type=submit] { @extend .btn-primary; }
   .form__group { @extend .pure-control-group; }
   .form__controls { @extend .pure-controls; }
+
+  input[type=text] {
+    // These might need adjustments for mobile
+    width: 250px;
+  }
+  textarea {
+    width: 350px;
+  }
+
+  input[type=number] {
+    width: 80px;
+  }
 }
+
+

@@ -1,5 +1,3 @@
-import moment from 'moment';
-
 import * as api from '../services/api';
 
 
@@ -67,9 +65,9 @@ export function uploadImage(imageFile) {
 
     // if image has last modified -information, parse it to Image model
     if (imageFile.lastModified) {
-      let lastModified = moment(imageFile.lastModified);
-      imageMetaData.year = lastModified.format('YYYY');
-      imageMetaData.month = lastModified.format('M');
+      let lastModified = new Date(imageFile.lastModified);
+      imageMetaData.year = lastModified.getFullYear();
+      imageMetaData.month = lastModified.getMonth() + 1;
     }
 
     // init the actual upload

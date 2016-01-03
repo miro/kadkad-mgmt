@@ -26,38 +26,6 @@ form { @extend .pure-form; }
 
 
 
-.card__wrapper {
-  background-color: $white;
-  margin-bottom: 10px;
-  overflow: hidden;
-  border: 1px solid $border-color--light;
-}
-
-.card__content {
-  padding: 10px;
-  position: relative;
-}
-.card__controls {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-
-  button { height: 100%; }
-}
-
-
-.card__cover {
-  // card cover will have bg-image
-  background-size: cover;
-  background-position: center center;
-  background-color: $bg-color--dark;
-  height: 150px;
-  width: 100%;
-
-}
-
-
 form.form--basic {
   @extend .pure-form-aligned;
 

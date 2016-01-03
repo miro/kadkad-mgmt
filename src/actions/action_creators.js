@@ -8,6 +8,21 @@ export function setState(state) {
   };
 }
 
+export function getAllModels(modelType) {
+  return dispatch => {
+    api.getModels(modelType)
+    .then(models => {
+      let updateObject = {};
+      updateObject[modelType] = models;
+
+      dispatch({
+        type: 'SET_STATE',
+        state: updateObject
+      });
+    });
+  }
+}
+
 export function createModel(modelType) {
   // TODO: filter unwanted modelTypes?
   // TODO: default values by modelType

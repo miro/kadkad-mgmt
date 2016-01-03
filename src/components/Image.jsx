@@ -33,6 +33,7 @@ let ImageFormComponent = React.createClass({
         <div className="form__controls">
           <button type="submit">Tallenna</button>
           <button onClick={this.toggleEditMode}>Peruuta</button>
+          <a className="btn btn-secondary" href={this.props.imgUrl} target="_blank">Avaa alkuperäinen</a>
         </div>
       </fieldset>
     </form>;
@@ -134,6 +135,7 @@ export default React.createClass({
           <ImageForm
             onSubmit={this.handleFormSubmit}
             initialValues={model}
+            {...model}
             form={'imageForm-' + model.id} />
         </div>
       </div>;

@@ -68,6 +68,9 @@ export default React.createClass({
     };
   },
 
+  // TODO get the full path from a config file
+  getImageUrl: (imageModel) => 'https://storage.googleapis.com/dakdak-dev/' + imageModel.storageId,
+
   handleFormSubmit(formValues) {
     const newProps = Object.assign({}, formValues);
     this.update(newProps);
@@ -86,8 +89,8 @@ export default React.createClass({
 
   render: function() {
     let model = this.props.image.toJS();
-    let imgUrl = 'https://storage.googleapis.com/dakdak-dev/' + model.storageId; // TODO get this from.. somewhere
-    let cardCoverStyle = { backgroundImage: 'url(' + imgUrl + '--thumb)' };
+    model.imgUrl = this.getImageUrl(model);
+    let cardCoverStyle = { backgroundImage: 'url(' + model.imgUrl + '--display)' };
 
 
     if (this.state.editMode) {
@@ -100,6 +103,7 @@ export default React.createClass({
       let spotSelectValues = this.props.spots.map(spot => {
         return { value: spot.get('id'), label: spot.get('name') };
       });
+      cardCoverStyle.backgroundSize = 'contain';
 
 
       return <div className="image__wrapper image__wrapper--editmode card__wrapper">

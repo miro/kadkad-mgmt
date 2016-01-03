@@ -45,6 +45,7 @@ form { @extend .pure-form; }
   // card cover will have bg-image
   background-size: cover;
   background-position: center center;
+  background-color: $bg-color--dark;
   height: 150px;
   width: 100%;
 

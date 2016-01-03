@@ -24,8 +24,8 @@ let ImageFormComponent = React.createClass({
           <input type="text" placeholder="Nollie Kickflip 900 50-50" {...trickName}/>
         </div>
         <div className="form__group">
-          <label>Kuvaus</label>
-          <textarea {...description}></textarea>
+          <label>Kuvateksti</label>
+          <textarea {...description} rows="6"></textarea>
         </div>
         <div className="form__group">
           <label>Kuukausi / Vuosi</label>
@@ -36,7 +36,9 @@ let ImageFormComponent = React.createClass({
         <div className="form__controls">
           <button type="submit">Tallenna</button>
           <button onClick={this.toggleEditMode}>Peruuta</button>
-          <a className="btn btn-secondary" href={this.props.imgUrl} target="_blank">Avaa alkuperäinen</a>
+          <a className="btn btn-secondary" href={this.props.imgUrl} target="_blank">
+            <i className="icon-kuva"></i> Avaa alkuperäinen kuva
+          </a>
         </div>
       </fieldset>
     </form>;
@@ -68,7 +70,7 @@ export default React.createClass({
 
     return {
       riderName: (riderModel) ? riderModel.get('displayName') : 'Tuntematon sankari',
-      spotName: (spotModel) ? spotModel.get('title') : 'Tuntematon sijainti'
+      spotName: (spotModel) ? spotModel.get('name') : 'Tuntematon sijainti'
     };
   },
 
@@ -114,26 +116,41 @@ export default React.createClass({
         <div className="card__cover" style={cardCoverStyle}></div>
 
         <div className="card__content">
-          <label>Atleetti</label>
-          <Select
-              name="image-rider"
-              options={personSelectValues}
-              onChange={this.handleAttributeChange('riderId')}
-              value={model.riderId}/>
 
-          <label>Spotti</label>
-          <Select
-              name="image-spot"
-              options={spotSelectValues}
-              onChange={this.handleAttributeChange('spotId')}
-              value={model.spotId}/>
+          <section className="select-items">
+            <div className="select__group">
+              <label>Atleetti</label>
+              <Select
+                className="select__wrapper"
+                name="image-rider"
+                options={personSelectValues}
+                onChange={this.handleAttributeChange('riderId')}
+                placeholder="Valitse..."
+                value={model.riderId} />
+            </div>
 
-          <label>Kuvaaja</label>
-          <Select
-              name="image-photographer"
-              options={personSelectValues}
-              onChange={this.handleAttributeChange('photographerId')}
-              value={model.photographerId}/>
+            <div className="select__group">
+              <label>Spotti</label>
+              <Select
+                className="select__wrapper"
+                name="image-spot"
+                options={spotSelectValues}
+                onChange={this.handleAttributeChange('spotId')}
+                placeholder="Valitse..."
+                value={model.spotId} />
+            </div>
+
+            <div className="select__group">
+              <label>Kuvaaja</label>
+              <Select
+                className="select__wrapper"
+                name="image-photographer"
+                options={personSelectValues}
+                onChange={this.handleAttributeChange('photographerId')}
+                placeholder="Valitse..."
+                value={model.photographerId} />
+            </div>
+          </section>
 
           <ImageForm
             onSubmit={this.handleFormSubmit}
@@ -150,12 +167,14 @@ export default React.createClass({
         <div className="card__cover" style={cardCoverStyle}></div>
 
         <div className="card__content">
-          <h3 className="image__title">{model.title}</h3>
+          <h3 className="image__title">
+            {model.title} <span className="image__title__trickname">{model.trickName}</span>
+          </h3>
           <p className="image__meta">
             {solvedProps.riderName} @ {solvedProps.spotName}
           </p>
           <div className="card__controls">
-            <button onClick={this.toggleEditMode}>Muokkaa</button>
+            <button onClick={this.toggleEditMode}><i className="icon-muokkaa"></i></button>
           </div>
         </div>
       </div>;

@@ -1,0 +1,15 @@
+.header__wrapper {
+
+}
+
+.header__title {
+  @extend .pure-menu-heading;
+  font-size: 20px;
+}
+
+.header__links {
+  @extend .pure-menu-list;
+
+  li { @extend .pure-menu-item; }
+  .header__link { @extend .pure-menu-link; }
+}

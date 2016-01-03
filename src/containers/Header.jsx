@@ -10,20 +10,12 @@ export default React.createClass({
 
   render: function() {
     return <div className="header__wrapper pure-menu pure-menu-horizontal">
-      <p className="pure-menu-heading">Kajaaniskate.net</p>
-      <ul className="pure-menu-list">
-        <li className="pure-menu-item">
-          <Link to={`/landing`} className="pure-menu-link">Koti</Link>
-        </li>
-        <li className="pure-menu-item">
-          <Link to={`/`} className="pure-menu-link">Muokkaa</Link>
-        </li>
-        <li className="pure-menu-item">
-          <Link to={`/upload`} className="pure-menu-link">Uploadaa</Link>
-        </li>
-        <li className="pure-menu-item">
-          <Link to={`/login`} className="pure-menu-link">Login</Link>
-        </li>
+      <h1 className="header__title">Kajaaniskate.net</h1>
+      <ul className="header__links">
+        <li><Link to={`/`} className="header__link"><i className="icon-koti"></i></Link></li>
+        <li><Link to={`/`} className="header__link">Muokkaa</Link></li>
+        <li><Link to={`/upload`} className="header__link">Uploadaa</Link></li>
+        <li><Link to={`/login`} className="header__link">Login</Link></li>
       </ul>
     </div>;
   }

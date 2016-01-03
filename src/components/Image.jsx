@@ -9,6 +9,9 @@ import classNames from 'classnames';
 let ImageFormComponent = React.createClass({
   render() {
     const { fields: { title, description, trickName, year, month }, handleSubmit } = this.props;
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const currentMonth = now.getMonth() + 1;
 
     return <form onSubmit={handleSubmit} className="form--basic">
       <fieldset>
@@ -25,9 +28,9 @@ let ImageFormComponent = React.createClass({
           <textarea {...description}></textarea>
         </div>
         <div className="form__group">
-          <label>Ajankohta</label>
-          <input type="number" placeholder="Kuukausi (3)" {...month}/>
-          <input type="number" placeholder="Vuosi (2016)" {...year}/>
+          <label>Kuukausi / Vuosi</label>
+          <input type="number" placeholder={currentMonth} {...month} min="1" max="12" />
+          <input type="number" placeholder={currentYear} {...year} min="1980" max={currentYear} />
         </div>
 
         <div className="form__controls">

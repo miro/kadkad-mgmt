@@ -1,3 +1,7 @@
+body {
+  background-color: $bg-color--light;
+}
+
 .app-container {
   margin: 20px auto 0 auto;
   width: 90%;
@@ -17,10 +21,10 @@ form { @extend .pure-form; }
 
 
 .card__wrapper {
-  background-color: $bg-color--light;
+  background-color: $white;
   margin-bottom: 10px;
   overflow: hidden;
-
+  border: 1px solid $border-color--light;
 }
 
 .card__content {

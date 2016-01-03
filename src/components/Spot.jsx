@@ -187,7 +187,7 @@ export default React.createClass({
     }
     else {
       return <div className="card__wrapper card__content spot__wrapper">
-        <p>#{model.id} / {model.name}</p>
+        <h4>{model.name}</h4>
         <div className="card__controls">
           <button onClick={this.toggleEditMode}>Muokkaa</button>
         </div>

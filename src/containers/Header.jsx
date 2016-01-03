@@ -10,7 +10,7 @@ export default React.createClass({
 
   render: function() {
     return <div className="header__wrapper pure-menu pure-menu-horizontal">
-      <a href="#" className="pure-menu-heading pure-menu-link">BRAND</a>
+      <p className="pure-menu-heading">Kajaaniskate.net</p>
       <ul className="pure-menu-list">
         <li className="pure-menu-item">
           <Link to={`/landing`} className="pure-menu-link">Koti</Link>

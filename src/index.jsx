@@ -20,6 +20,7 @@ import {EditViewContainer} from './containers/EditView';
 import {UploadViewContainer} from './containers/UploadView';
 import {LoginViewContainer} from './containers/LoginView';
 import {LandingViewContainer} from './containers/LandingView';
+import {ImageEditViewContainer} from './containers/ImageEditView';
 
 
 
@@ -61,10 +62,11 @@ const App = React.createClass({
   }
 });
 const routes = <Route component={App} history={history}>
-  <Route path="/" component={EditViewContainer} />
-  <Route path="/upload" component={UploadViewContainer} />
+  <Route path="/" component={LandingViewContainer} />
   <Route path="/login" component={LoginViewContainer} />
-  <Route path="/landing" component={LandingViewContainer} />
+  <Route path="/upload" component={UploadViewContainer} />
+  <Route path="/metadata" component={EditViewContainer} />
+  <Route path="/images" component={ImageEditViewContainer} />
 </Route>;
 
 ReactDOM.render(

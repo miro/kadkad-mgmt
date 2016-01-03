@@ -11,22 +11,20 @@ import {Spots} from '../components/Spots';
 
 
 
-export const EditView = React.createClass({
+export const ImageEditView = React.createClass({
   mixins: [PureRenderMixin],
 
 
   render: function() {
     let { images, persons, spots, dispatch } = this.props;
 
+    // TODO paging/filters
     return <div>
-        <h2>EditView</h2>
+        <h2>ImageEditView</h2>
 
-        <Persons
+        <Images
+          images={images}
           persons={persons}
-          dispatch={dispatch}
-          {...bindActionCreators(actionCreators, dispatch)} />
-
-        <Spots
           spots={spots}
           dispatch={dispatch}
           {...bindActionCreators(actionCreators, dispatch)} />
@@ -44,6 +42,6 @@ function mapStateToProps(state) {
 }
 
 
-export const EditViewContainer = connect(
+export const ImageEditViewContainer = connect(
   mapStateToProps
-)(EditView);
+)(ImageEditView);

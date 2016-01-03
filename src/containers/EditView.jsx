@@ -5,7 +5,6 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import classNames from 'classnames';
 
 import * as actionCreators from '../actions/action_creators';
-import {Images} from '../components/Images';
 import {Persons} from '../components/Persons';
 import {Spots} from '../components/Spots';
 

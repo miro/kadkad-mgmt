@@ -86,8 +86,9 @@ export default React.createClass({
   // general handler factory for spotId, riderId etc
   handleAttributeChange(attribute) {
     return selectedItem => {
+      let newValue = (selectedItem && selectedItem.value) ? selectedItem.value : '';
       let newProps = {};
-      newProps[attribute] = selectedItem.value;
+      newProps[attribute] = newValue;
       this.update(newProps);
     }
   },

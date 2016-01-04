@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux'
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
-import * as actionCreators from '../actions/action_creators';
+import * as modelActions from '../actions/modelActions';
 import {ImageList} from '../components/ImageList';
 
 // NOTE: do we need filters in here..?
@@ -14,7 +14,7 @@ export const ImageEditView = React.createClass({
   getInitialState: () => ({ page: 0, itemsInPage: 10 }),
 
   componentDidMount() {
-    this.props.dispatch(actionCreators.getAllModels('images'));
+    this.props.dispatch(modelActions.getAllModels('images'));
   },
 
   // page related functions
@@ -64,7 +64,7 @@ export const ImageEditView = React.createClass({
         persons={persons}
         spots={spots}
         dispatch={dispatch}
-        {...bindActionCreators(actionCreators, dispatch)} />
+        {...bindActionCreators(modelActions, dispatch)} />
     </div>;
   }
 });

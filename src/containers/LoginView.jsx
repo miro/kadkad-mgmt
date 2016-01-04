@@ -1,11 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux'
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-import classNames from 'classnames';
 
 import {createPopup, createMessageListener} from '../utils/windowUtils';
-import * as actionCreators from '../actions/action_creators';
 import * as authService from '../services/auth';
 
 
@@ -13,11 +10,9 @@ export const LoginView = React.createClass({
   mixins: [PureRenderMixin],
   popupPoller: null,
 
-
   componentWillUnmount() {
     this.clearPopupPoller();
   },
-
 
   onFbLoginLink() {
     // Create popup window

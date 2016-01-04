@@ -2,9 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux'
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-import classNames from 'classnames';
-
-import * as actionCreators from '../actions/action_creators';
 
 
 export const LandingView = React.createClass({

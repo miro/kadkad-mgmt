@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux'
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
-import * as actionCreators from '../actions/action_creators';
+import * as modelActions from '../actions/modelActions';
 import {Persons} from '../components/Persons';
 import {Spots} from '../components/Spots';
 
@@ -13,8 +13,8 @@ export const EditView = React.createClass({
   mixins: [PureRenderMixin],
 
   componentDidMount() {
-    this.props.dispatch(actionCreators.getAllModels('persons'));
-    this.props.dispatch(actionCreators.getAllModels('spots'));
+    this.props.dispatch(modelActions.getAllModels('persons'));
+    this.props.dispatch(modelActions.getAllModels('spots'));
   },
 
   render: function() {
@@ -26,12 +26,12 @@ export const EditView = React.createClass({
         <Persons
           persons={persons}
           dispatch={dispatch}
-          {...bindActionCreators(actionCreators, dispatch)} />
+          {...bindActionCreators(modelActions, dispatch)} />
 
         <Spots
           spots={spots}
           dispatch={dispatch}
-          {...bindActionCreators(actionCreators, dispatch)} />
+          {...bindActionCreators(modelActions, dispatch)} />
     </div>;
   }
 });

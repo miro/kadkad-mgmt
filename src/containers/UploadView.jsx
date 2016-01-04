@@ -5,14 +5,14 @@ import classNames from 'classnames';
 import Dropzone from 'react-dropzone';
 
 import Upload from '../components/Upload';
-import * as actionCreators from '../actions/action_creators';
+import {uploadImage} from '../actions/modelActions';
 
 
 export const UploadView = React.createClass({
   mixins: [PureRenderMixin],
 
   onDrop(files) {
-    files.map(file => this.props.dispatch(actionCreators.uploadImage(file)));
+    files.map(file => this.props.dispatch(uploadImage(file)));
   },
 
   render() {

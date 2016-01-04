@@ -25,10 +25,11 @@ function turnPage(state, viewName, turnForward, totalItemCount) {
   newPageNumber = (newPageNumber < 0) ? 0 : newPageNumber;
 
   // check that page doesn't overflow
-  let lastIndexOnNewPage = newPageNumber * pageState.get('itemsInPage');
+  let lastIndexOnNewPage = newPageNumber * pageState.get('itemsInPage') + pageState.get('itemsInPage');
+  let firstIndexOnNewPage = newPageNumber * pageState.get('itemsInPage');
 
-  if (lastIndexOnNewPage <= totalItemCount) {
-    // NOTE this might have an error. too tired to check thoroughly now
+  if (lastIndexOnNewPage <= totalItemCount ||
+    (firstIndexOnNewPage <= totalItemCount && totalItemCount <= lastIndexOnNewPage)) {
     return state.setIn(['paging', viewName, 'currentPage'], newPageNumber);
   }
   else {

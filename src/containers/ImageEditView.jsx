@@ -4,9 +4,13 @@ import {bindActionCreators} from 'redux'
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 import * as modelActions from '../actions/modelActions';
+import * as appActions from '../actions/appActions';
+
 import {ImageList} from '../components/ImageList';
 
 // NOTE: do we need filters in here..?
+
+const VIEW_NAME = 'imageEditView';
 
 export const ImageEditView = React.createClass({
   mixins: [PureRenderMixin],
@@ -21,24 +25,14 @@ export const ImageEditView = React.createClass({
   turnNextPage() { this.changePage(true, this.props.images.length) },
   turnPreviousPage() {this.changePage(false, this.props.images.length) },
   changePage(turnForward, totalCount) {
-    let newPageNumber = (turnForward) ? this.state.page + 1 : this.state.page - 1;
-
-    // check that page doesn't underflow (is that a term?)
-    newPageNumber = (newPageNumber < 0) ? 0 : newPageNumber;
-
-    // check that page doesn't overflow
-    let lastIndexOnNewPage = newPageNumber * this.state.itemsInPage;
-    if (lastIndexOnNewPage <= totalCount) {
-      // NOTE this might have an error. too tired to check thoroughly now
-      this.setState({ page: newPageNumber });
-    }
+    this.props.dispatch(appActions.turnPage(VIEW_NAME, turnForward, totalCount));
   },
 
   render: function() {
     const {images, persons, spots, dispatch} = this.props;
-    const {page, itemsInPage} = this.state
+    const {currentPage, itemsInPage} = this.props.paging.toJS();
 
-    const startIndex = page * itemsInPage;
+    const startIndex = currentPage * itemsInPage;
     const endIndex = startIndex + itemsInPage;
 
     const imagesOnThisPage = images.slice(startIndex, endIndex);
@@ -72,6 +66,8 @@ export const ImageEditView = React.createClass({
 
 function mapStateToProps(state) {
   return {
+    paging: state.app.getIn(['paging', VIEW_NAME]),
+
     images: state.models.get('images').toArray(),
     persons: state.models.get('persons').toArray(),
     spots: state.models.get('spots').toArray()

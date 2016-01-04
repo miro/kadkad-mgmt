@@ -4,16 +4,17 @@ import Router, {Route} from 'react-router';
 
 import {createStore, combineReducers, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
-import {reducer as formReducer} from 'redux-form';
 import thunk from 'redux-thunk';
 
 import Immutable from 'immutable';
 import Promise from 'bluebird';
 
 import history from './history'
-
-import modelReducer from './reducers/modelReducer';
 import {getModels} from './services/api';
+
+import {default as appReducer, defaultState as appReducerDefaultState} from './reducers/appReducer';
+import modelReducer from './reducers/modelReducer';
+import {reducer as formReducer} from 'redux-form';
 
 import Header from './containers/Header'
 import {EditViewContainer} from './containers/EditView';
@@ -25,6 +26,7 @@ import {ImageEditViewContainer} from './containers/ImageEditView';
 
 
 const reducers = {
+  app: appReducer,
   models: modelReducer,
   form: formReducer
 }
@@ -35,6 +37,7 @@ const createStoreWithMiddleware = applyMiddleware(
 )(createStore);
 
 const store = createStoreWithMiddleware(reducer, {
+  app: Immutable.fromJS(appReducerDefaultState),
   models: Immutable.fromJS({ persons: [], images: [], spots: [], uploads: [] }),
   form: {} // for react-form
 });

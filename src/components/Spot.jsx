@@ -128,7 +128,7 @@ export default React.createClass({
             googleMapElement={
               <GoogleMap
                 ref="map"
-                defaultZoom={12}
+                defaultZoom={14}
                 // onClick={this.handleMapClick}> // TODO!
                 center={this.state.center} >
 

@@ -106,12 +106,8 @@ export default React.createClass({
     });
 
     // Set markers; set map center to first search result
-    const mapCenter = markers.length > 0 ? markers[0].position : this.state.center;
-
-    this.setState({
-      center: mapCenter,
-      markers: markers
-    });
+    const center = markers.length > 0 ? markers[0].position : this.state.center;
+    this.setState({ center, markers });
   },
 
 

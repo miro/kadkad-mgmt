@@ -19,6 +19,8 @@ export const ImageEditView = React.createClass({
 
   componentDidMount() {
     this.props.dispatch(modelActions.getAllModels('images'));
+    this.props.dispatch(modelActions.getAllModels('persons'));
+    this.props.dispatch(modelActions.getAllModels('spots'));
   },
 
   // page related functions

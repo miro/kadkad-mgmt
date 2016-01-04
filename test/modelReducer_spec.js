@@ -13,7 +13,7 @@ describe('modelReducer', () => {
     const initialState = Map();
     const action = {
       type: 'SET_STATE',
-      state: {foo: 'bar' }
+      state: { foo: 'bar' }
     };
     const nextState = modelReducer(initialState, action);
 

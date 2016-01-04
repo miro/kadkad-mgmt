@@ -56,7 +56,6 @@ export function updateModel(id, modelType, props) {
   }
 }
 
-
 export function uploadImage(imageFile) {
   const uploadId = _generatePseudoId();
 

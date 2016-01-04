@@ -7,7 +7,10 @@ import {getToken, removeToken} from './auth';
 
 const baseUrl = DAKDAK.apiBaseUrl;
 
+// TODO: on auth error empty store?
 
+// # Utils ----------------------------------------------------
+//
 
 // Hack: create general handler for unauthorized responses
 // (from https://github.com/visionmedia/superagent/issues/165#issuecomment-166383362)
@@ -24,7 +27,7 @@ request.Request.prototype.end = function (callback) {
   });
 };
 
-// sets the authorization header
+// middleware for setting authorization header
 function authorizationHeader(request) {
   let token = getToken();
   if (token) {
@@ -33,6 +36,9 @@ function authorizationHeader(request) {
 }
 
 
+
+// # API ----------------------------------------------------
+//
 
 export function getModels(modelType) {
   return new Promise((resolve, reject) => {
@@ -48,7 +54,6 @@ export function getModels(modelType) {
   });
 }
 
-
 export function createModel(modelType, model) {
   return new Promise((resolve, reject) => {
     request.post(baseUrl + modelType)
@@ -60,7 +65,6 @@ export function createModel(modelType, model) {
     )
   });
 }
-
 
 export function updateModel(modelType, modelId, model) {
   return new Promise((resolve, reject) => {
@@ -77,7 +81,6 @@ export function updateModel(modelType, modelId, model) {
     )
   });
 }
-
 
 export function uploadImage(imageFile, metaData, handleProgressEvent) {
   return new Promise((resolve, reject) => {

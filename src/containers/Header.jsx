@@ -3,7 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {Link} from 'react-router';
 import classNames from 'classnames';
 
-
+// TODO: move to /components?
 
 export default React.createClass({
   mixins: [PureRenderMixin],

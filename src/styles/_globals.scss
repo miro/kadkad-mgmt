@@ -35,11 +35,9 @@ form.form--basic {
   .form__group { @extend .pure-control-group; }
   .form__controls { @extend .pure-controls; }
 
-  input[type=text] {
-    // These might need adjustments for mobile
-    width: 250px;
-  }
+  input[type=text],
   textarea {
+    // These might need adjustments for mobile
     width: 350px;
   }
 

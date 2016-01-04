@@ -3,9 +3,6 @@ import {expect} from 'chai';
 
 import modelReducer from '../src/reducers/modelReducer';
 
-function getInitialState() {
-  return fromJs({ persons: [], images: []});
-}
 
 describe('modelReducer', () => {
 

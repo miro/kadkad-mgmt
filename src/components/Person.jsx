@@ -1,36 +1,7 @@
 import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-import {reduxForm} from 'redux-form';
-import classNames from 'classnames';
 
-
-var PersonFormComponent = React.createClass({
-  render() {
-    const {fields: {fullName, displayName}, handleSubmit} = this.props;
-    return (
-      <form onSubmit={handleSubmit} className="form--basic">
-        <fieldset>
-          <div className="form__group">
-            <label>Koko nimi</label>
-            <input type="text" placeholder="Koko nimi" {...fullName}/>
-          </div>
-          <div className="form__group">
-            <label>Näytettävä nimi</label>
-            <input type="text" placeholder="Näytettävä nimi" {...displayName}/>
-          </div>
-
-          <div className="form__controls">
-            <button type="submit">Tallenna</button>
-            <button onClick={this.toggleEditMode}>Peruuta</button>
-          </div>
-        </fieldset>
-      </form>
-    );
-  }
-});
-var PersonForm = reduxForm({
-  fields: ['fullName', 'displayName']
-})(PersonFormComponent);
+import PersonForm from './PersonForm';
 
 
 export default React.createClass({
@@ -50,7 +21,6 @@ export default React.createClass({
     this.update(formValues);
     this.toggleEditMode();
   },
-
 
   render: function() {
     let model = this.props.person.toJS();

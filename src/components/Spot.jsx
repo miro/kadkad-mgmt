@@ -1,10 +1,10 @@
 import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-import classNames from 'classnames';
 
-import {reduxForm} from 'redux-form';
 import {GoogleMapLoader, GoogleMap, SearchBox, Marker} from "react-google-maps";
 import Select from 'react-select';
+
+import SpotForm from './SpotForm';
 
 
 // Styles for the search input field on the map.
@@ -24,33 +24,6 @@ const mapSearchBoxStyle = {
   textOverflow: "ellipses",
   width: "400px"
 };
-
-
-let SpotFormComponent = React.createClass({
-  render() {
-    const {fields: {name, description}, handleSubmit, onCancel} = this.props;
-
-    return <form onSubmit={handleSubmit} className="form--basic">
-      <fieldset>
-        <div className="form__group">
-          <label>Otsikko</label>
-          <input type="text" placeholder="Otsikko" {...name}/>
-        </div>
-        <div className="form__group">
-          <label>Kuvaus</label>
-          <textarea {...description}></textarea>
-        </div>
-        <div className="form__controls">
-          <button type="submit">Tallenna</button>
-          <button onClick={onCancel}>Peruuta</button>
-        </div>
-      </fieldset>
-    </form>;
-  }
-});
-let SpotForm = reduxForm({
-  fields: ['name', 'description']
-})(SpotFormComponent);
 
 
 export default React.createClass({
@@ -81,7 +54,6 @@ export default React.createClass({
       state.center = markers[0].position;
     } else {
       // spot has no markers yet - set map center to Kajaani city
-      // TODO: get this value from config
       state.center = { lat: 64.2270644, lng: 27.7198246 };
     }
 

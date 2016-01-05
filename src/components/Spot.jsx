@@ -64,7 +64,10 @@ export default React.createClass({
     this.props.updateModel(this.props.spot.get('id'), 'spots', newProps);
   },
 
-  toggleEditMode() {
+  toggleEditMode(e) {
+    // if this triggered through react-form, there is an event object as parameter.
+    // in that case preventDefault from it!
+    e ? e.preventDefault() : '';
     this.setState({ editMode: !this.state.editMode });
   },
 

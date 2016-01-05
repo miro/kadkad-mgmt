@@ -30,6 +30,7 @@ export default React.createClass({
         <h4 className="card__title">Muokkaa henkilöä</h4>
         <PersonForm
           onSubmit={this.onFormSubmit}
+          onCancel={this.toggleEditMode}
           initialValues={model}
           formKey={'personForm-' + model.id} // so that each form will have different store.. is this wrong?
         />

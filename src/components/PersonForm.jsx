@@ -1,10 +1,9 @@
 import React from 'react';
 import {reduxForm} from 'redux-form';
 
-
 const PersonFormComponent = React.createClass({
   render() {
-    const {fields: {fullName, displayName}, handleSubmit} = this.props;
+    const {fields: {fullName, displayName}, handleSubmit, onCancel} = this.props;
     return (
       <form onSubmit={handleSubmit} className="form--basic">
         <fieldset>
@@ -19,7 +18,7 @@ const PersonFormComponent = React.createClass({
 
           <div className="form__controls">
             <button type="submit">Tallenna</button>
-            <button onClick={this.toggleEditMode}>Peruuta</button>
+            <button onClick={onCancel}>Peruuta</button>
           </div>
         </fieldset>
       </form>

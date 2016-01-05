@@ -24,14 +24,10 @@ export function getAllModels(modelType) {
   }
 }
 
-export function createModel(modelType) {
+export function createModel(modelType, props) {
   // TODO: filter unwanted modelTypes?
-  // TODO: default values by modelType
   return dispatch => {
-    api.createModel(modelType, {
-      fullName: 'Koko Nimi',
-      displayName: 'Näyttönimi'
-    })
+    api.createModel(modelType, {...props})
     .then(model => dispatch({
       type: 'MODEL_CREATE',
       modelType,

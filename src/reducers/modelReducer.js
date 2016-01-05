@@ -9,7 +9,7 @@ function createModel(state, modelType, newModel) {
   let currentList = state.get(modelType) || [];
 
   return state.set(modelType, List([
-    ...currentList, Map(newModel)
+    Map(newModel), ...currentList
   ]));
 }
 

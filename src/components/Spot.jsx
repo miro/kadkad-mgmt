@@ -149,7 +149,7 @@ export default React.createClass({
             onSubmit={this.handleFormSubmit}
             onCancel={this.toggleEditMode}
             initialValues={formValues}
-            form={'spotForm-' + model.id} />
+            formKey={'spotForm-' + model.id} />
         </div>
       </div>;
     }

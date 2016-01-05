@@ -25,5 +25,6 @@ const SpotFormComponent = React.createClass({
   }
 });
 export default reduxForm({
+  form: 'spotForm',
   fields: ['name', 'description']
 })(SpotFormComponent);

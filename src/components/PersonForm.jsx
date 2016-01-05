@@ -27,5 +27,6 @@ const PersonFormComponent = React.createClass({
   }
 });
 export default reduxForm({
+  form: 'personForm',
   fields: ['fullName', 'displayName']
 })(PersonFormComponent);

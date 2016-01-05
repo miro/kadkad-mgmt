@@ -31,7 +31,7 @@ export default React.createClass({
         <PersonForm
           onSubmit={this.onFormSubmit}
           initialValues={model}
-          form={'personForm' + model.id} // so that each form will have different store.. is this wrong?
+          formKey={'personForm-' + model.id} // so that each form will have different store.. is this wrong?
         />
       </div>;
     }

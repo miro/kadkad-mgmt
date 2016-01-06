@@ -13,16 +13,16 @@ export default React.createClass({
       <h1 className="header__title">Kajaaniskate.net</h1>
       <ul className="header__links">
         <li><Link to={`/`} className="header__link">
-          <i className="icon-koti"> Etusivu</i>
+          <i className="icon-koti"></i> Etusivu
         </Link></li>
         <li><Link to={`/metadata`} className="header__link">
-          <i className="icon-tietokanta"> Paikat &amp; Ihmiset</i>
+          <i className="icon-tietokanta"></i> Paikat &amp; Ihmiset
         </Link></li>
         <li><Link to={`/upload`} className="header__link">
-          <i className="icon-lataus2"> Uploadaa</i>
+          <i className="icon-upload"></i> Uploadaa
         </Link></li>
         <li><Link to={`/images`} className="header__link">
-          <i className="icon-kuvat"> Kuvat</i>
+          <i className="icon-kuvat"></i> Kuvat
         </Link></li>
         <li><Link to={`/login`} className="header__link">
           Login

@@ -21,8 +21,5 @@ export function createMessageListener(expectedSenderUrl, callback) {
     if (event.origin === expectedSenderUrl) {
       callback(event)
     }
-    else {
-      console.error('Got Message-event from unexpected origin:', event.origin);
-    }
   }, false); // that false equals event to be non-Transferable
 }

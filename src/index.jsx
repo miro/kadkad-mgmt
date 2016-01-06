@@ -9,9 +9,10 @@ import thunk from 'redux-thunk';
 import Immutable from 'immutable';
 import Promise from 'bluebird';
 
-import history from './history'
+import history from './history';
 import {getModels} from './services/api';
 
+import {routeReducer, syncReduxAndRouter} from 'redux-simple-router';
 import {default as appReducer, defaultState as appReducerDefaultState} from './reducers/appReducer';
 import modelReducer from './reducers/modelReducer';
 import {reducer as formReducer} from 'redux-form';
@@ -24,8 +25,8 @@ import {LandingViewContainer} from './containers/LandingView';
 import {ImageEditViewContainer} from './containers/ImageEditView';
 
 
-
 const reducers = {
+  routing: routeReducer,
   app: appReducer,
   models: modelReducer,
   form: formReducer
@@ -42,6 +43,9 @@ const store = createStoreWithMiddleware(reducer, {
   form: {} // for react-form
 });
 
+syncReduxAndRouter(history, store);
+
+
 const App = React.createClass({
   render: function() {
     return <div className="app-container">
@@ -50,7 +54,7 @@ const App = React.createClass({
     </div>
   }
 });
-const routes = <Route component={App} history={history}>
+const routes = <Route component={App}>
   <Route path="/" component={LandingViewContainer} />
   <Route path="/login" component={LoginViewContainer} />
   <Route path="/upload" component={UploadViewContainer} />
@@ -60,7 +64,7 @@ const routes = <Route component={App} history={history}>
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>{routes}</Router>
+    <Router history={history}>{routes}</Router>
   </Provider>,
   document.getElementById('app')
 );

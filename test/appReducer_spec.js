@@ -10,24 +10,63 @@ import * as actions from '../src/actions/appActions';
 
 const initialState = fromJS(defaultState);
 
+// # User account tests --------------------------------------------
+describe('appReducer (user)', () => {
+  it('handles basic USER_UPDATE', () => {
+    const action = {
+      type: 'USER_UPDATE',
+      profile: { name: 'foo' },
+      loggedIn: true
+    };
+    const nextState = appReducer(initialState, action);
+    expect(nextState.get('user')).to.equal(fromJS({
+      profile: { name: 'foo' },
+      loggedIn: true
+    }));
+  });
+
+  it('handles setting & unsetting of user via USER_UPDATE', () => {
+    const loginAction = {
+      type: 'USER_UPDATE',
+      profile: { name: 'foo' },
+      loggedIn: true
+    };
+    const loggedInState = appReducer(initialState, loginAction);
+    expect(loggedInState.get('user')).to.equal(fromJS({
+      profile: { name: 'foo' },
+      loggedIn: true
+    }));
+
+    const logoutAction = {
+      type: 'USER_UPDATE',
+      profile: {},
+      loggedIn: false
+    };
+    const loggedOutState = appReducer(initialState, logoutAction);
+    expect(loggedOutState.get('user')).to.equal(fromJS({
+      profile: {},
+      loggedIn: false
+    }));
+  });
+});
+
 
 // # Paging related tests -------------------------------------------
 //
 const VIEW_NAME = 'imageEditView'; // use the imageEditView on the paging tests
 const ITEMS_PER_PAGE = defaultState.paging[VIEW_NAME].itemsInPage;
+const PAGING = 'paging'; // property where the paging data is saved in the state
 
-describe('appReducer', () => {
+describe('appReducer (paging)', () => {
   it('handles basic TURN_PAGE to forward', () => {
     const totalItemsInThisTest = ITEMS_PER_PAGE * 2;
     const action = actions.turnPage(VIEW_NAME, true, totalItemsInThisTest);
 
     const nextState = appReducer(initialState, action);
-    expect(nextState).to.equal(fromJS({
-      paging: {
-        imageEditView: {
-          itemsInPage: ITEMS_PER_PAGE,
-          currentPage: 1
-        }
+    expect(nextState.get(PAGING)).to.equal(fromJS({
+      imageEditView: {
+        itemsInPage: ITEMS_PER_PAGE,
+        currentPage: 1
       }
     }));
   });
@@ -39,24 +78,20 @@ describe('appReducer', () => {
     // first action
     const turnSecondPage = actions.turnPage(VIEW_NAME, true, totalItemsInThisTest);
     const secondState = appReducer(initialState, turnSecondPage);
-    expect(secondState).to.equal(fromJS({
-      paging: {
-        imageEditView: {
-          itemsInPage: ITEMS_PER_PAGE,
-          currentPage: 1
-        }
+    expect(secondState.get(PAGING)).to.equal(fromJS({
+      imageEditView: {
+        itemsInPage: ITEMS_PER_PAGE,
+        currentPage: 1
       }
     }));
 
     // second action
     const turnBackToFirstPage = actions.turnPage(VIEW_NAME, false, totalItemsInThisTest);
     const thirdState = appReducer(secondState, turnBackToFirstPage);
-    expect(thirdState).to.equal(fromJS({
-      paging: {
-        imageEditView: {
-          itemsInPage: ITEMS_PER_PAGE,
-          currentPage: 0
-        }
+    expect(thirdState.get(PAGING)).to.equal(fromJS({
+      imageEditView: {
+        itemsInPage: ITEMS_PER_PAGE,
+        currentPage: 0
       }
     }));
   });
@@ -68,12 +103,10 @@ describe('appReducer', () => {
     const action = actions.turnPage(VIEW_NAME, true, totalItemsInThisTest);
 
     const nextState = appReducer(initialState, action);
-    expect(nextState).to.equal(fromJS({
-      paging: {
-        imageEditView: {
-          itemsInPage: ITEMS_PER_PAGE,
-          currentPage: 0
-        }
+    expect(nextState.get(PAGING)).to.equal(fromJS({
+      imageEditView: {
+        itemsInPage: ITEMS_PER_PAGE,
+        currentPage: 0
       }
     }));
   });
@@ -85,12 +118,10 @@ describe('appReducer', () => {
     const action = actions.turnPage(VIEW_NAME, true, totalItemsInThisTest);
 
     const nextState = appReducer(initialState, action);
-    expect(nextState).to.equal(fromJS({
-      paging: {
-        imageEditView: {
-          itemsInPage: ITEMS_PER_PAGE,
-          currentPage: 0
-        }
+    expect(nextState.get(PAGING)).to.equal(fromJS({
+      imageEditView: {
+        itemsInPage: ITEMS_PER_PAGE,
+        currentPage: 0
       }
     }));
   });
@@ -101,12 +132,10 @@ describe('appReducer', () => {
     const tryToTurnToNegativePage = actions.turnPage(VIEW_NAME, false, 10);
 
     const nextState = appReducer(initialState, tryToTurnToNegativePage);
-    expect(nextState).to.equal(fromJS({
-      paging: {
-        imageEditView: {
-          itemsInPage: ITEMS_PER_PAGE,
-          currentPage: 0
-        }
+    expect(nextState.get(PAGING)).to.equal(fromJS({
+      imageEditView: {
+        itemsInPage: ITEMS_PER_PAGE,
+        currentPage: 0
       }
     }));
   });
@@ -115,12 +144,10 @@ describe('appReducer', () => {
     const totalItemsInThisTest = ITEMS_PER_PAGE + 1;
     const turnNextPage = actions.turnPage(VIEW_NAME, true, totalItemsInThisTest);
     const nextState = appReducer(initialState, turnNextPage);
-    expect(nextState).to.equal(fromJS({
-      paging: {
-        imageEditView: {
-          itemsInPage: ITEMS_PER_PAGE,
-          currentPage: 1
-        }
+    expect(nextState.get(PAGING)).to.equal(fromJS({
+      imageEditView: {
+        itemsInPage: ITEMS_PER_PAGE,
+        currentPage: 1
       }
     }));
   });

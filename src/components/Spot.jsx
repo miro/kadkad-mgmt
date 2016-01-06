@@ -158,7 +158,12 @@ export default React.createClass({
     }
     else {
       return <div className="card__wrapper card__content spot__wrapper">
-        <h4>{model.name}</h4>
+        <h4>
+          {model.name}
+          {(!model.latitude) ?
+            <span className="card__badge">Tarkka sijainti puuttuu</span>
+            : ''}
+        </h4>
         <div className="card__controls">
           <button onClick={this.toggleEditMode}>
             <i className="icon-muokkaa"></i> Muokkaa

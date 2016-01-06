@@ -1,6 +1,6 @@
 .card__wrapper {
   background-color: $white;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   overflow: hidden;
   border: 1px solid $border-color--light;
 
@@ -22,7 +22,6 @@
   button { height: 100%; }
 }
 
-
 .card__cover {
   // card cover will have bg-image
   background-size: cover;
@@ -30,4 +29,15 @@
   background-color: $bg-color--dark;
   height: 150px;
   width: 100%;
+}
+
+.card__badge {
+  font-weight: normal;
+  font-size: 0.8em;
+  color: $white;
+
+  background-color: $color--error;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-left: 10px;
 }

@@ -3,13 +3,11 @@ import * as tokenService from '../services/token';
 
 export function userLogin(token) {
   tokenService.setToken(token);
-  const profile = tokenService.getUserProfile();
-  console.log(profile);
+  const userInfo = tokenService.getUserProfile();
 
   return {
     type: 'USER_UPDATE',
-    profile,
-    loggedIn: true
+    ...userInfo
   };
 }
 

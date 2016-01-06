@@ -18,7 +18,16 @@ export function removeToken() {
 }
 
 export function getUserProfile() {
-  return jwt.decode(localStorage.getItem(TOKEN_STORAGE_KEY));
+  if (isAuthenticated()) {
+    return {
+      loggedIn: true,
+      profile: jwt.decode(localStorage.getItem(TOKEN_STORAGE_KEY))
+    }
+  } else {
+    return {
+      loggedIn: false, profile: {}
+    };
+  }
 }
 
 export function isAuthenticated() {

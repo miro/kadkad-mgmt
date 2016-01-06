@@ -32,5 +32,5 @@ export function getUserProfile() {
 
 export function isAuthenticated() {
   let token = localStorage.getItem(TOKEN_STORAGE_KEY);
-  return (typeof token === String);
+  return (typeof token === 'string');
 }

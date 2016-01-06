@@ -1,9 +1,11 @@
+// This file is responsible for decoding JWT tokens, and saving &
+// deleting them into localStorage.
 import jwt from 'jsonwebtoken';
-
 const TOKEN_STORAGE_KEY = 'dakdak-token';
 
+
 export function setToken(token) {
-  console.log(jwt.decode(token));
+  console.log('Saving token', token);
   localStorage.setItem(TOKEN_STORAGE_KEY, token);
 }
 
@@ -15,7 +17,7 @@ export function removeToken() {
   localStorage.removeItem(TOKEN_STORAGE_KEY);
 }
 
-export function getUserInfo() {
+export function getUserProfile() {
   return jwt.decode(localStorage.getItem(TOKEN_STORAGE_KEY));
 }
 

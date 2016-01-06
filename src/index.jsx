@@ -11,6 +11,7 @@ import Promise from 'bluebird';
 
 import history from './history';
 import {getModels} from './services/api';
+import {getUserProfile} from './services/token';
 
 import {routeReducer, syncReduxAndRouter} from 'redux-simple-router';
 import {default as appReducer, defaultState as appReducerDefaultState} from './reducers/appReducer';
@@ -36,6 +37,9 @@ const reducer = combineReducers(reducers);
 const createStoreWithMiddleware = applyMiddleware(
   thunk
 )(createStore);
+
+// In case user is logged in, fetch infos from localStorage
+appReducerDefaultState.user = getUserProfile();
 
 const store = createStoreWithMiddleware(reducer, {
   app: Immutable.fromJS(appReducerDefaultState),

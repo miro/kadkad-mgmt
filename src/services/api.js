@@ -7,11 +7,9 @@ import {getToken, removeToken} from './auth';
 
 const baseUrl = DAKDAK.apiBaseUrl;
 
-// TODO: on auth error empty store?
 
 // # Utils ----------------------------------------------------
 //
-
 // Hack: create general handler for unauthorized responses
 // (from https://github.com/visionmedia/superagent/issues/165#issuecomment-166383362)
 //
@@ -47,13 +45,7 @@ export function getModels(modelType) {
   return new Promise((resolve, reject) => {
     request.get(baseUrl + modelType)
       .use(authorizationHeader)
-      .end((error, response) => {
-        if (error) {
-          reject(error)
-        } else {
-          resolve(response.body);
-        }
-      })
+      .end((error, response) => (error) ? reject(error) : resolve(response.body));
   });
 }
 
@@ -62,10 +54,7 @@ export function createModel(modelType, model) {
     request.post(baseUrl + modelType)
       .use(authorizationHeader)
       .send(model)
-      .end((error, response) => {
-        (error) ? reject(error) : resolve(response.body);
-      }
-    )
+      .end((error, response) => (error) ? reject(error) : resolve(response.body));
   });
 }
 
@@ -74,14 +63,7 @@ export function updateModel(modelType, modelId, model) {
     request.put(baseUrl + modelType + '/' + modelId)
       .use(authorizationHeader)
       .send(model)
-      .end((error, response) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(response.body);
-        }
-      }
-    )
+      .end((error, response) => (error) ? reject(error) : resolve(response.body));
   });
 }
 
@@ -103,14 +85,6 @@ export function uploadImage(imageFile, metaData, handleProgressEvent) {
       .on('progress', function(e) {
         (handleProgressEvent) ? handleProgressEvent(e) : 'do nothing';
       })
-      .end((error, response) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(response.body);
-        }
-      });
+      .end((error, response) => (error) ? reject(error) : resolve(response.body));
   });
 }
-
-

@@ -137,6 +137,7 @@ export default React.createClass({
                 ref="map"
                 defaultZoom={14}
                 onClick={this.handleMapClick}
+                onCenterChanged={this.handleBoundsChanged}
                 center={this.state.center} >
 
                 <SearchBox

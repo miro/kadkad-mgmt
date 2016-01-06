@@ -1,11 +1,9 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {Link} from 'react-router';
-import classNames from 'classnames';
 
-// TODO: move to /components?
-
-export default React.createClass({
+export const Header = React.createClass({
   mixins: [PureRenderMixin],
 
   render: function() {
@@ -31,3 +29,5 @@ export default React.createClass({
     </div>;
   }
 });
+
+export const HeaderContainer = connect()(Header);

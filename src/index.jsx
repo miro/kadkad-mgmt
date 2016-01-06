@@ -17,7 +17,7 @@ import {default as appReducer, defaultState as appReducerDefaultState} from './r
 import modelReducer from './reducers/modelReducer';
 import {reducer as formReducer} from 'redux-form';
 
-import Header from './containers/Header'
+import {HeaderContainer} from './containers/Header'
 import {EditViewContainer} from './containers/EditView';
 import {UploadViewContainer} from './containers/UploadView';
 import {LoginViewContainer} from './containers/LoginView';
@@ -49,7 +49,7 @@ syncReduxAndRouter(history, store);
 const App = React.createClass({
   render: function() {
     return <div className="app-container">
-      <Header />
+      <HeaderContainer />
       {this.props.children}
     </div>
   }

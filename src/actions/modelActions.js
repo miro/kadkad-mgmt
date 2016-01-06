@@ -19,7 +19,8 @@ export function getAllModels(modelType) {
         type: 'SET_STATE',
         state: updateObject
       });
-    });
+    })
+    .catch(_errorHandler);
   }
 }
 
@@ -31,7 +32,8 @@ export function createModel(modelType, props) {
       type: 'MODEL_CREATE',
       modelType,
       model
-    }));
+    }))
+    .catch(_errorHandler);
   }
 }
 
@@ -47,7 +49,8 @@ export function updateModel(id, modelType, props) {
           ...props
         }
       });
-    });
+    })
+    .catch(_errorHandler);
   }
 }
 
@@ -99,7 +102,7 @@ export function uploadImage(imageFile) {
       });
     })
     .catch(error => {
-      console.log('error on upload', error);
+      console.error('Error on image upload', error);
 
       dispatch({
         type: 'MODEL_UPDATE',
@@ -111,6 +114,9 @@ export function uploadImage(imageFile) {
 }
 
 
+function _errorHandler(error) {
+  console.error('Error catched on modelActions', error);
+}
 
 const _generatePseudoId = (function() {
     // http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript

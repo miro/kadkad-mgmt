@@ -87,30 +87,38 @@ export default React.createClass({
     this.props.updateModel(this.props.spot.get('id'), 'spots', newProps);
   },
 
-  handleBoundsChanged() {
+  handleBoundsChanged(e) {
     this.setState({
       bounds: this.refs.map.getBounds(),
       center: this.refs.map.getCenter()
     });
   },
 
+  handleMapClick(e) {
+    this.setMarkerPosition(e.latLng.lat(), e.latLng.lng());
+  },
+
   handlePlacesChanged() {
     const places = this.refs.searchBox.getPlaces();
     const markers = [];
 
-    // Add a marker for each place returned from search bar
-    places.forEach(function (place) {
-      markers.push({
-        position: {
-          lat: place.geometry.location.lat(),
-          lng: place.geometry.location.lng()
-        }
-      });
-    });
+    // Add a marker for first Place returned by the Search Bar
+    if (places.length > 0) {
+      this.setMarkerPosition(places[0].geometry.location.lat(), places[0].geometry.location.lng(), true);
+    }
+  },
 
-    // Set markers; set map center to first search result
-    const center = markers.length > 0 ? markers[0].position : this.state.center;
-    this.setState({ center, markers });
+  setMarkerPosition(lat, lng, centerMapToMarker) {
+    let stateDelta = {};
+    stateDelta.markers = [{
+      position: { lat, lng }
+    }];
+
+    if (centerMapToMarker) {
+      stateDelta.center = stateDelta.markers[0].position;
+    }
+
+    this.setState(stateDelta);
   },
 
 
@@ -128,7 +136,7 @@ export default React.createClass({
               <GoogleMap
                 ref="map"
                 defaultZoom={14}
-                // onClick={this.handleMapClick}> // TODO!
+                onClick={this.handleMapClick}
                 center={this.state.center} >
 
                 <SearchBox

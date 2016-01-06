@@ -20,7 +20,7 @@ request.Request.prototype.end = function (callback) {
     if (response.unauthorized) {
       console.error('Unauthorized request!');
       removeToken(); // delete token, it is invalid/expires
-      history.pushState({ pathname: '/login' });
+      history.replaceState(null, '/login');
       callback(error, response);
     } else {
       callback(error, response);

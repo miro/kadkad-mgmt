@@ -14,13 +14,16 @@ const baseUrl = DAKDAK.apiBaseUrl;
 
 // Hack: create general handler for unauthorized responses
 // (from https://github.com/visionmedia/superagent/issues/165#issuecomment-166383362)
+//
+// if unauthorized request is catched, forward user to /login
 const end = request.Request.prototype.end;
 request.Request.prototype.end = function (callback) {
   return end.call(this, (error, response) => {
     if (response.unauthorized) {
-      console.error('unauthorized request!');
+      console.error('Unauthorized request!');
       removeToken(); // delete token, it is invalid/expires
-      history.replaceState(null, '/#login');
+      history.pushState({ pathname: '/login' });
+      callback(error, response);
     } else {
       callback(error, response);
     }

@@ -40,27 +40,31 @@ export const ImageEditView = React.createClass({
     const imagesOnThisPage = images.slice(startIndex, endIndex);
     const totalImagesCount = images.length;
 
+    const pagingControls = <div className="paging__controls">
+      <button onClick={this.turnPreviousPage} className="paging__previous">
+        Edelliset
+      </button>
+      <p className="paging__state">
+        {startIndex+1} ... {endIndex} ({totalImagesCount} kuvaa yhteensä)
+      </p>
+      <button onClick={this.turnNextPage} className="paging__next">
+        Seuraavat
+      </button>
+    </div>;
+
+
     return <div>
       <h2>Kuvat</h2>
 
-      <div className="paging__controls">
-        <button onClick={this.turnPreviousPage} className="paging__previous">
-          Edelliset
-        </button>
-        <p className="paging__state">
-          {startIndex+1} ... {endIndex} ({totalImagesCount} kuvaa yhteensä)
-        </p>
-        <button onClick={this.turnNextPage} className="paging__next">
-          Seuraavat
-        </button>
-      </div>
-
+      {pagingControls}
       <ImageList
         images={imagesOnThisPage}
         persons={persons}
         spots={spots}
         dispatch={dispatch}
         {...bindActionCreators(modelActions, dispatch)} />
+      {pagingControls}
+
     </div>;
   }
 });

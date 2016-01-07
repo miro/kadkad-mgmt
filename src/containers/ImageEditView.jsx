@@ -24,21 +24,14 @@ export const ImageEditView = React.createClass({
   },
 
   // page related functions
-  turnNextPage() { this.changePage(true, this.props.images.length) },
-  turnPreviousPage() {this.changePage(false, this.props.images.length) },
+  turnNextPage() { this.changePage(true, this.props.totalImagesCount) },
+  turnPreviousPage() {this.changePage(false, this.props.totalImagesCount) },
   changePage(turnForward, totalCount) {
     this.props.dispatch(appActions.turnPage(VIEW_NAME, turnForward, totalCount));
   },
 
   render: function() {
-    const {images, persons, spots, dispatch} = this.props;
-    const {currentPage, itemsInPage} = this.props.paging.toJS();
-
-    const startIndex = currentPage * itemsInPage;
-    const endIndex = startIndex + itemsInPage;
-
-    const imagesOnThisPage = images.slice(startIndex, endIndex);
-    const totalImagesCount = images.length;
+    const {imagesOnThisPage, persons, spots, startIndex, endIndex, totalImagesCount, dispatch} = this.props;
 
     const pagingControls = <div className="paging__controls">
       <button onClick={this.turnPreviousPage} className="paging__previous">
@@ -71,10 +64,18 @@ export const ImageEditView = React.createClass({
 
 
 function mapStateToProps(state) {
-  return {
-    paging: state.app.getIn(['paging', VIEW_NAME]),
+  const images = state.models.get('images').toArray();
 
-    images: state.models.get('images').toArray(),
+  const {currentPage, itemsInPage} = state.app.getIn(['paging', VIEW_NAME]).toJS();
+  const startIndex = currentPage * itemsInPage;
+  const endIndex = startIndex + itemsInPage;
+
+  return {
+    imagesOnThisPage: images.slice(startIndex, endIndex),
+    totalImagesCount: images.length,
+    startIndex,
+    endIndex,
+
     persons: state.models.get('persons').toArray(),
     spots: state.models.get('spots').toArray()
   };

@@ -1,7 +1,7 @@
 var express        = require('express');
 var app            = express();
 
-var environment = process.env.NODE_ENV || 'development';
+var environment = process.env.DAKDAK_ENV || 'development';
 var serverPort = process.env.PORT || 3002;
 var servingDirectory = './dist';
 
@@ -28,6 +28,6 @@ if (environment !== 'development') {
 // Static file serving point
 app.use(express.static(servingDirectory));
 
-console.log('### SmartSite Frontend Server started!');
+console.log('### kadkadk (Kajaaniskate) Frontend Server started!');
 console.log('Serving static resources from', servingDirectory, 'on port', serverPort);
 app.listen(serverPort);

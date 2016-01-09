@@ -46,7 +46,8 @@ export const ImageEditView = React.createClass({
     </div>;
 
 
-    return <div>
+    return (imagesOnThisPage.length > 0) ?
+    <div>
       <h2>Kuvat</h2>
 
       {pagingControls}
@@ -58,7 +59,8 @@ export const ImageEditView = React.createClass({
         {...bindActionCreators(modelActions, dispatch)} />
       {pagingControls}
 
-    </div>;
+    </div> :
+    <p>Ei vielä yhtään kuvaa - uploadaa jotain!</p>
   }
 });
 

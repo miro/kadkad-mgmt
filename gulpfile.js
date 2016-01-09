@@ -1,5 +1,6 @@
 // # Imports
 var gulp                    = require('gulp');
+var gulpSequence            = require('gulp-sequence');
 var browserSync             = require('browser-sync').create();
 var sass                    = require('gulp-sass');
 var autoprefixer            = require('gulp-autoprefixer');
@@ -33,12 +34,17 @@ gulp.task('sass', function() {
 });
 
 gulp.task('cleanAssets', function (callback) {
-    del([path.join(cfg.assetsTargetDir, '**/*')], callback);
+    del([path.join(cfg.assetsTargetDir, '**/*')])
+    callback();
 });
 
 gulp.task('copyAssets', function() {
     return gulp.src(path.join(cfg.assetsSrcDir, '**/*'))
       .pipe(gulp.dest(cfg.assetsTargetDir));
+});
+
+gulp.task('productionBuild', function(cb) {
+  gulpSequence('cleanAssets', 'sass', 'copyAssets', cb);
 });
 
 

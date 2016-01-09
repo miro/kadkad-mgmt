@@ -14,10 +14,10 @@ export const LoginView = React.createClass({
     this.clearPopupPoller();
   },
 
-  onFbLoginClick() {
+  onLoginClick(type) {
     // Create popup window
     // TODO: what dimensions to use? what about mobile devices?
-    let handle = createPopup(DAKDAK.baseUrl + '/auth/facebook', 'Kirjaudu sisään', 600, 400);
+    let handle = createPopup(DAKDAK.baseUrl + '/auth/' + type, 'Kirjaudu sisään', 600, 400);
 
     // Start polling the popup with events, so the popup will get handle to this window
     this.popupPoller = setInterval(function() {
@@ -54,7 +54,8 @@ export const LoginView = React.createClass({
   render() {
     return <div>
         <h2>Login-test</h2>
-        <button onClick={this.onFbLoginClick}>Kirjaudu Facebookin kautta</button>
+        <button onClick={() => this.onLoginClick('facebook')}>Kirjaudu Facebookin kautta</button>
+        <button onClick={() => this.onLoginClick('google')}>Kirjaudu Googlen kautta</button>
         <button onClick={this.onLogoutClick}>Logout</button>
     </div>;
   }

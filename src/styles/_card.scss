@@ -2,11 +2,12 @@
   background-color: $white;
   margin-bottom: 15px;
   overflow: hidden;
+
   border: 1px solid $border-color--light;
+  border-top: none;
 
   transition: box-shadow 0.3s;
-  box-shadow: 0 4px 4px -2px rgba(0,0,0,0.4);
-  &:hover { box-shadow: 0 4px 4px -2px rgba(0,0,0,0.8) }
+  &:hover { box-shadow: 0 8px 4px -2px rgba(0,0,0,0.2) }
 }
 
 .card__content {
@@ -26,7 +27,7 @@
   color: $white;
   background-color: $purpose;
 
-  padding: 3px 10px;
+  padding: 5px 10px;
   margin: 0;
 
   font-size: 0.8em;

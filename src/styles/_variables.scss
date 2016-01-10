@@ -11,17 +11,17 @@ $purple: #9061C2;
 
 
 // link color vars to "purposes" (person, spot, organization, image)
-$purpose: $color-secondary-1-3; // used as a default
-$purpose--person: $color-primary-4;
-$purpose--spot: $color-secondary-1-0;
+$purpose: $color-secondary-1-2; // used as a default
+$purpose--person: $color-secondary-1-0;
+$purpose--spot: $color-secondary-1-4;
 $purpose--image: $purple;
 
 
-$bg-color--light: #F1F3F2;
-$bg-color--dark: #E0E0E0;
+$bg-color--light: #e8e8e8;// http://www.0to255.com/E0E0E0
+$bg-color--dark: #bebebe;
 
 $text-color--dark: #9C9C9C;
-$border-color--light: #DDDDDD;
+$border-color--light: #bebebe;
 
 $color--ready: #13d11d;  // http://www.0to255.com/12c11b
-$color--error: #f01f10;
+$color--error: $color-complement-0;

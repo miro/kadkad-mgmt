@@ -1,6 +1,12 @@
 import {List, Map, fromJS} from 'immutable';
 
 export const defaultState = {
+  tabs: {
+    spotsAndPersonsEditView: {
+      currentTab: 'spots',
+      tabs: ['persons', 'spots']
+    }
+  },
   user: { // info of current logged in user
     loggedIn: false,
     profile: {}
@@ -15,6 +21,24 @@ export const defaultState = {
 
 function setState(state, newState) {
   return state.merge(newState);
+}
+
+// # Tabs related ----------------------------------------------
+function setTab(state, viewName, targetTabName) {
+  const tabState = state.getIn(['tabs', viewName]);
+
+  if (!tabState) {
+    console.error('No tab state saved for', viewName);
+    return state;
+  }
+
+  if (!tabState.get('tabs').includes(targetTabName)) {
+    console.error('Unknown tab "', targetTabName, '" requested from', viewName);
+    return state;
+  }
+
+  // otherwise -> update tab
+  return state.setIn(['tabs', viewName, 'currentTab'], targetTabName);
 }
 
 // # Current user account related ------------------------------
@@ -54,6 +78,8 @@ function turnPage(state, viewName, turnForward, totalItemCount) {
 
 export default function(state = Map(), action) {
   switch (action.type) {
+  case 'TAB_CHANGE':
+    return setTab(state, action.viewName, action.targetTabName);
   case 'SET_STATE':
     return setState(state, action.state);
   case 'USER_UPDATE':

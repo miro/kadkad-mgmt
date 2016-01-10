@@ -10,6 +10,26 @@ import * as actions from '../src/actions/appActions';
 
 const initialState = fromJS(defaultState);
 
+// # Tab related tests ---------------------------------------------
+const TAB_VIEW_NAME = 'spotsAndPersonsEditView';
+const TABS = 'tabs'; // shortcut
+const DEFAULT_OPEN_TAB = defaultState[TABS][TAB_VIEW_NAME].currentTab;
+
+describe('appReducer (tabs)', () => {
+  it('handles basic TAB_CHANGE', () => {
+    const action = actions.changeTab(TAB_VIEW_NAME, 'persons');
+    const nextState = appReducer(initialState, action);
+    expect(nextState.getIn(['tabs', TAB_VIEW_NAME, 'currentTab'])).to.equal('persons');
+  });
+
+  it('does not change anything if target tab does not exist', () => {
+    const action = actions.changeTab(TAB_VIEW_NAME, 'unexistent');
+    const nextState = appReducer(initialState, action);
+    expect(nextState.getIn(['tabs', TAB_VIEW_NAME, 'currentTab'])).to.equal(DEFAULT_OPEN_TAB);
+  });
+});
+
+
 // # User account tests --------------------------------------------
 describe('appReducer (user)', () => {
   it('handles basic USER_UPDATE', () => {

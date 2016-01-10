@@ -1,5 +1,13 @@
 import * as tokenService from '../services/token';
 
+export function changeTab(viewName, targetTabName) {
+  return {
+    type: 'TAB_CHANGE',
+    viewName,
+    targetTabName
+  };
+}
+
 
 export function userLogin(token) {
   tokenService.setToken(token);

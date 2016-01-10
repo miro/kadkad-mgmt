@@ -1,4 +1,4 @@
-$upload-card__height: 70px;
+$upload-card__height: 90px;
 
 .upload__wrapper {
   position: relative;
@@ -13,7 +13,7 @@ $upload-card__height: 70px;
   bottom: 0;
   right: 0;
 
-  line-height: $upload-card__height;
+  line-height: $upload-card__height - 20px; // sorry for this... such is life
 
   padding: 0 10px;
 }

@@ -22,8 +22,19 @@
   button { height: 100%; }
 }
 
+.card__purpose {
+  color: $white;
+  background-color: $purpose;
+
+  padding: 3px 10px;
+  margin: 0;
+
+  font-size: 0.8em;
+  text-transform: uppercase;
+}
+
 .card__cover {
-  // card cover will have bg-image
+  // card cover will have bg-image set inside components
   background-size: cover;
   background-position: center center;
   background-color: $bg-color--dark;

@@ -128,7 +128,7 @@ export default React.createClass({
     if (this.state.editMode) {
       let formValues = { name: model.name, description: model.description };
 
-      return <div className="card__wrapper">
+      return <div className="card__wrapper spot__wrapper">
         <section className="card__cover spot__map__wrapper">
           <GoogleMapLoader
             containerElement={<div {...this.props} className="spot-map__container" />}
@@ -156,6 +156,7 @@ export default React.createClass({
           />
         </section>
 
+        <h3 className="card__purpose"><i className="icon-sijainti"></i> Spotti</h3>
         <div className="card__content">
           <SpotForm
             onSubmit={this.handleFormSubmit}
@@ -166,17 +167,20 @@ export default React.createClass({
       </div>;
     }
     else {
-      return <div className="card__wrapper card__content spot__wrapper">
-        <h4>
-          {model.name}
-          {(!model.latitude) ?
-            <span className="card__badge">Tarkka sijainti puuttuu</span>
-            : ''}
-        </h4>
-        <div className="card__controls">
-          <button onClick={this.toggleEditMode}>
-            <i className="icon-muokkaa"></i> Muokkaa
-          </button>
+      return <div className="card__wrapper spot__wrapper">
+        <h3 className="card__purpose"><i className="icon-sijainti"></i> Spotti</h3>
+        <div className="card__content">
+          <h4>
+            {model.name}
+            {(!model.latitude) ?
+              <span className="card__badge">Sijainti puuttuu</span>
+              : ''}
+          </h4>
+          <div className="card__controls">
+            <button onClick={this.toggleEditMode}>
+              <i className="icon-muokkaa"></i> Muokkaa
+            </button>
+          </div>
         </div>
       </div>;
     }

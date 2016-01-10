@@ -114,9 +114,8 @@ export default React.createClass({
 
       return <div className="image__wrapper image__wrapper--editmode card__wrapper">
         <div className="card__cover" style={cardCoverStyle}></div>
-
+        <h3 className="card__purpose"><i className="icon-kuva"></i> Kuva</h3>
         <div className="card__content">
-
           <section className="select-items">
             <div className="select__group">
               <label>Atleetti</label>
@@ -165,7 +164,7 @@ export default React.createClass({
 
       return <div className="image__wrapper card__wrapper">
         <div className="card__cover" style={cardCoverStyle}></div>
-
+        <h3 className="card__purpose"><i className="icon-kuva"></i> Kuva</h3>
         <div className="card__content">
           <h3 className="image__title">
             {model.title} <span className="image__title__trickname">{model.trickName}</span>

@@ -1,15 +1,31 @@
 .header__wrapper {
-
+  background-color: $green;
+  border-bottom: 10px solid lighten($green, 5%);
+  box-shadow: 0px -2px 14px 4px rgba(55, 50, 50, 1);
 }
 
 .header__title {
   @extend .pure-menu-heading;
+  color: $white;
   font-size: 20px;
 }
 
 .header__links {
   @extend .pure-menu-list;
 
-  li { @extend .pure-menu-item; }
-  .header__link { @extend .pure-menu-link; }
+  li {
+    @extend .pure-menu-item;
+    color: $white;
+
+  }
+  .header__link {
+    @extend .pure-menu-link;
+    color: $white;
+    margin: 0 1px;
+
+    &:hover, &:focus {
+      border-radius: 2px;
+      color: $green;
+    }
+  }
 }

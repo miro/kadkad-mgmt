@@ -170,7 +170,10 @@ export default React.createClass({
             {model.title} <span className="image__title__trickname">{model.trickName}</span>
           </h3>
           <p className="image__meta">
-            {solvedProps.riderName} @ {solvedProps.spotName}
+            {(model.riderId) ? solvedProps.riderName : (<span className="card__badge">Atleetti puuttuu</span>)}
+            {(model.spotId) ?
+              (' @ ' + solvedProps.spotName) :
+              (<span className="card__badge">Spotti puuttuu</span>)}
           </p>
           <div className="card__controls">
             <button onClick={this.toggleEditMode}>

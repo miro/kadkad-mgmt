@@ -29,26 +29,32 @@ export default React.createClass({
     let model = this.props.person.toJS();
 
     if (this.state.editMode) {
-      return <div className="person__wrapper card__wrapper card__content">
-        <h4 className="card__title">Muokkaa henkilöä</h4>
-        <PersonForm
-          onSubmit={this.onFormSubmit}
-          onCancel={this.toggleEditMode}
-          initialValues={model}
-          formKey={'personForm-' + model.id} // so that each form will have different store.. is this wrong?
-        />
+      return <div className="person__wrapper card__wrapper">
+        <h3 className="card__purpose"><i className="icon-ihminen"></i> Henkilö</h3>
+        <div className="card__content">
+          <h4 className="card__title">Muokkaa henkilöä</h4>
+          <PersonForm
+            onSubmit={this.onFormSubmit}
+            onCancel={this.toggleEditMode}
+            initialValues={model}
+            formKey={'personForm-' + model.id} />
+        </div>
       </div>;
     }
     else {
-      return <div className="person__wrapper card__wrapper card__content">
-        <p className="person__infos">
-          <span className="person__display-name">{model.displayName}</span>
-          <span className="person__full-name">{model.fullName}</span>
-        </p>
-        <div className="card__controls">
-          <button onClick={this.toggleEditMode} className="person__edit">
-            <i className="icon-muokkaa"></i> Muokkaa
-          </button>
+      return <div className="person__wrapper card__wrapper">
+        <h3 className="card__purpose"><i className="icon-ihminen"></i> Henkilö</h3>
+
+        <div className="card__content">
+          <p className="person__infos">
+            <span className="person__display-name">{model.displayName}</span>
+            <span className="person__full-name">{model.fullName}</span>
+          </p>
+          <div className="card__controls">
+            <button onClick={this.toggleEditMode} className="person__edit">
+              <i className="icon-muokkaa"></i> Muokkaa
+            </button>
+          </div>
         </div>
       </div>;
     }

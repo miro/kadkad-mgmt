@@ -15,7 +15,10 @@ button, .btn {
   @extend .pure-button;
 }
 
-.btn-primary { @extend .pure-button-primary; }
+.btn-primary {
+  @extend .pure-button-primary;
+  background-color: $green;
+}
 .btn-secondary {
   color: $white;
   border-radius: 4px;

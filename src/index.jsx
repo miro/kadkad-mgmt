@@ -52,10 +52,12 @@ syncReduxAndRouter(history, store);
 
 const App = React.createClass({
   render: function() {
-    return <div className="app-container">
+    return <div className="site__wrapper">
       <HeaderContainer />
-      {this.props.children}
-    </div>
+      <div className="app-container">
+        {this.props.children}
+      </div>
+    </div>;
   }
 });
 const routes = <Route component={App}>

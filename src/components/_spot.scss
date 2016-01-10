@@ -5,3 +5,9 @@
 .spot-map__container {
   height: 100%;
 }
+
+.spot__wrapper {
+  .card__purpose {
+    background-color: $purpose--spot;
+  }
+}

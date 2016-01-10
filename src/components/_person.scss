@@ -1,3 +1,8 @@
+.person__wrapper {
+  .card__purpose {
+    background-color: $purpose--person;
+  }
+}
 .person__infos {
   & > span { margin-right: 10px; }
 

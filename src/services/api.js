@@ -17,7 +17,7 @@ const baseUrl = DAKDAK.apiBaseUrl;
 const end = request.Request.prototype.end;
 request.Request.prototype.end = function (callback) {
   return end.call(this, (error, response) => {
-    if (response.unauthorized) {
+    if (response && response.unauthorized) {
       console.error('Unauthorized request!');
       removeToken(); // delete token, it is invalid/expires TODO
       history.replaceState(null, '/login');

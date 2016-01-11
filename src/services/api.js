@@ -3,7 +3,8 @@ import Promise from 'bluebird';
 import {browserHistory} from 'react-router';
 
 import history from '../history';
-import {getToken, removeToken} from './token';
+import {getToken} from './token';
+import {userLogout} from '../actions/appActions';
 
 const baseUrl = DAKDAK.apiBaseUrl;
 
@@ -20,7 +21,7 @@ request.Request.prototype.end = function (callback) {
   return end.call(this, (error, response) => {
     if (response && response.unauthorized) {
       console.error('Unauthorized request!');
-      removeToken(); // delete token, it is invalid/expires TODO
+      storeHandle.dispatch(userLogout());
       history.replaceState(null, '/login');
       callback(error, response);
     } else {

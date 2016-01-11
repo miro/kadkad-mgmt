@@ -4,9 +4,9 @@ import {bindActionCreators} from 'redux'
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 import * as modelActions from '../actions/modelActions';
-import * as appActions from '../actions/appActions';
 
 import List from '../components/List';
+import {TabNavigationContainer as TabNavigation} from '../containers/TabNavigation';
 
 const VIEW_NAME = 'spotsAndPersonsEditView';
 
@@ -24,9 +24,7 @@ export const EditView = React.createClass({
     return <div>
       <h2>Henkil&ouml;t &amp; Spotit</h2>
 
-      <button onClick={() => this.props.dispatch(appActions.changeTab(VIEW_NAME, 'persons'))}>Henkilöt</button>
-      <button onClick={() => this.props.dispatch(appActions.changeTab(VIEW_NAME, 'spots'))}>Spotit</button>
-
+      <TabNavigation viewName={VIEW_NAME} />
       <List
         itemType={tabState.currentTab}
         items={items}
@@ -40,10 +38,7 @@ function mapStateToProps(state) {
   const tabState = state.app.getIn(['tabs', VIEW_NAME]).toJS();
   const items = state.models.get(tabState.currentTab).toArray();
 
-  return {
-    tabState,
-    items
-  };
+  return { tabState, items };
 }
 
 export const EditViewContainer = connect(

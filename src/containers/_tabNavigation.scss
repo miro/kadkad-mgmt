@@ -1,0 +1,17 @@
+.tabmenu__wrapper {
+  width: 100%;
+  background-color: $green--light;
+  padding: 0 10px;
+  margin-bottom: 15px;
+}
+
+button.tabmenu__button {
+  border-radius: 0;
+  margin-right: 10px;
+  background-color: $green--light;
+}
+
+button.tabmenu__button--active,
+button.tabmenu__button--active:focus {
+  background-color: $bg-color--light;
+}

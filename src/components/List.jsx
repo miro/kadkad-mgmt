@@ -40,16 +40,18 @@ export default React.createClass({
   render: function() {
     const {ItemComponent, FormComponent} = this.getComponents();
 
-    return <div>
-      <button onClick={this.toggleCreateMode} className="btn-primary">Luo Uusi</button>
-
-      {this.state.createMode ?
+    return <div className="list__wrapper">
+      {!this.state.createMode ?
+        <button onClick={this.toggleCreateMode} className="btn-primary list__btn-create">
+          <i className="icon-plus"></i> Luo Uusi
+        </button>
+        :
         <FormComponent
           onSubmit={(props) => this.onCreateFormSubmit(props)}
           onCancel={this.toggleCreateMode}
           initialValues={{}}
           formKey={'ListComponent-create-' + this.props.itemType} />
-       : ''}
+      }
 
       {this.props.items.map(item => {
         return <ItemComponent

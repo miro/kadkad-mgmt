@@ -10,7 +10,7 @@ import Immutable from 'immutable';
 import Promise from 'bluebird';
 
 import history from './history';
-import {getModels} from './services/api';
+import {setStore as setStoreToApi, getModels} from './services/api';
 import {getUserProfile} from './services/token';
 
 import {routeReducer, syncReduxAndRouter} from 'redux-simple-router';
@@ -47,8 +47,9 @@ const store = createStoreWithMiddleware(reducer, {
   form: {} // for react-form
 });
 
-syncReduxAndRouter(history, store);
 
+syncReduxAndRouter(history, store);
+setStoreToApi(store);
 
 const App = React.createClass({
   render: function() {

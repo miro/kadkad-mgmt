@@ -7,6 +7,7 @@ import {getToken, removeToken} from './token';
 
 const baseUrl = DAKDAK.apiBaseUrl;
 
+var storeHandle = null; // handle to redux store
 
 // # Utils ----------------------------------------------------
 //
@@ -40,6 +41,10 @@ function authorizationHeader(request) {
 
 // # API ----------------------------------------------------
 //
+
+export function setStore(store) {
+  storeHandle = store;
+}
 
 export function getModels(modelType) {
   return new Promise((resolve, reject) => {

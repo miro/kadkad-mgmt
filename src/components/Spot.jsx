@@ -34,14 +34,14 @@ export default React.createClass({
 
     // Google Map related state params
     let markers = [];
-    if (this.props.spot.get('latitude')) {
+    if (this.props.model.get('latitude')) {
       // there was a latitude on this spot model -> there must also be a longitude
       // init a marker for it
       markers.push({
-        name: this.props.spot.get('name'),
+        name: this.props.model.get('name'),
         position: {
-          lat: this.props.spot.get('latitude'),
-          lng: this.props.spot.get('longitude')
+          lat: this.props.model.get('latitude'),
+          lng: this.props.model.get('longitude')
         }
       });
     }
@@ -61,7 +61,7 @@ export default React.createClass({
   },
 
   update(newProps) {
-    this.props.updateModel(this.props.spot.get('id'), 'spots', newProps);
+    this.props.updateModel(this.props.model.get('id'), 'spots', newProps);
   },
 
   toggleEditMode(e) {
@@ -79,12 +79,8 @@ export default React.createClass({
       newProps.longitude = this.state.markers[0].position.lng;
     }
 
-    this.updateSpotModel(newProps);
+    this.update(newProps);
     this.toggleEditMode();
-  },
-
-  updateSpotModel(newProps) {
-    this.props.updateModel(this.props.spot.get('id'), 'spots', newProps);
   },
 
   handleBoundsChanged(e) {
@@ -123,7 +119,7 @@ export default React.createClass({
 
 
   render: function() {
-    let model = this.props.spot.toJS();
+    let model = this.props.model.toJS();
 
     if (this.state.editMode) {
       let formValues = { name: model.name, description: model.description };

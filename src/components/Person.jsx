@@ -10,7 +10,7 @@ export default React.createClass({
   getInitialState: () => ({ editMode: false }),
 
   update(newProps) {
-    this.props.updateModel(this.props.person.get('id'), 'persons', newProps);
+    this.props.updateModel(this.props.model.get('id'), 'persons', newProps);
   },
 
   toggleEditMode(e) {
@@ -26,7 +26,7 @@ export default React.createClass({
   },
 
   render: function() {
-    let model = this.props.person.toJS();
+    let model = this.props.model.toJS();
 
     if (this.state.editMode) {
       return <div className="person__wrapper card__wrapper">

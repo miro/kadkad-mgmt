@@ -36,3 +36,30 @@ export function turnPage(viewName, turnForward, totalItemCount) {
     totalItemCount
   };
 }
+
+export function setMessage(messageName, message) {
+  return {
+    type: 'SET_MESSAGE',
+    messageName,
+    message
+  };
+}
+
+export function setFlag(flagName) {
+  return {
+    type: 'FLAG_SET',
+    flagName
+  };
+}
+export function unsetFlag(flagName) {
+  return {
+    type: 'FLAG_UNSET',
+    flagName
+  };
+}
+export function deleteFlag(flagName) {
+  return {
+    type: 'FLAG_DELETE',
+    flagName
+  };
+}

@@ -11,6 +11,8 @@ export const defaultState = {
     loggedIn: false,
     profile: {}
   },
+  messages: {},
+  flags: {},
   paging: { // state for the current page setup
     imageEditView: {
       itemsInPage: 10,
@@ -50,6 +52,27 @@ function updateUser(state, profile, loggedIn) {
 }
 
 
+// # Messages and flasgs related - error responses etc --------------------
+//    - messages: basically key-value store
+//    - flags: same as messages, but only key-boolean -store
+function setMessage(state, messageName, message) {
+  return state.setIn(['messages', messageName], message);
+}
+
+function setFlag(state, flagName) {
+  console.log('olol true', flagName);
+  // turn flag to true
+  return state.setIn(['flags', flagName], true);
+}
+function unsetFlag(state, flagName) {
+  // turn flag to false
+  return state.setIn(['flags', flagName], false);
+}
+function deleteFlag(state, flagName) {
+  // deletes flag completely
+  return state.deleteIn(['flags', flagName]);
+}
+
 
 // # View paging related----------------------------------------
 //
@@ -77,11 +100,25 @@ function turnPage(state, viewName, turnForward, totalItemCount) {
 }
 
 export default function(state = Map(), action) {
+  // TODO get action types from some const cfg object
+  // TODO enforece <TYPE>_<VERB> format in every action
+  // TODO tests for message and flag related operations
   switch (action.type) {
   case 'TAB_CHANGE':
     return setTab(state, action.viewName, action.targetTabName);
+
   case 'SET_STATE':
     return setState(state, action.state);
+
+  case 'SET_MESSAGE':
+    return setMessage(state, action.messageName, action.message);
+  case 'FLAG_SET':
+    return setFlag(state, action.flagName);
+  case 'FLAG_UNSET':
+    return unsetFlag(state, action.flagName);
+  case 'FLAG_DELETE':
+    return deleteFlag(state, action.flagName);
+
   case 'USER_UPDATE':
     return updateUser(state, action.profile, action.loggedIn);
   case 'TURN_PAGE':

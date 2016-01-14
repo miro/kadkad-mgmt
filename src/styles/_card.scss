@@ -53,3 +53,17 @@
   border-radius: 4px;
   margin-left: 10px;
 }
+
+
+// # "Status cards"
+.status-card {
+  border: 2px solid $color--error;
+  border-radius: 2px;
+
+  padding: 0 10px;
+  margin: 10px 0;
+}
+.status-card--error {
+  @extend .status-card;
+  background-color: lighten($color--error, 40%);
+}

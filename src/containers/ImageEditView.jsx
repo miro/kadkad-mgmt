@@ -34,14 +34,14 @@ export const ImageEditView = React.createClass({
     const {imagesOnThisPage, persons, spots, startIndex, endIndex, totalImagesCount, dispatch} = this.props;
 
     const pagingControls = <div className="paging__controls">
-      <button onClick={this.turnPreviousPage} className="paging__previous">
-        Edelliset
+      <button onClick={this.turnPreviousPage} className="paging__previous btn-primary">
+        <i className="icon-nuoli-vasen"></i>
       </button>
       <p className="paging__state">
         {startIndex+1} ... {endIndex} ({totalImagesCount} kuvaa yhteensä)
       </p>
-      <button onClick={this.turnNextPage} className="paging__next">
-        Seuraavat
+      <button onClick={this.turnNextPage} className="paging__next btn-primary">
+        <i className="icon-nuoli-oikea"></i>
       </button>
     </div>;
 

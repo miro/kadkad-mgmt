@@ -44,7 +44,7 @@
     "mocha": "^2.3.0",
     "odometer": "^0.4.7",
     "purecss-sass": "^0.6.0",
-    "react": "^0.14.0",
+    "react": "^0.14.6",
     "react-addons-pure-render-mixin": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-dropzone": "^3.2.2",

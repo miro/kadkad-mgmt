@@ -1,0 +1,12 @@
+.invitation__wrapper {
+  @extend .pure-form; // to get the input style right
+
+  input, button {
+    font-size: 25px;
+    display: inline-block;
+    margin-right: 10px;
+  }
+  input {
+  }
+}
+

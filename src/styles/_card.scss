@@ -57,13 +57,30 @@
 
 // # "Status cards"
 .status-card {
+  overflow: hidden;
   border: 2px solid $color--error;
   border-radius: 2px;
 
   padding: 0 10px;
   margin: 10px 0;
+
+
+  i {
+    float: left;
+    height: 80px;
+    display: inline-block;
+    font-size: 50px;
+    margin-right: 15px;
+    padding-top: 20px;
+  }
 }
 .status-card--error {
   @extend .status-card;
   background-color: lighten($color--error, 40%);
 }
+.status-card--success {
+  @extend .status-card;
+  border-color: $color--ready;
+  background-color: lighten($color--ready, 50%);
+}
+

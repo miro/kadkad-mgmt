@@ -7,13 +7,12 @@ export default React.createClass({
 
   render: function() {
 
-    const className = 'status-card--' + this.props.type;
     const iconClassName = 'icon-' + this.props.icon;
 
-    return <div className={className}>
-      <p>
-        {this.props.icon ? <i className={iconClassName}></i> : ''} {this.props.message}
-      </p>
+    return <div className={'status-card--' + this.props.type}>
+      {this.props.icon ?  <i className={iconClassName}></i> : ''}
+      {this.props.title ? <h3>{this.props.title}</h3> : ''}
+      <p>{this.props.message}</p>
     </div>;
   }
 });

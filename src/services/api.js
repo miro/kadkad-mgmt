@@ -94,3 +94,12 @@ export function uploadImage(imageFile, metaData, handleProgressEvent) {
       .end((error, response) => (error) ? reject(error) : resolve(response.body));
   });
 }
+
+export function sendInvitationCode(invitationCode) {
+  return new Promise((resolve, reject) => {
+    request.post(baseUrl + 'invitation')
+    .use(authorizationHeader)
+    .send({ invitationCode: invitationCode })
+    .end((error, response) => (error) ? reject(error) : resolve(response.body));
+  });
+}

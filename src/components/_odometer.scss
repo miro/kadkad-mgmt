@@ -1,0 +1,22 @@
+.odometer__wrapper {
+  font-size: 35px;
+  margin-bottom: 10px;
+
+  span.whitespace {
+    padding: 0 5px;
+  }
+  span.digit {
+    min-width: 25px;
+    display: inline-block;
+
+    text-align: center;
+
+    background-color: black;
+    color: white;
+
+    margin-right: 4px;
+    padding: 2px 3px;
+
+    border-radius: 4px;
+  }
+}

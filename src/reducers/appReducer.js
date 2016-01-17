@@ -1,18 +1,25 @@
 import {List, Map, fromJS} from 'immutable';
 
 export const defaultState = {
+  // everything related to the app/system itself
+  appState: { kpi: {
+    pixelCount: '???',
+    imageCount: '???'
+  }},
+
+  flags: {},
+
+  user: { // info of current logged in user
+    loggedIn: false,
+    profile: {}
+  },
+
   tabs: {
     spotsAndPersonsEditView: {
       currentTab: 'spots',
       tabs: ['persons', 'spots']
     }
   },
-  user: { // info of current logged in user
-    loggedIn: false,
-    profile: {}
-  },
-  messages: {},
-  flags: {},
   paging: { // state for the current page setup
     imageEditView: {
       itemsInPage: 10,
@@ -55,8 +62,8 @@ function updateUser(state, profile, loggedIn) {
 // # Messages and flasgs related - error responses etc --------------------
 //    - messages: basically key-value store
 //    - flags: same as messages, but only key-boolean -store
-function setMessage(state, messageName, message) {
-  return state.setIn(['messages', messageName], message);
+function setData(state, key, value) {
+  return state.setIn(['appState', key], value);
 }
 
 function setFlag(state, flagName) {
@@ -101,7 +108,7 @@ function turnPage(state, viewName, turnForward, totalItemCount) {
 
 export default function(state = Map(), action) {
   // TODO get action types from some const cfg object
-  // TODO enforece <TYPE>_<VERB> format in every action
+  // TODO enforce <TYPE>_<VERB> format in every action
   // TODO tests for message and flag related operations
   switch (action.type) {
   case 'TAB_CHANGE':
@@ -110,8 +117,8 @@ export default function(state = Map(), action) {
   case 'SET_STATE':
     return setState(state, action.state);
 
-  case 'SET_MESSAGE':
-    return setMessage(state, action.messageName, action.message);
+  case 'SET_DATA':
+    return setData(state, action.key, action.value);
   case 'FLAG_SET':
     return setFlag(state, action.flagName);
   case 'FLAG_UNSET':

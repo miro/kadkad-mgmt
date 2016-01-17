@@ -1,5 +1,5 @@
 import * as tokenService from '../services/token';
-import {sendInvitationCode} from '../services/api';
+import * as api from '../services/api';
 
 export function changeTab(viewName, targetTabName) {
   return {
@@ -42,10 +42,10 @@ export const INVITATION_REDEEMED_FLAG = 'INVITATION_REDEEMED_FLAG';
 export const INVITATION_NO_MORE_TRIES_LEFT_FLAG = 'INVITATION_NO_MORE_TRIES_LEFT_FLAG';
 export function challengeInvitationCode(invitationCode) {
   return dispatch => {
-    sendInvitationCode(invitationCode)
+    api.sendInvitationCode(invitationCode)
         .then(response => {
           // unset error message, in case there is one
-          dispatch(setMessage(INVITATION_ERROR_MESSAGE, null));
+          dispatch(setData(INVITATION_ERROR_MESSAGE, null));
 
           // update user token
           dispatch(userLogin(response.newToken));
@@ -56,27 +56,27 @@ export function challengeInvitationCode(invitationCode) {
         .catch(error => {
           switch (error.status) {
             case 400:
-              dispatch(setMessage(INVITATION_ERROR_MESSAGE, 'Koodi on väärä'));
+              dispatch(setData(INVITATION_ERROR_MESSAGE, 'Koodi on väärä'));
               break;
 
             case 403:
               dispatch(setFlag(INVITATION_NO_MORE_TRIES_LEFT_FLAG));
-              dispatch(setMessage(INVITATION_ERROR_MESSAGE, 'Maksimimäärä yrityksiä täynnä - et voi yrittää enää'));
+              dispatch(setData(INVITATION_ERROR_MESSAGE, 'Maksimimäärä yrityksiä täynnä - et voi yrittää enää'));
               break;
 
             case 410:
-              dispatch(setMessage(INVITATION_ERROR_MESSAGE, 'Olet käyttänyt jo yhden koodin'));
+              dispatch(setData(INVITATION_ERROR_MESSAGE, 'Olet käyttänyt jo yhden koodin'));
               break;
           }
         });
   }
 }
 
-export function setMessage(messageName, message) {
+export function setData(key, value) {
   return {
-    type: 'SET_MESSAGE',
-    messageName,
-    message
+    type: 'SET_DATA',
+    key,
+    value
   };
 }
 

@@ -103,3 +103,10 @@ export function sendInvitationCode(invitationCode) {
     .end((error, response) => (error) ? reject(error) : resolve(response.body));
   });
 }
+
+export function getKpi() {
+  return new Promise((resolve, reject) => {
+    request.get(baseUrl + 'kpi')
+      .end((error, response) => (error) ? reject(error) : resolve(response.body));
+  });
+}

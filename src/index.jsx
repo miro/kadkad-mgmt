@@ -10,7 +10,7 @@ import Immutable from 'immutable';
 import Promise from 'bluebird';
 
 import history from './history';
-import {setStore as setStoreToApi, getModels} from './services/api';
+import {setStore as setStoreToApi, getKpi} from './services/api';
 import {getUserProfile} from './services/token';
 
 import {routeReducer, syncReduxAndRouter} from 'redux-simple-router';
@@ -50,6 +50,16 @@ const store = createStoreWithMiddleware(reducer, {
 
 syncReduxAndRouter(history, store);
 setStoreToApi(store);
+
+getKpi().then(kpi => {
+  console.log('fetched', kpi);
+
+  store.dispatch({
+    type: 'SET_DATA',
+    key: 'kpi',
+    value: kpi
+  });
+});
 
 const App = React.createClass({
   render: function() {

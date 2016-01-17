@@ -67,7 +67,7 @@ function mapStateToProps(state) {
     hasUsedInvitationDuringThisSession: state.app.getIn(['flags', app.INVITATION_REDEEMED_FLAG]),
     hasUsedInvitation: state.app.getIn(['user', 'profile', 'invitationId']),
     hasNoMoreTriesLeft: state.app.getIn(['flags', app.INVITATION_NO_MORE_TRIES_LEFT_FLAG]),
-    errorMessage: state.app.getIn(['messages', app.INVITATION_ERROR_MESSAGE])
+    errorMessage: state.app.getIn(['appState', app.INVITATION_ERROR_MESSAGE])
   };
 }
 

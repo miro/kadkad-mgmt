@@ -98,3 +98,16 @@ export function deleteFlag(flagName) {
     flagName
   };
 }
+
+
+export function fetchKpi() {
+  return dispatch => {
+    console.log('asdlol');
+    api.getKpi()
+      .then(kpi => {
+        console.log(kpi);
+        dispatch(setData('kpi', kpi))
+      })
+  };
+}
+

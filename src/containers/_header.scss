@@ -37,6 +37,12 @@
       border-radius: 2px;
       color: $green;
     }
+
+    i {
+      @include viewports(up-to small) {
+        font-size: 22px;
+      }
+    }
   }
 
   @include viewports(up-to small) {

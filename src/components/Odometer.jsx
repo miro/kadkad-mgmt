@@ -14,7 +14,7 @@ export default React.createClass({
 
   getDisplayValue(value, minLength) {
     value = value ? value + '' : '???';
-    const paddedValue = this.pad(value, minLength, '-');
+    const paddedValue = this.pad(value, minLength, '0');
 
     let displayValue = '';
     for (var i = paddedValue.length - 1; i >= 0; --i) {

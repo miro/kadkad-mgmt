@@ -9,8 +9,7 @@ body {
 }
 
 
-
-// purecss extends
+// Button related
 button, .btn {
   @extend .pure-button;
 }
@@ -18,6 +17,9 @@ button, .btn {
 .btn-primary {
   @extend .pure-button-primary;
   background-color: $green;
+
+  // hack to avoid some weird 0.7m top margin that comes from purecss on <=480px breakpoint
+  margin-top: 0 !important;
 }
 .btn-secondary {
   color: $white;

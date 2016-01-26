@@ -6,7 +6,10 @@
 .header__title {
   @extend .pure-menu-heading;
   color: $white;
-  font-size: 20px;
+  font-size: 30px;
+
+  font-weight: 700;
+  font-style: italic;
 
   &.header__title--mini { display: none; }
 

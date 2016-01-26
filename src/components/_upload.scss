@@ -5,17 +5,36 @@ $upload-card__height: 90px;
   height: $upload-card__height;
   overflow: hidden;
   box-sizing: border-box;
+
+  @include viewports(up-to small) {
+    height: auto;
+  }
+}
+
+.upload__title {
+  @include viewports(up-to small) {
+    display: block;
+    width: 100%;
+  }
 }
 
 .upload__status {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
+  @include viewports(above small) {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+  }
 
   line-height: $upload-card__height - 20px; // sorry for this... such is life
 
   padding: 0 10px;
+
+  @include viewports(up-to small) {
+    margin-left: -10px;
+    margin-bottom: -10px;
+    width: 110%;
+  }
 }
 .upload__status--ready {
   background-image: linear-gradient($color--ready, darken($color--ready, 5%));

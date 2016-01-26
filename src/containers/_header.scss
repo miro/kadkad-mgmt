@@ -7,7 +7,15 @@
   @extend .pure-menu-heading;
   color: $white;
   font-size: 20px;
+
+  &.header__title--mini { display: none; }
+
+  @include viewports(up-to small) {
+    &.header__title--full { display: none; }
+    &.header__title--mini { display: inline-block; }
+  }
 }
+
 
 .header__links {
   @extend .pure-menu-list;
@@ -15,8 +23,8 @@
   li {
     @extend .pure-menu-item;
     color: $white;
-
   }
+
   .header__link {
     @extend .pure-menu-link;
     color: $white;
@@ -26,5 +34,9 @@
       border-radius: 2px;
       color: $green;
     }
+  }
+
+  @include viewports(up-to small) {
+    .link__title { display: none; }
   }
 }

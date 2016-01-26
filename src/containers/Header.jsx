@@ -21,14 +21,15 @@ export const Header = React.createClass({
       if (!link.requiresAuth || (link.requiresAuth && user.loggedIn)) {
         return <li key={link.href}>
           <Link to={link.href} className="header__link">
-            <i className={'icon-'+link.icon}></i> {link.title}
+            <i className={'icon-'+link.icon}></i> <span className="link__title">{link.title}</span>
           </Link>
         </li>;
       }
     });
 
     return <div className="header__wrapper pure-menu pure-menu-horizontal">
-      <h1 className="header__title">Kajaaniskate.net</h1>
+      <h1 className="header__title header__title--full">Kajaaniskate.net</h1>
+      <h1 className="header__title header__title--mini">kniskate</h1>
       <ul className="header__links">
         {links}
       </ul>

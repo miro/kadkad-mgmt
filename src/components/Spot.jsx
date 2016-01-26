@@ -174,7 +174,7 @@ export default React.createClass({
           </h4>
           <div className="card__controls">
             <button onClick={this.toggleEditMode}>
-              <i className="icon-muokkaa"></i> Muokkaa
+              <i className="icon-muokkaa"></i> <span className="card-control__title">Muokkaa</span>
             </button>
           </div>
         </div>

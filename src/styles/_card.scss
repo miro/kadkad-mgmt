@@ -21,6 +21,10 @@
   right: 0;
 
   button { height: 100%; }
+
+  .card-control__title {
+    @include viewports(up-to small) { display: none; }
+  }
 }
 
 .card__purpose {

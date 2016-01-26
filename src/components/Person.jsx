@@ -52,7 +52,7 @@ export default React.createClass({
           </p>
           <div className="card__controls">
             <button onClick={this.toggleEditMode} className="person__edit">
-              <i className="icon-muokkaa"></i> Muokkaa
+              <i className="icon-muokkaa"></i> <span className="card-control__title">Muokkaa</span>
             </button>
           </div>
         </div>

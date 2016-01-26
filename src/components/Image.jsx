@@ -37,7 +37,7 @@ let ImageFormComponent = React.createClass({
           <button type="submit">Tallenna</button>
           <button onClick={this.toggleEditMode}>Peruuta</button>
           <a className="btn btn-secondary" href={this.props.imgUrl} target="_blank">
-            <i className="icon-kuva"></i> Avaa alkuperäinen kuva
+            <i className="icon-kuva"></i> Alkuperäinen kuva
           </a>
         </div>
       </fieldset>
@@ -177,7 +177,7 @@ export default React.createClass({
           </p>
           <div className="card__controls">
             <button onClick={this.toggleEditMode}>
-              <i className="icon-muokkaa"></i> Muokkaa
+              <i className="icon-muokkaa"></i> <span className="card-control__title">Muokkaa</span>
             </button>
           </div>
         </div>

@@ -57,10 +57,6 @@ export function updateModel(id, modelType, props) {
 export function uploadImage(imageFile) {
   const uploadId = _generatePseudoId();
 
-  const handleUploadProgress = event => {
-    console.log(event);
-  };
-
   return dispatch => {
     // create model to uploads collection
     dispatch({
@@ -70,11 +66,25 @@ export function uploadImage(imageFile) {
         id: uploadId,
         fileName: imageFile.name,
         size: imageFile.size / 1000, // convert to KBs
-        status: 'in-progress'
+        status: 'in-progress',
+        uploadPercent: 0
       }
     });
 
     let imageMetaData = {};
+
+    const onProgressEvent = event => {
+      const uploadPercent = parseInt(event.percent, 10) + '%';
+
+      dispatch({
+        type: 'MODEL_UPDATE',
+        modelType: 'uploads',
+        model: {
+          id: uploadId,
+          uploadPercent
+        }
+      });
+    };
 
     // if image has last modified -information, parse it to Image model
     if (imageFile.lastModified) {
@@ -84,7 +94,7 @@ export function uploadImage(imageFile) {
     }
 
     // init the actual upload
-    api.uploadImage(imageFile, imageMetaData, handleUploadProgress)
+    api.uploadImage(imageFile, imageMetaData, onProgressEvent)
     .then(imageModel => {
 
       // create the actual image model

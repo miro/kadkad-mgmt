@@ -10,7 +10,7 @@ export default React.createClass({
     switch (status) {
       case 'in-progress':
         return <span>
-          <i className="icon-lataus rotate360"></i> Uploadataan...
+          <i className="icon-lataus rotate360"></i> Uploadataan... {this.props.uploadPercent}
         </span>;
       case 'ready':
         return <span>

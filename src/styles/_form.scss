@@ -1,0 +1,77 @@
+$input-width: 350px;
+$input-width--small: 90%;
+
+form { @extend .pure-form; }
+
+form.form--basic {
+  @extend .pure-form-aligned;
+
+  button, .btn { margin-right: 5px; }
+
+  button[type=submit] { @extend .btn-primary; }
+  .form__group { @extend .pure-control-group; }
+
+  .form__group { @extend .pure-control-group; }
+
+  .form__controls {
+    @extend .pure-controls;
+
+    @include viewports(up-to small) {
+      margin-left: 0;
+    }
+  }
+
+  input[type=text],
+  textarea {
+    width: $input-width;
+
+    @include viewports(up-to small) {
+      width: $input-width--small;
+    }
+  }
+
+  input[type=number] {
+    width: 80px;
+  }
+}
+
+
+.select__group {
+  // these try to mimick how purecss aligned form works, so
+  // they would look the same when put side by side
+
+  .select__wrapper {
+    display: inline-block;
+    width: $input-width;
+
+    @include viewports(up-to small) {
+      width: $input-width--small;
+    }
+  }
+
+  margin-bottom: 0.5em;
+
+  label {
+    display: inline-block;
+    width: 10em;
+    text-align: right;
+    vertical-align: middle;
+    margin: -26px 1em 0 0;
+  }
+}
+
+// NOTE: This confusingly mixes up styles for stuff inside .form--basic
+// and stuff outside that selector. Root cause for that are the select elements
+// which are not inside the form, but I needed them to behave similarly. Oh well
+.form__group,
+.select__group {
+  label {
+
+    @include viewports(up-to small) {
+      text-align: left !important;
+      margin: 5px;
+    }
+  }
+}
+
+

@@ -25,28 +25,3 @@ button, .btn {
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   background: rgb(66, 184, 221);
 }
-form { @extend .pure-form; }
-
-
-
-form.form--basic {
-  @extend .pure-form-aligned;
-
-  button, .btn { margin-right: 5px; }
-
-  button[type=submit] { @extend .btn-primary; }
-  .form__group { @extend .pure-control-group; }
-  .form__controls { @extend .pure-controls; }
-
-  input[type=text],
-  textarea {
-    // These might need adjustments for mobile
-    width: 350px;
-  }
-
-  input[type=number] {
-    width: 80px;
-  }
-}
-
-

@@ -1,0 +1,62 @@
+.kpi__wrapper {
+  margin: 5px 0;
+  overflow: hidden;
+
+  .odometer__wrapper {
+    display: inline-block;
+  }
+}
+
+.phases__wrapper {
+  counter-reset: phases;
+
+  .phase-item {
+    $phase-height: 60px;
+
+    counter-increment: phases;
+    // height: $phase-height;
+    // line-height: $phase-height;
+    margin-bottom: 10px;
+
+    .phase__title {
+      font-weight: 700;
+      font-style: italic;
+      font-size: 20px;
+      margin-bottom: 0;
+
+      &:before {
+        content: "#" counter(phases);
+
+        background-color: $green--dimmed;
+        display: inline-block;
+
+        text-align: center;
+        line-height: $phase-height;
+        font-weight: 700;
+        font-style: italic;
+        color: $white;
+        font-size: 25px;
+
+        // height: $phase-height;
+        width: $phase-height;
+        margin-right: 10px;
+        border-radius: $phase-height / 2;
+      }
+    }
+
+    p {
+      margin: 2px 0;
+      // display: inline-block;
+      margin-left: 80px;
+    }
+
+
+  }
+  .phase-item--active {
+    @extend .phase-item;
+    .phase__title:before {
+      background-color: $green;
+    }
+
+  }
+}

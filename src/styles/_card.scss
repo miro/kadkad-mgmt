@@ -38,6 +38,10 @@
   text-transform: uppercase;
 }
 
+.card__title {
+  margin-top: 0;
+}
+
 .card__cover {
   // card cover will have bg-image set inside components
   background-size: cover;

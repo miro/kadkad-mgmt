@@ -16,21 +16,13 @@ export default React.createClass({
     value = value ? value + '' : '???';
     const paddedValue = this.pad(value, minLength, '0');
 
-    let displayValue = '';
-    for (var i = paddedValue.length - 1; i >= 0; --i) {
-      if (i % 4 === 0) {
-        displayValue = ' ' + displayValue;
-      } else {
-        displayValue = paddedValue[i] + displayValue;
-      }
-    }
-
+    // Split paddedValue into strings of 3, then join them with ' '
+    // http://stackoverflow.com/questions/7033639/split-large-string-in-n-size-chunks-in-javascript
+    let displayValue = paddedValue.match(/.{1,3}/g).join(' ');
     return displayValue;
   },
 
   render() {
-    console.log('ole');
-    // const value = (this.props.value) ? this.props.value : '???';
     const value = this.getDisplayValue(this.props.value, this.props.minDigits);
 
     let elements = [];

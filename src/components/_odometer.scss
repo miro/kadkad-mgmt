@@ -1,9 +1,14 @@
 .odometer__wrapper {
   font-size: 35px;
-  margin-bottom: 10px;
+  margin: 0 15px 10px 15px;
+
+  .odometer__title {
+    font-size: 15px;
+    margin-bottom: 0;
+  }
 
   span.whitespace {
-    padding: 0 5px;
+    padding: 0 3px;
   }
   span.digit {
     min-width: 25px;

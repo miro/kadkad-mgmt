@@ -32,7 +32,6 @@ export default React.createClass({
       return <div className="person__wrapper card__wrapper">
         <h3 className="card__purpose"><i className="icon-ihminen"></i> Henkilö</h3>
         <div className="card__content">
-          <h4 className="card__title">Muokkaa henkilöä</h4>
           <PersonForm
             onSubmit={this.onFormSubmit}
             onCancel={this.toggleEditMode}

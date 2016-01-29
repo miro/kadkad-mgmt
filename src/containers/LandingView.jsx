@@ -5,6 +5,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import * as app from '../actions/appActions';
 
 import {InvitationCardContainer} from './Invitation';
+import {LoginButtonContainer} from './LoginButtons';
 import Odometer from '../components/Odometer';
 
 
@@ -41,6 +42,8 @@ export const LandingView = React.createClass({
         </div>
       </div>
 
+          <p>Ei kun tunnukset jiiriin ja kuvat tiskiin!</p>
+          <LoginButtonContainer />
 
       <InvitationCardContainer />
 

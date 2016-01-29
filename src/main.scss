@@ -4,25 +4,25 @@
 @import '../node_modules/viewports/viewports';
 
 // # General styles
-@import './styles/_mixins.scss';
-@import './styles/_variables.scss';
-@import './styles/_icons.scss';
-@import './styles/_globals.scss';
-@import './styles/_form.scss';
-@import './styles/_card.scss';
+@import './styles/mixins';
+@import './styles/variables';
+@import './styles/icons';
+@import './styles/globals';
+@import './styles/form';
+@import './styles/card';
 
 // # Component specific styles
-@import './components/_spot.scss';
-@import './components/_image.scss';
-@import './components/_person.scss';
-@import './components/_upload.scss';
-@import './components/_list.scss';
-@import './components/_odometer.scss';
+@import './components/spot';
+@import './components/image';
+@import './components/person';
+@import './components/upload';
+@import './components/list';
+@import './components/odometer';
 
 // # Container specific styles
-@import './containers/_header.scss';
-@import './containers/_uploadView.scss';
-@import './containers/_imageEditView.scss';
-@import './containers/_tabNavigation.scss';
-@import './containers/_landing.scss';
-@import './containers/_invitation.scss';
+@import './containers/header';
+@import './containers/uploadView';
+@import './containers/imageEditView';
+@import './containers/tabNavigation';
+@import './containers/landing';
+@import './containers/invitation';

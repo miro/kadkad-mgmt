@@ -6,7 +6,7 @@ import {userLogin, userLogout} from '../actions/appActions';
 import {createPopup, createMessageListener} from '../utils/windowUtils';
 
 
-export const LoginView = React.createClass({
+export const LoginButton = React.createClass({
   mixins: [PureRenderMixin],
   popupPoller: null,
 
@@ -52,19 +52,31 @@ export const LoginView = React.createClass({
 
 
   render() {
-    return <div>
-        <h2>Login-test</h2>
-        <button onClick={() => this.onLoginClick('facebook')}>Kirjaudu Facebookin kautta</button>
-        <button onClick={() => this.onLoginClick('google')}>Kirjaudu Googlen kautta</button>
+    const className = 'login-buttons__wrapper';
+
+    if (this.props.loggedIn) {
+      return <div className={className}>
         <button onClick={this.onLogoutClick}>Logout</button>
-    </div>;
+      </div>;
+    } else {
+      return <div className={className}>
+        <button onClick={() => this.onLoginClick('facebook')}>
+          <i className="icon-facebook"></i> Kirjaudu Facebookin kautta
+        </button>
+        <button onClick={() => this.onLoginClick('google')}>
+          <i className="icon-google"></i> Kirjaudu Googlen kautta
+        </button>
+      </div>;
+    }
   }
 });
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    loggedIn: state.app.getIn(['user', 'loggedIn'])
+  };
 }
 
-export const LoginViewContainer = connect(
+export const LoginButtonContainer = connect(
   mapStateToProps
-)(LoginView);
+)(LoginButton);

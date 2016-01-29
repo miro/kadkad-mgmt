@@ -10,8 +10,7 @@ export const Header = React.createClass({
     { title: 'Etusivu', icon: 'koti', href: '/' },
     { title: 'Paikat & Ihmiset', icon: 'tietokanta', href: '/metadata', requiresAuth: true },
     { title: 'Uploadaa', icon: 'upload', href: '/upload', requiresAuth: true },
-    { title: 'Kuvat', icon: 'kuvat', href: '/images', requiresAuth: true },
-    { title: 'Login', icon: '', href: '/login'} // TODO move to home page or something
+    { title: 'Kuvat', icon: 'kuvat', href: '/images', requiresAuth: true }
   ],
 
   render: function() {

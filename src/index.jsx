@@ -21,7 +21,6 @@ import {reducer as formReducer} from 'redux-form';
 import {HeaderContainer} from './containers/Header'
 import {EditViewContainer} from './containers/EditView';
 import {UploadViewContainer} from './containers/UploadView';
-import {LoginViewContainer} from './containers/LoginView';
 import {LandingViewContainer} from './containers/LandingView';
 import {ImageEditViewContainer} from './containers/ImageEditView';
 
@@ -73,7 +72,6 @@ const App = React.createClass({
 });
 const routes = <Route component={App}>
   <Route path="/" component={LandingViewContainer} />
-  <Route path="/login" component={LoginViewContainer} />
   <Route path="/upload" component={UploadViewContainer} />
   <Route path="/metadata" component={EditViewContainer} />
   <Route path="/images" component={ImageEditViewContainer} />

@@ -3,7 +3,8 @@ import {connect} from 'react-redux';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 import * as app from '../actions/appActions';
-import {InvitationContainer} from './Invitation';
+
+import {InvitationCardContainer} from './Invitation';
 import Odometer from '../components/Odometer';
 
 
@@ -40,14 +41,15 @@ export const LandingView = React.createClass({
         </div>
       </div>
 
+
+      <InvitationCardContainer />
+
+
       <div className="kpi__wrapper">
         <Odometer value={kpi.imageCount} minDigits={3} title="Kuvia" />
         <Odometer value="3" minDigits={3} title="Spotteja" />
         <Odometer value={kpi.pixelCount} minDigits={12} title="Pikseleitä" />
       </div>
-
-      <InvitationContainer />
-
     </div>;
   }
 });

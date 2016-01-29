@@ -23,6 +23,7 @@ import {EditViewContainer} from './containers/EditView';
 import {UploadViewContainer} from './containers/UploadView';
 import {LandingViewContainer} from './containers/LandingView';
 import {ImageEditViewContainer} from './containers/ImageEditView';
+import Footer from './components/footer';
 
 
 const reducers = {
@@ -67,6 +68,7 @@ const App = React.createClass({
       <div className="app-container">
         {this.props.children}
       </div>
+      <Footer />
     </div>;
   }
 });

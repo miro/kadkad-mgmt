@@ -1,0 +1,37 @@
+.footer__wrapper {
+  min-height: 150px;
+  width: 100%;
+  overflow: hidden;
+
+  background-color: $blue;
+  border-top: 10px solid lighten($blue, 5%);
+  color: $blue--dark;
+
+  a {
+    color: lighten($blue, 30%);
+    text-decoration: none;
+  }
+}
+
+.footer__column {
+  margin-right: 25px;
+  float: right;
+
+  p {
+    font-size: 14px;
+    margin: 5px 0;
+  }
+}
+
+#chilicorn--logo {
+  height: 50px;
+  filter: grayscale(100%);
+  float: right;
+
+}
+
+.footer__title {
+  @extend .app__title;
+  margin: 5px 0;
+}
+

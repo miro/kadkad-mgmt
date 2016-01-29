@@ -11,8 +11,7 @@ export default React.createClass({
 
     return <div className={'status-card--' + this.props.type}>
       {this.props.icon ?  <i className={iconClassName}></i> : ''}
-      {this.props.title ? <h3>{this.props.title}</h3> : ''}
-      <p>{this.props.message}</p>
+      <p>{this.props.title ? <strong>{this.props.title}</strong> : ''} {this.props.message}</p>
     </div>;
   }
 });

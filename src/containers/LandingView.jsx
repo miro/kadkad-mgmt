@@ -15,44 +15,43 @@ export const LandingView = React.createClass({
   render() {
     const {kpi} = this.props;
 
-    return <div>
-
+    return <div className="landing-view__wrapper">
       <div className="card__wrapper">
         <h3 className="card__purpose">Täh?</h3>
         <div className="card__content">
 
           <h2 className="card__title">Olé!</h2>
-          <p>Kajaaniskate.net on yritys koota kainuulainen rullalautailukuvasto (sekä liittyvä lumella tapahtunut toiminta) yksiin kansiin. Nostalgiafiilistelyprojekti siis, on sitten jotain mitä selailla kiikkustuolissa!</p>
-          <p>Askelmerkit ovat suurinpiirtein seuraavat:</p>
+          <p>Kajaaniskate.net on yritys koota kainuulainen rullalautailukuvasto (sekä liittyvä lumella tapahtunut toiminta) yksiin kansiin. On sitten jotain mitä fiilistellä kiikkustuolissa!</p>
+          <p>Askelmerkit ovat seuraavat:</p>
 
           <section className="phases__wrapper">
             <div className="phase-item--active">
-              <h3 className="phase__title">Kuvien kerääminen tämän sivuston kautta</h3>
+              <h3 className="phase__title">Kuvien kerääminen</h3>
               <p>Kuvien uploadaus tämän sivun kautta, sekä tiedot niiden sijainnista, kuvaajasta, tempusta, kaikki mahdollinen! Saadaan kaikki spotit kartalle!</p>
             </div>
             <div className="phase-item">
-              <h3 className="phase__title">Parhaiden kuvien etsiminen mobiilisovelluksen avulla</h3>
-              <p>Kun kuvia on hyvä läjä, muodostetaan niille keskinäinen paremmuusjärjestys käyttäen älypuhelinteknologiaa ja älyttömiä algoritmeja!</p>
+              <h3 className="phase__title">Parhaiden kuvien etsiminen</h3>
+              <p>Kun kuvia on hyvä läjä, muodostetaan niille keskinäinen paremmuusjärjestys käyttäen älypuhelinteknologiaa, mobiilisovelluksia ja älyttömiä algoritmeja!</p>
             </div>
             <div className="phase-item">
               <h3 className="phase__title">Kuvagallerian (+ kirjan?) julkaisu</h3>
               <p>Kun kaikki tämä on tehty, isketään kaikki näkyville, ja jos menee ihan putkeen, pyöräytetään jonkinnäköinen fyysinen teos pihalle. Mutta siitä lisää myöhemmin!</p>
             </div>
           </section>
-        </div>
-      </div>
 
           <p>Ei kun tunnukset jiiriin ja kuvat tiskiin!</p>
           <LoginButtonContainer />
 
-      <InvitationCardContainer />
-
+        </div>
+      </div>
 
       <div className="kpi__wrapper">
         <Odometer value={kpi.imageCount} minDigits={3} title="Kuvia" />
         <Odometer value="3" minDigits={3} title="Spotteja" />
         <Odometer value={kpi.pixelCount} minDigits={12} title="Pikseleitä" />
       </div>
+
+      <InvitationCardContainer />
     </div>;
   }
 });

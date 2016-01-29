@@ -43,7 +43,7 @@ export const Header = React.createClass({
 
     return <div className="header__wrapper pure-menu pure-menu-horizontal">
       <h1 className="header__title header__title--full">Kajaaniskate.net</h1>
-      <h1 className="header__title header__title--mini">kniskate</h1>
+      <h1 className="header__title header__title--mini">kniskt</h1>
       <ul className="header__links">
         {links}
       </ul>

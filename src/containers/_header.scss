@@ -7,6 +7,9 @@
   @extend .pure-menu-heading;
   color: $white;
   font-size: 30px;
+  padding: 0 20px;
+
+  user-select: none;
 
   font-weight: 700;
   font-style: italic;
@@ -32,6 +35,8 @@
     @extend .pure-menu-link;
     color: $white;
     margin: 0 1px;
+
+    user-select: none;
 
     &:hover, &:focus {
       border-radius: 2px;

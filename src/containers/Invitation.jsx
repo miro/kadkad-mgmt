@@ -35,8 +35,7 @@ export const Invitation = React.createClass({
     }
     else {
       return <div className="invitation__wrapper">
-        <h2>Saitko kutsukoodin?</h2>
-        <p>Syötä se tähän, niin pääset muokkaamaan Spotteja ja Henkilöitä</p>
+        <p>Saitko jostain kutsukoodin? Syötä se tähän, niin pääset muokkaamaan Spotteja ja Henkilöitä</p>
         <input
           type="text"
           onChange={this.handleInputChange}

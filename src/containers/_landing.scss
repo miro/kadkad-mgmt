@@ -1,3 +1,11 @@
+.landing-view__wrapper {
+  .login-buttons__wrapper {
+    text-align: center;
+    button { display: inline-block; }
+    margin-bottom: 20px;
+  }
+}
+
 .kpi__wrapper {
   margin: 5px 0;
   overflow: hidden;
@@ -9,13 +17,12 @@
 
 .phases__wrapper {
   counter-reset: phases;
+  margin-bottom: 25px;
 
   .phase-item {
     $phase-height: 60px;
 
     counter-increment: phases;
-    // height: $phase-height;
-    // line-height: $phase-height;
     margin-bottom: 10px;
 
     .phase__title {
@@ -37,7 +44,6 @@
         color: $white;
         font-size: 25px;
 
-        // height: $phase-height;
         width: $phase-height;
         margin-right: 10px;
         border-radius: $phase-height / 2;
@@ -46,11 +52,8 @@
 
     p {
       margin: 2px 0;
-      // display: inline-block;
       margin-left: 80px;
     }
-
-
   }
   .phase-item--active {
     @extend .phase-item;

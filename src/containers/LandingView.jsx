@@ -6,16 +6,26 @@ import * as app from '../actions/appActions';
 
 import {InvitationCardContainer} from './Invitation';
 import {LoginButtonContainer} from './LoginButtons';
+
+import ImageReel from '../components/ImageReel';
 import Odometer from '../components/Odometer';
 
 
 export const LandingView = React.createClass({
   mixins: [PureRenderMixin],
 
+  componentWillMount() {
+    this.props.dispatch(app.fetchLatestImages());
+  },
+
   render() {
     const {kpi} = this.props;
 
     return <div className="landing-view__wrapper">
+
+      <ImageReel images={this.props.latestImages} />
+
+
       <div className="card__wrapper">
         <h3 className="card__purpose">Täh?</h3>
         <div className="card__content">
@@ -59,6 +69,7 @@ export const LandingView = React.createClass({
 
 function mapStateToProps(state) {
   return {
+    latestImages: state.app.getIn(['appState', 'latestImages']),
     kpi: state.app.getIn(['appState', 'kpi'])
   };
 }

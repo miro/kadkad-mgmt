@@ -46,8 +46,9 @@ export const LandingView = React.createClass({
       </div>
 
       <div className="kpi__wrapper">
+        <h2>Tähän mennessä kerätty:</h2>
         <Odometer value={kpi.imageCount} minDigits={3} title="Kuvia" />
-        <Odometer value="3" minDigits={3} title="Spotteja" />
+        <Odometer value={kpi.spotCount} minDigits={3} title="Spotteja" />
         <Odometer value={kpi.pixelCount} minDigits={12} title="Pikseleitä" />
       </div>
 

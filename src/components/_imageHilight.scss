@@ -1,0 +1,49 @@
+.image-hilight__wrapper {
+  width: 100%;
+  height: 550px;
+  position: relative;
+}
+
+.hilight__meta {
+  position: absolute;
+  bottom: 40px;
+  right: 5%;
+}
+
+.hilight__title {
+  color: $white;
+  background-color: $green--light;
+  font-size: 25px;
+  padding: 0 15px;
+  margin: 0;
+
+  text-transform: uppercase;
+  font-style: italic;
+}
+
+.hilight__description {
+  @extend .hilight__title;
+  font-size: 18px;
+  display: inline;
+  background-color: $green;
+
+  position: absolute;
+  right: 15px;
+}
+
+.hilight__image,
+.hilight__fill {
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.hilight__image {
+  background-size: contain;
+}
+
+.hilight__fill {
+  background-size: cover;
+  filter: blur(60px);
+}

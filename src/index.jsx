@@ -23,7 +23,7 @@ import {EditViewContainer} from './containers/EditView';
 import {UploadViewContainer} from './containers/UploadView';
 import {LandingViewContainer} from './containers/LandingView';
 import {ImageEditViewContainer} from './containers/ImageEditView';
-import Footer from './components/footer';
+import Footer from './components/Footer';
 
 
 const reducers = {

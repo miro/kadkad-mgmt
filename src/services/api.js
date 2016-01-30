@@ -110,3 +110,10 @@ export function getKpi() {
       .end((error, response) => (error) ? reject(error) : resolve(response.body));
   });
 }
+
+export function getLatestImages() {
+  return new Promise((resolve, reject) => {
+    request.get(baseUrl + 'images/latest')
+      .end((error, response) => (error) ? reject(error) : resolve(response.body));
+  });
+}

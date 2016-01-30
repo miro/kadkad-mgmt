@@ -102,12 +102,15 @@ export function deleteFlag(flagName) {
 
 export function fetchKpi() {
   return dispatch => {
-    console.log('asdlol');
     api.getKpi()
-      .then(kpi => {
-        console.log(kpi);
-        dispatch(setData('kpi', kpi))
-      })
+      .then(kpi => dispatch(setData('kpi', kpi)));
   };
+}
+
+export function fetchLatestImages() {
+  return dispatch => {
+    api.getLatestImages()
+      .then(latest => dispatch(setData('latestImages', latest)));
+  }
 }
 

@@ -22,7 +22,7 @@ request.Request.prototype.end = function (callback) {
     if (response && response.unauthorized) {
       console.error('Unauthorized request!');
       storeHandle.dispatch(userLogout());
-      history.replaceState(null, '/login');
+      history.replaceState(null, '/');
       callback(error, response);
     } else {
       callback(error, response);

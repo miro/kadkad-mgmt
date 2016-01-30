@@ -28,6 +28,11 @@
   filter: grayscale(100%);
   float: right;
 
+  transition: filter 0.5s;
+
+  &:hover {
+    filter: grayscale(0%);
+  }
 }
 
 .footer__title {

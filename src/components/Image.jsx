@@ -4,6 +4,7 @@ import {reduxForm} from 'redux-form';
 import Select from 'react-select';
 import classNames from 'classnames';
 
+import {getImageUrl} from '../utils/utils';
 
 
 let ImageFormComponent = React.createClass({
@@ -74,8 +75,6 @@ export default React.createClass({
     };
   },
 
-  getImageUrl: (imageModel) => DAKDAK.storageUrl + imageModel.storageId,
-
   handleFormSubmit(formValues) {
     const newProps = Object.assign({}, formValues);
     this.update(newProps);
@@ -95,8 +94,8 @@ export default React.createClass({
 
   render: function() {
     let model = this.props.image.toJS();
-    model.imgUrl = this.getImageUrl(model);
-    let cardCoverStyle = { backgroundImage: 'url(' + model.imgUrl + '--display)' };
+    model.imgUrl = getImageUrl(model);
+    let cardCoverStyle = { backgroundImage: 'url(' + model.imgUrl + ')' };
 
 
     if (this.state.editMode) {

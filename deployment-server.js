@@ -1,4 +1,5 @@
 var express        = require('express');
+var compression = require('compression')
 var app            = express();
 
 var environment = process.env.DAKDAK_ENV || 'development';
@@ -24,6 +25,9 @@ if (environment !== 'development') {
         }
     });
 }
+
+// Gzip magic & stuff
+app.use(compression());
 
 // Static file serving point
 app.use(express.static(servingDirectory));

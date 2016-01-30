@@ -8,7 +8,7 @@ export default React.createClass({
     return <div className="footer__wrapper">
       <div className="footer__column">
         <h3 className="footer__title">&nbsp;</h3>
-        <p>2014-2016 <a href="https://github.com/miro/kadkad-mgmt/blob/development/LICENSE">Jotkut oikeudet pidätetään</a></p>
+        <p>&copy; 2014-2016 <a href="https://github.com/miro/kadkad-mgmt/blob/development/LICENSE">Jotkut oikeudet pidätetään</a></p>
         <p><a href="https://github.com/miro/kadkad-mgmt">Haarukoi koodit <i className="icon-github"></i> GitHubista</a></p>
       </div>
 

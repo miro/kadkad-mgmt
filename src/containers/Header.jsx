@@ -41,6 +41,14 @@ export const Header = React.createClass({
       links.push(<li key="logout-link" className="header__link" onClick={this.onLogoutClick}>
         <i className="icon-exit"></i> <span className="link__title--always"></span>
       </li>);
+    } else {
+      links.push(
+        <li key="login-link">
+          <Link to="/kirjaudu" className="header__link">
+            <i className="icon-enter"></i> <span className="link__title">Kirjaudu/Rekister&ouml;idy</span>
+          </Link>
+        </li>
+      );
     }
 
     return <div className="header__wrapper pure-menu pure-menu-horizontal">

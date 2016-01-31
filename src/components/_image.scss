@@ -4,6 +4,13 @@
 }
 
 .image__wrapper {
+  .card__content {
+    // hack to avoid content getting under the card controls
+    padding-right: 115px;
+    @include viewports(up-to small) {
+      padding-right: 50px;
+    }
+  }
   .card__purpose {
     background-color: $purpose--image;
   }
@@ -13,13 +20,44 @@
   }
 }
 
+.image__title {
+  margin-top: 0;
+  margin-bottom: 0;
+}
 .image__title__trickname {
+  margin-top: 0;
   font-weight: normal;
-  font-size: 0.8em;
   color: $text-color--dark;
+  margin-bottom: 5px;
+}
+.image__meta {
+  margin-top: 5px;
+
+  .badge__wrapper {
+    margin: 0 5px 0 0;
+  }
 }
 
 .image__wrapper--editmode {
   .card__cover { height: 400px; }
+}
+
+.form--image .form__group {
+  .image-form__month {
+    width: 55px;
+  }
+
+  @include viewports(up-to small) {
+    .image-form__month,
+    .image-form__year {
+      display: inline-block;
+    }
+  }
+}
+
+@include viewports(up-to small) {
+  .form--image .image-form__time-inputs label {
+    display: block !important;
+  }
 }
 

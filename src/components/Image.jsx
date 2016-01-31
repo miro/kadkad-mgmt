@@ -14,7 +14,7 @@ let ImageFormComponent = React.createClass({
     const currentYear = now.getFullYear();
     const currentMonth = now.getMonth() + 1;
 
-    return <form onSubmit={handleSubmit} className="form--basic">
+    return <form onSubmit={handleSubmit} className="form--basic form--image">
       <fieldset>
         <div className="form__group">
           <label>Otsikko</label>
@@ -28,10 +28,10 @@ let ImageFormComponent = React.createClass({
           <label>Kuvateksti</label>
           <textarea {...description} rows="6"></textarea>
         </div>
-        <div className="form__group">
+        <div className="form__group image-form__time-inputs">
           <label>Kuukausi / Vuosi</label>
-          <input type="number" placeholder={currentMonth} {...month} min="1" max="12" />
-          <input type="number" placeholder={currentYear} {...year} min="1980" max={currentYear} />
+          <input className="image-form__month" type="number" placeholder={currentMonth} {...month} min="1" max="12" />
+          <input className="image-form__year" type="number" placeholder={currentYear} {...year} min="1980" max={currentYear} />
         </div>
 
         <div className="form__controls">

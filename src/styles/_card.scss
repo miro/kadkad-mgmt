@@ -1,3 +1,7 @@
+// TODO the card__controls shouldn't be done via absolute positioning
+// -> now the content might get under the controls
+// This issue is currently mainly on Image component, where it has hack to fix it
+
 .card__wrapper {
   background-color: $white;
   margin-bottom: 15px;

@@ -13,7 +13,7 @@ export const Header = React.createClass({
     { title: '', icon: 'home', href: '/' },
     { title: 'Paikat & Ihmiset', icon: 'tietokanta', href: '/metadata', requiresAuth: true, requiresRole: role.EDITOR },
     { title: 'Uploadaa', icon: 'upload', href: '/upload', requiresAuth: true },
-    { title: 'Kuvat', icon: 'kuvat', href: '/images', requiresAuth: true }
+    { title: 'Kuvat', icon: 'kuvat', href: '/kuvat', requiresAuth: true }
   ],
 
   onLogoutClick() {

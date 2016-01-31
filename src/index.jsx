@@ -77,7 +77,7 @@ const routes = <Route component={App}>
   <Route path="/" component={LandingViewContainer} />
   <Route path="/upload" component={UploadViewContainer} />
   <Route path="/metadata" component={EditViewContainer} />
-  <Route path="/images" component={ImageEditViewContainer} />
+  <Route path="/kuvat" component={ImageEditViewContainer} />
   <Route path="/kirjaudu" component={LoginViewContainer} />
 </Route>;
 

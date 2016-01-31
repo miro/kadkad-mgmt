@@ -32,7 +32,7 @@ export default React.createClass({
       </div>;
     }
     else {
-      return <h3>Lolz</h3>
+      return <h4>Ladataan viimeisimpiä kuvia...</h4>
     }
 
   }

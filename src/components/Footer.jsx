@@ -1,6 +1,8 @@
 import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
+const CHILICORN_IMAGE_URL = 'https://raw.githubusercontent.com/futurice/spiceprogram/gh-pages/assets/img/logo/chilicorn_no_text-64.png';
+
 export default React.createClass({
   mixins: [PureRenderMixin],
 
@@ -17,7 +19,7 @@ export default React.createClass({
         <p>Kysymyksiä? <a href="mailto:miro@kajaaniskate.net">miro@kajaaniskate.net</a></p>
         <p>Kehitystä tukemassa <a href="http://spiceprogram.org/">Spice Program</a></p>
         <a href="http://spiceprogram.org/">
-          <img id="chilicorn--logo" src="/assets/chilicorn.png" alt="Chilicorn!"/>
+          <img id="chilicorn--logo" src={CHILICORN_IMAGE_URL} alt="Chilicorn!"/>
         </a>
       </div>
     </div>

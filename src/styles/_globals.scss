@@ -1,7 +1,15 @@
 @import url(https://fonts.googleapis.com/css?family=Titillium+Web:400,700italic,700);
 
+html, body {
+  min-height: 100%;
+  background-color: #187389;
+}
+
 body {
   font-family: 'Titillium Web', sans-serif;
+}
+
+#app {
   background-color: $bg-color--light;
 }
 

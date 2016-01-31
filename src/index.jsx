@@ -23,6 +23,7 @@ import {EditViewContainer} from './containers/EditView';
 import {UploadViewContainer} from './containers/UploadView';
 import {LandingViewContainer} from './containers/LandingView';
 import {ImageEditViewContainer} from './containers/ImageEditView';
+import {LoginViewContainer} from './containers/LoginView';
 import Footer from './components/Footer';
 
 
@@ -77,6 +78,7 @@ const routes = <Route component={App}>
   <Route path="/upload" component={UploadViewContainer} />
   <Route path="/metadata" component={EditViewContainer} />
   <Route path="/images" component={ImageEditViewContainer} />
+  <Route path="/kirjaudu" component={LoginViewContainer} />
 </Route>;
 
 ReactDOM.render(

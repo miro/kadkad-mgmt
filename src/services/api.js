@@ -1,8 +1,6 @@
 import request from 'superagent';
 import Promise from 'bluebird';
-import {browserHistory} from 'react-router';
 
-import history from '../history';
 import {getToken} from './token';
 import {userLogout} from '../actions/appActions';
 
@@ -22,7 +20,6 @@ request.Request.prototype.end = function (callback) {
     if (response && response.unauthorized) {
       console.error('Unauthorized request!');
       storeHandle.dispatch(userLogout());
-      history.replaceState(null, '/');
       callback(error, response);
     } else {
       callback(error, response);

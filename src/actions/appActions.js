@@ -1,5 +1,9 @@
+import history from '../history';
+
 import * as tokenService from '../services/token';
 import * as api from '../services/api';
+
+const URL_TO_REDIRECT_ON_401 = '/kirjaudu';
 
 export function changeTab(viewName, targetTabName) {
   return {
@@ -21,7 +25,10 @@ export function userLogin(token) {
 }
 
 export function userLogout() {
+  // this is called also when unauthorized request is catched
   tokenService.removeToken();
+  history.replaceState(null, URL_TO_REDIRECT_ON_401);
+
   return {
     type: 'USER_UPDATE',
     profile: {},

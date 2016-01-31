@@ -11,6 +11,7 @@ export function changeTab(viewName, targetTabName) {
 
 export function userLogin(token) {
   tokenService.setToken(token);
+  window.scroll(0, 0);
   const userInfo = tokenService.getUserProfile();
 
   return {

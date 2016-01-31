@@ -22,9 +22,15 @@ export const UploadView = React.createClass({
       </h2>
 
       <Dropzone onDrop={this.onDrop} className="dropzone" activeClassName="dropzone--active">
-        <p className="dropzone__desc">
-          Raahaa kuvasi tähän, tai paina tästä valitaksesi lähetettävät kuvat
-        </p>
+        <div>
+          <h3 className="dropzone__title"><i className="icon-camera"></i></h3>
+          <p className="dropzone__desc">
+            Raahaa kuvasi tähän, tai paina tästä valitaksesi lähetettävät kuvat
+          </p>
+          <p className="dropzone__desc--mobile">
+            Paina tästä valitaksesi lähetettävät kuvat
+          </p>
+        </div>
       </Dropzone>
 
       <div className="uploads__wrapper">

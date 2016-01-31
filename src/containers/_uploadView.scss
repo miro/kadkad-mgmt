@@ -1,5 +1,6 @@
 .dropzone {
-  width: 100%;
+  width: 90%;
+  margin: 0 auto 20px auto;
   height: 150px;
 
   box-sizing: border-box;
@@ -9,14 +10,32 @@
   border-style: dashed;
   border-radius: 5px;
 
-  margin-bottom: 20px;
 }
 .dropzone--active {
   border-style: solid;
 }
 
+.dropzone__title {
+  font-size: 25px;
+  padding: 0;
+  margin: 20px 0 0 0;
+  display: block;
+  text-align: center;
+}
+
 .dropzone__desc {
   margin: 0;
-  margin-top: 50px;
+  margin-top: 10px;
   text-align: center;
+  padding: 0 10px;
+}
+
+.dropzone__desc--mobile {
+  @extend .dropzone__desc;
+  display: none;
+}
+
+@include viewports (up-to small) {
+  .dropzone__desc { display: none; }
+  .dropzone__desc--mobile { display: inline-block; }
 }

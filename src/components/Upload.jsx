@@ -3,6 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import classNames from 'classnames';
 
 import {UPLOAD_STATUS} from '../actions/modelActions';
+import Spinner from './Spinner';
 
 
 export default React.createClass({
@@ -11,21 +12,29 @@ export default React.createClass({
   getStatusContent(status) {
     switch (status) {
       case UPLOAD_STATUS.IN_PROGRESS:
-        return <span>
-          <i className="icon-lataus rotate360"></i> Uploadataan... {this.props.uploadPercent}
-        </span>;
+        return (
+          <span>
+            <Spinner /> Uploadataan... {this.props.uploadPercent}%
+          </span>
+        );
       case UPLOAD_STATUS.PROCESSING:
-        return <span>
-          <i className="icon-lataus rotate360"></i> Pienennetään... {this.props.uploadPercent}
-        </span>;
+        return (
+          <span>
+            <Spinner type={UPLOAD_STATUS.PROCESSING} /> Käsitellään...
+          </span>
+        );
       case UPLOAD_STATUS.READY:
-        return <span>
-          <i className="icon-ok"></i> Onnistui!
-        </span>;
+        return (
+          <span>
+            <i className="icon-ok"></i> Onnistui!
+          </span>
+        );
       case UPLOAD_STATUS.FAILED:
-        return <span>
-          <i className="icon-varoitus"></i> Jostain syystä uploadaus epäonnistui:(
-        </span>;
+        return (
+          <span>
+            <i className="icon-varoitus"></i> Jostain syystä uploadaus epäonnistui:(
+          </span>
+        );
       default: return <span>{this.props.status}</span>;
     }
   },

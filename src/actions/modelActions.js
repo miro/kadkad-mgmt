@@ -62,8 +62,6 @@ export const UPLOAD_STATUS = {
 };
 export function uploadImage(imageFile) {
   const uploadId = _generatePseudoId();
-  // possible values for upload statuses
-
 
   return dispatch => {
     // create model to uploads collection
@@ -82,8 +80,8 @@ export function uploadImage(imageFile) {
     let imageMetaData = {};
 
     const onProgressEvent = event => {
-      const uploadPercent = parseInt(event.percent, 10) + '%';
-      const uploadReady = (uploadPercent === '100%');
+      const uploadPercent = parseInt(event.percent, 10);
+      const uploadReady = (uploadPercent === 100);
 
       dispatch({
         type: 'MODEL_UPDATE',

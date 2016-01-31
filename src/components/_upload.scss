@@ -19,16 +19,15 @@ $upload-card__height: 90px;
 }
 
 .upload__status {
+  padding: 10px;
+
   @include viewports(above small) {
     position: absolute;
     top: 0;
     bottom: 0;
     right: 0;
+    padding-top: 20px;
   }
-
-  line-height: $upload-card__height - 20px; // sorry for this... such is life
-
-  padding: 0 10px;
 
   @include viewports(up-to small) {
     margin-left: -10px;

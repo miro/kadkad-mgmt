@@ -4,6 +4,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {GoogleMapLoader, GoogleMap, SearchBox, Marker} from "react-google-maps";
 import Select from 'react-select';
 
+import Badge from './Badge';
 import SpotForm from './SpotForm';
 
 
@@ -168,9 +169,7 @@ export default React.createClass({
         <div className="card__content">
           <h4>
             {model.name}
-            {(!model.latitude) ?
-              <span className="card__badge">Sijainti puuttuu</span>
-              : ''}
+            {(!model.latitude) ? <Badge>Sijainti puuttuu</Badge> : ''}
           </h4>
           <div className="card__controls">
             <button onClick={this.toggleEditMode}>

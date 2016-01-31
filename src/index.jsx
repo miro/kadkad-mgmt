@@ -53,8 +53,6 @@ syncReduxAndRouter(history, store);
 setStoreToApi(store);
 
 getKpi().then(kpi => {
-  console.log('fetched', kpi);
-
   store.dispatch({
     type: 'SET_DATA',
     key: 'kpi',

@@ -5,7 +5,6 @@ const TOKEN_STORAGE_KEY = 'dakdak-token';
 
 
 export function setToken(token) {
-  console.log('Saving token', token);
   localStorage.setItem(TOKEN_STORAGE_KEY, token);
 }
 

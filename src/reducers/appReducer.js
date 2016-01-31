@@ -67,7 +67,6 @@ function setData(state, key, value) {
 }
 
 function setFlag(state, flagName) {
-  console.log('olol true', flagName);
   // turn flag to true
   return state.setIn(['flags', flagName], true);
 }

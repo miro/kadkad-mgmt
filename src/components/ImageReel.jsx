@@ -15,9 +15,9 @@ export default React.createClass({
     speed: 500,
     fade: true,
     slidesToShow: 1,
-    initialSlide: 1,
+    slidesToScroll: 1,
+    initialSlide: 0
 
-    slidesToScroll: 1
   },
 
   render: function () {

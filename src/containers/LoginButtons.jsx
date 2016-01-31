@@ -56,14 +56,16 @@ export const LoginButton = React.createClass({
 
     if (this.props.loggedIn) {
       return <div className={className}>
-        <button onClick={this.onLogoutClick}>Logout</button>
+        <button className="btn-primary" onClick={this.onLogoutClick}>
+          <i className="icon-exit"></i> Logout
+        </button>
       </div>;
     } else {
       return <div className={className}>
-        <button onClick={() => this.onLoginClick('facebook')}>
+        <button className="btn-primary" onClick={() => this.onLoginClick('facebook')}>
           <i className="icon-facebook"></i> Kirjaudu Facebookin kautta
         </button>
-        <button onClick={() => this.onLoginClick('google')}>
+        <button className="btn-primary" onClick={() => this.onLoginClick('google')}>
           <i className="icon-google"></i> Kirjaudu Googlen kautta
         </button>
       </div>;

@@ -4,5 +4,5 @@ module.exports = {
     baseUrl: JSON.stringify('https://kajaaniskate-api-test.herokuapp.com'),
     apiBaseUrl: JSON.stringify('https://kajaaniskate-api-test.herokuapp.com/api/v0/')
   },
-  NODE_ENV: 'production'
+  'process.env.NODE_ENV': 'production'
 };

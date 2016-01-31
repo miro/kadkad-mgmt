@@ -10,6 +10,7 @@ export default React.createClass({
 
   sliderSettings: {
     dots: true,
+    draggable: false,
     infinite: true,
     speed: 500,
     fade: true,

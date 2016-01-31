@@ -37,6 +37,7 @@ export default React.createClass({
     return <div className="odometer__wrapper">
       <h5 className="odometer__title">{this.props.title}</h5>
       {elements}
+      {this.props.unit ? <span className="digit digit--unit">{this.props.unit}</span> : null}
     </div>
   }
 });

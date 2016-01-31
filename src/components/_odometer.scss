@@ -38,4 +38,12 @@
       padding: 0 2px;
     }
   }
+
+  @include viewports (up-to tiny) {
+    font-size: 15px;
+
+    span.digit {
+      padding: 0
+    }
+  }
 }

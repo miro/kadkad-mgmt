@@ -28,7 +28,7 @@ gulp.task('serve', ['sass'], function() {
 gulp.task('sass', function() {
   return gulp.src('src/**/*.scss')
     .pipe(sass())
-    .pipe(autoprefixer())
+    .pipe(autoprefixer({ browsers: ['last 2 versions'] }))
     .pipe(gulp.dest('dist/css'))
     .pipe(browserSync.stream());
 });

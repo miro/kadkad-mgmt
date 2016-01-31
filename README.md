@@ -1,10 +1,8 @@
 # kadkad-mgmt
 
-Image gallery management application. Frontend for [dakdak-api](https://github.com/miro/dakdak-api).
+Frontend for [dakdak-api](https://github.com/miro/dakdak-api) - Image uploading & metadata management.
 
 Better README is on the works.
-
-Currently seems to be working only with node v0.12.x, see this [react-router issue](https://github.com/rackt/react-router/issues/2195) for more details.
 
 
 ## Quick-start development

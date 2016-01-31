@@ -14,6 +14,10 @@ export default React.createClass({
         return <span>
           <i className="icon-lataus rotate360"></i> Uploadataan... {this.props.uploadPercent}
         </span>;
+      case UPLOAD_STATUS.PROCESSING:
+        return <span>
+          <i className="icon-lataus rotate360"></i> Pienennetään... {this.props.uploadPercent}
+        </span>;
       case UPLOAD_STATUS.READY:
         return <span>
           <i className="icon-ok"></i> Onnistui!

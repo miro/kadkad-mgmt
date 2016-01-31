@@ -73,8 +73,8 @@ export function uploadImage(imageFile) {
       model: {
         id: uploadId,
         fileName: imageFile.name,
-        size: imageFile.size / 1000, // convert to KBs
-        status: 'in-progress',
+        size: parseInt(imageFile.size / 1000, 10), // convert to KBs
+        status: UPLOAD_STATUS.IN_PROGRESS,
         uploadPercent: 0
       }
     });

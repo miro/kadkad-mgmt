@@ -5,7 +5,7 @@ import Select from 'react-select';
 import classNames from 'classnames';
 
 import {getImageUrl} from '../utils/utils';
-
+import Badge from './Badge';
 
 let ImageFormComponent = React.createClass({
   render() {
@@ -68,10 +68,12 @@ export default React.createClass({
 
     const riderModel = persons.find(person => person.get('id') === image.get('riderId'));
     const spotModel = spots.find(spot => spot.get('id') === image.get('spotId'));
+    const photographerModel = persons.find(person => person.get('id') === image.get('photographerId'));
 
     return {
       riderName: (riderModel) ? riderModel.get('displayName') : 'Tuntematon sankari',
-      spotName: (spotModel) ? spotModel.get('name') : 'Tuntematon sijainti'
+      spotName: (spotModel) ? spotModel.get('name') : 'Tuntematon sijainti',
+      photographerName: (photographerModel) ? photographerModel.get('displayName') : 'Tuntematon kuvaaja'
     };
   },
 
@@ -165,14 +167,19 @@ export default React.createClass({
         <div className="card__cover" style={cardCoverStyle}></div>
         <h3 className="card__purpose"><i className="icon-kuva"></i> Kuva</h3>
         <div className="card__content">
-          <h3 className="image__title">
-            {model.title} <span className="image__title__trickname">{model.trickName}</span>
-          </h3>
+          <h3 className="image__title">{model.title}</h3>
+          <h4 className="image__title__trickname">{model.trickName}</h4>
+
           <p className="image__meta">
-            {(model.riderId) ? solvedProps.riderName : (<span className="card__badge">Atleetti puuttuu</span>)}
+            {(model.riderId) ?
+              <Badge type="person">{solvedProps.riderName}</Badge> :
+              <Badge>Atleetti puuttuu</Badge>
+            }
             {(model.spotId) ?
-              (' @ ' + solvedProps.spotName) :
-              (<span className="card__badge">Spotti puuttuu</span>)}
+              <Badge type="spot">{solvedProps.spotName}</Badge> :
+              <Badge>Spotti puuttuu</Badge>
+            }
+            {(model.photographerId) ? <Badge type="photographer">{solvedProps.photographerName}</Badge> : null}
           </p>
           <div className="card__controls">
             <button onClick={this.toggleEditMode}>

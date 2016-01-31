@@ -16,7 +16,7 @@ export default React.createClass({
         <div className="hilight__fill" style={bgImageStyle}></div>
         <div className="hilight__image" style={bgImageStyle}></div>
         <div className="hilight__meta">
-          <h3 className="hilight__title">{model.trickName} @ {model.spot.name}</h3>
+          <h3 className="hilight__title">{model.trickName ? model.trickName : model.title} @ {model.spot.name}</h3>
           <h4 className="hilight__description">{model.rider.displayName}, {model.month}/{model.year}</h4>
         </div>
       </div>

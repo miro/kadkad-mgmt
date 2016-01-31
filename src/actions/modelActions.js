@@ -54,8 +54,16 @@ export function updateModel(id, modelType, props) {
   }
 }
 
+export const UPLOAD_STATUS = {
+  IN_PROGRESS: 'in-progress',
+  PROCESSING: 'processing', // uploaded to server, now processing
+  READY: 'ready',
+  FAILED: 'failed'
+};
 export function uploadImage(imageFile) {
   const uploadId = _generatePseudoId();
+  // possible values for upload statuses
+
 
   return dispatch => {
     // create model to uploads collection
@@ -75,13 +83,15 @@ export function uploadImage(imageFile) {
 
     const onProgressEvent = event => {
       const uploadPercent = parseInt(event.percent, 10) + '%';
+      const uploadReady = (uploadPercent === '100%');
 
       dispatch({
         type: 'MODEL_UPDATE',
         modelType: 'uploads',
         model: {
           id: uploadId,
-          uploadPercent
+          uploadPercent,
+          status: uploadReady ? UPLOAD_STATUS.PROCESSING : UPLOAD_STATUS.IN_PROGRESS
         }
       });
     };
@@ -108,7 +118,7 @@ export function uploadImage(imageFile) {
       dispatch({
         type: 'MODEL_UPDATE',
         modelType: 'uploads',
-        model: { id: uploadId, status: 'ready' }
+        model: { id: uploadId, status: UPLOAD_STATUS.READY }
       });
     })
     .catch(error => {
@@ -117,7 +127,7 @@ export function uploadImage(imageFile) {
       dispatch({
         type: 'MODEL_UPDATE',
         modelType: 'uploads',
-        model: { id: uploadId, status: 'failed' }
+        model: { id: uploadId, status: UPLOAD_STATUS.FAILED }
       });
     });
   }

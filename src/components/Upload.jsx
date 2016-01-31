@@ -2,21 +2,23 @@ import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import classNames from 'classnames';
 
+import {UPLOAD_STATUS} from '../actions/modelActions';
+
 
 export default React.createClass({
   mixins: [PureRenderMixin],
 
   getStatusContent(status) {
     switch (status) {
-      case 'in-progress':
+      case UPLOAD_STATUS.IN_PROGRESS:
         return <span>
           <i className="icon-lataus rotate360"></i> Uploadataan... {this.props.uploadPercent}
         </span>;
-      case 'ready':
+      case UPLOAD_STATUS.READY:
         return <span>
           <i className="icon-ok"></i> Onnistui!
         </span>;
-      case 'failed':
+      case UPLOAD_STATUS.FAILED:
         return <span>
           <i className="icon-varoitus"></i> Jostain syystä uploadaus epäonnistui:(
         </span>;

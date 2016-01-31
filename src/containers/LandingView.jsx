@@ -48,8 +48,10 @@ export const LandingView = React.createClass({
             </div>
           </section>
 
-          <p>Ei kun tunnukset jiiriin ja kuvat tiskiin!</p>
-          <LoginButtonContainer />
+          {this.props.loggedIn ? null : <div>
+            <p>Ei kun tunnukset jiiriin ja kuvat tiskiin!</p>
+            <LoginButtonContainer />
+          </div>}
 
         </div>
       </div>
@@ -68,6 +70,7 @@ export const LandingView = React.createClass({
 
 function mapStateToProps(state) {
   return {
+    loggedIn: state.app.getIn(['user', 'loggedIn']),
     latestImages: state.app.getIn(['appState', 'latestImages']),
     kpi: state.app.getIn(['appState', 'kpi'])
   };

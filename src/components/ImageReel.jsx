@@ -9,6 +9,9 @@ export default React.createClass({
   mixins: [PureRenderMixin],
 
   sliderSettings: {
+    autoplay: true,
+    autoplaySpeed: 3500,
+
     dots: true,
     draggable: false,
     swipe: false,

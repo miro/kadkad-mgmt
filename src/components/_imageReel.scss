@@ -1,0 +1,15 @@
+.image-reel__wrapper {
+  // image carousel next and prev buttons
+  .slick-next:before,
+  .slick-prev:before {
+    color: $green !important;
+
+  }
+
+  @include viewports (up-to small) {
+    .slick-next,
+    .slick-prev {
+      display: none !important;
+    }
+  }
+}

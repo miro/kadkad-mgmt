@@ -17,7 +17,6 @@ export default React.createClass({
     slidesToShow: 1,
     slidesToScroll: 1,
     initialSlide: 0
-
   },
 
   render: function () {
@@ -26,11 +25,11 @@ export default React.createClass({
     const imageComponents = images.map(image => <div key={image.id}><ImageHilight model={image} /></div>);
 
     if (this.props.images) {
-      return (
+      return <div className="image-reel__wrapper">
         <Slider {...this.sliderSettings}>
           {imageComponents}
         </Slider>
-      );
+      </div>;
     }
     else {
       return <h3>Lolz</h3>

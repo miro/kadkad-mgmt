@@ -25,7 +25,6 @@ export const LandingView = React.createClass({
 
       <ImageReel images={this.props.latestImages} />
 
-
       <div className="card__wrapper">
         <h3 className="card__purpose">Täh?</h3>
         <div className="card__content">
@@ -59,7 +58,7 @@ export const LandingView = React.createClass({
         <h2>Tähän mennessä kerätty:</h2>
         <Odometer value={kpi.imageCount} minDigits={3} title="Kuvia" />
         <Odometer value={kpi.spotCount} minDigits={3} title="Spotteja" />
-        <Odometer value={kpi.pixelCount} minDigits={12} title="Pikseleitä" />
+        <Odometer value={parseInt(kpi.pixelCount / 1000, 10)} minDigits={9} title="Pikseleitä" unit="k" />
       </div>
 
       <InvitationCardContainer />

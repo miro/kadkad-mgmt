@@ -9,6 +9,13 @@ body {
   font-family: 'Titillium Web', sans-serif;
 }
 
+a, a:visited {
+  color: $green;
+}
+a:hover {
+  color: $green--light;
+}
+
 #app {
   background-color: $bg-color--light;
 }

@@ -2,6 +2,13 @@
   width: 100%;
   height: 550px;
   position: relative;
+
+  @include viewports(up-to small) {
+    height: 450px;
+  }
+  @include viewports(tiny) {
+    height: 300px;
+  }
 }
 
 .hilight__meta {
@@ -19,6 +26,10 @@
 
   text-transform: uppercase;
   font-style: italic;
+
+  @include viewports (up-to small) {
+    font-size: 15px;
+  }
 }
 
 .hilight__description {
@@ -29,6 +40,10 @@
 
   position: absolute;
   right: 15px;
+
+  @include viewports (up-to small) {
+    font-size: 12px;
+  }
 }
 
 .hilight__image,
@@ -45,5 +60,5 @@
 
 .hilight__fill {
   background-size: cover;
-  filter: blur(60px);
+  filter: blur(18px);
 }

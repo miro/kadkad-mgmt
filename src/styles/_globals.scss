@@ -9,6 +9,10 @@ body {
   margin: 20px auto 30px auto;
   width: 90%;
   max-width: 1020px;
+
+  @include viewports (up-to small) {
+    width: 100%;
+  }
 }
 
 

@@ -18,6 +18,10 @@
     &.header__title--full { display: none; }
     &.header__title--mini { display: inline-block; }
   }
+  @include viewports(tiny) {
+    font-size: 24px;
+    padding-right: 10px;
+  }
 }
 
 
@@ -42,9 +46,16 @@
       color: $green;
     }
 
+    @include viewports(tiny) {
+      padding: 8px 8px;
+    }
+
     i {
       @include viewports(up-to small) {
         font-size: 22px;
+      }
+      @include viewports(tiny) {
+        font-size: 18px;
       }
     }
   }

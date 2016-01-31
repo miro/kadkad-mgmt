@@ -10,14 +10,16 @@ export const Header = React.createClass({
   mixins: [PureRenderMixin],
 
   linkItems: [
-    { title: '', icon: 'koti', href: '/' },
+    { title: '', icon: 'home', href: '/' },
     { title: 'Paikat & Ihmiset', icon: 'tietokanta', href: '/metadata', requiresAuth: true, requiresRole: role.EDITOR },
     { title: 'Uploadaa', icon: 'upload', href: '/upload', requiresAuth: true },
     { title: 'Kuvat', icon: 'kuvat', href: '/images', requiresAuth: true }
   ],
 
   onLogoutClick() {
-    this.props.dispatch(userLogout());
+    if (confirm('Haluatko varmasti kirjautua ulos?')) {
+      this.props.dispatch(userLogout());
+    }
   },
 
   render: function() {
@@ -37,7 +39,7 @@ export const Header = React.createClass({
 
     if (user.loggedIn) {
       links.push(<li key="logout-link" className="header__link" onClick={this.onLogoutClick}>
-        <i className="icon-nuoli-vasen"></i> <span className="link__title--always">Logout</span>
+        <i className="icon-exit"></i> <span className="link__title--always"></span>
       </li>);
     }
 

@@ -1,7 +1,9 @@
 .footer__wrapper {
   min-height: 150px;
   width: 100%;
+  padding-bottom: 20px;
   overflow: hidden;
+
 
   background-color: $blue;
   border-top: 10px solid lighten($blue, 5%);
@@ -21,10 +23,18 @@
     font-size: 14px;
     margin: 5px 0;
   }
+
+  @include viewports (up-to small) {
+    box-sizing: border-box;
+    width: 100%;
+    margin-right: 0;
+    padding-left: 15px;
+  }
 }
 
 #chilicorn--logo {
   height: 50px;
+  width: 50px;
   filter: grayscale(100%);
   float: right;
 
@@ -33,10 +43,20 @@
   &:hover {
     filter: grayscale(0%);
   }
+
+  @include viewports (up-to small) {
+    display: block;
+    float: none;
+    margin: 0 auto;
+  }
 }
 
 .footer__title {
   @extend .app__title;
   margin: 5px 0;
+}
+.footer__title--placeholder {
+  @extend .footer__title;
+  @include viewports(up-to small) { display: none; }
 }
 

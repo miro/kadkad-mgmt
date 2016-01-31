@@ -22,7 +22,9 @@ export const EditView = React.createClass({
     let {items, tabState, dispatch} = this.props;
 
     return <div>
-      <h2>Henkil&ouml;t &amp; Spotit</h2>
+      <h2 className="view__title">
+        <i className="icon-tietokanta"></i> Henkil&ouml;t &amp; Spotit
+      </h2>
 
       <TabNavigation viewName={VIEW_NAME} />
       <List

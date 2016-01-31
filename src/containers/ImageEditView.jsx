@@ -48,7 +48,9 @@ export const ImageEditView = React.createClass({
 
     return (imagesOnThisPage.length > 0) ?
     <div>
-      <h2>Kuvat</h2>
+      <h2 className="view__title">
+        <i className="icon-kuvat"></i> Kuvat
+      </h2>
 
       {pagingControls}
       <ImageList

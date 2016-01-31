@@ -17,8 +17,6 @@ export const UploadView = React.createClass({
 
   render() {
     return <div>
-        <h2>Kuvien uploadaus</h2>
-
         <Dropzone onDrop={this.onDrop} className="dropzone" activeClassName="dropzone--active">
           <p className="dropzone__desc">
             Raahaa kuvasi tähän, tai paina tästä valitaksesi lähetettävät kuvat
@@ -28,6 +26,9 @@ export const UploadView = React.createClass({
         <div className="uploads__wrapper">
           {this.props.uploads.map(item => (<Upload {...item.toJS()} key={item.toJS().id} />))}
         </div>
+      <h2 className="view__title">
+        <i className="icon-upload"></i> Kuvien uploadaus
+      </h2>
     </div>;
   }
 });

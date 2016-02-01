@@ -30,6 +30,7 @@ export default React.createClass({
 
     if (this.props.images) {
       return <div className="image-reel__wrapper">
+        <h3 className="card__purpose--image"><i className="icon-kuvat"></i> 10 viimeksi muokattua/l&auml;hetetty&auml; kuvaa</h3>
         <Slider {...this.sliderSettings}>
           {imageComponents}
         </Slider>

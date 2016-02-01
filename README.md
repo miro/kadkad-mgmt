@@ -1,6 +1,8 @@
-# kadkad-mgmt
+# kadkad-mgmt - KAJAANISKATE.NET frontend
 
-Frontend for [dakdak-api](https://github.com/miro/dakdak-api) - Image uploading & metadata management.
+Frontend of [KAJAANISKATE.NET](http://kajaaniskate.net), utilizing [dakdak-api](https://github.com/miro/dakdak-api). This application is about Image uploading & metadata management.
+
+![Example screenshot of the app](http://i.imgur.com/ObQvojP.png)
 
 Better README is on the works.
 

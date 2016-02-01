@@ -43,6 +43,10 @@
   font-size: 0.8em;
   text-transform: uppercase;
 }
+.card__purpose--image {
+  @extend .card__purpose;
+  background-color: $purpose--image;
+}
 
 .card__title {
   margin-top: 0;

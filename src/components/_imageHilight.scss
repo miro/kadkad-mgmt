@@ -1,14 +1,7 @@
 .image-hilight__wrapper {
   width: 100%;
-  height: 550px;
+  height: 80vh;
   position: relative;
-
-  @include viewports(up-to small) {
-    height: 450px;
-  }
-  @include viewports(tiny) {
-    height: 300px;
-  }
 }
 
 .hilight__meta {

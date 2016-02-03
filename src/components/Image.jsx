@@ -13,6 +13,7 @@ let ImageFormComponent = React.createClass({
     const now = new Date();
     const currentYear = now.getFullYear();
     const currentMonth = now.getMonth() + 1;
+    const fullImgUrl = getImageUrl(this.props, 'full');
 
     return <form onSubmit={handleSubmit} className="form--basic form--image">
       <fieldset>
@@ -37,7 +38,7 @@ let ImageFormComponent = React.createClass({
         <div className="form__controls">
           <button type="submit">Tallenna</button>
           <button onClick={this.toggleEditMode}>Peruuta</button>
-          <a className="btn btn-secondary" href={this.props.imgUrl} target="_blank">
+          <a className="btn btn-secondary" href={fullImgUrl} target="_blank">
             <i className="icon-kuva"></i> Alkuperäinen kuva
           </a>
         </div>
@@ -96,9 +97,7 @@ export default React.createClass({
 
   render: function() {
     let model = this.props.image.toJS();
-    model.imgUrl = getImageUrl(model);
-    let cardCoverStyle = { backgroundImage: 'url(' + model.imgUrl + ')' };
-
+    let cardCoverStyle = { backgroundImage: 'url(' + getImageUrl(model) + ')' };
 
     if (this.state.editMode) {
       let personSelectValues = this.props.persons.map(person => {

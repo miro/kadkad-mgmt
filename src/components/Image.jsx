@@ -103,7 +103,7 @@ export default React.createClass({
       let personSelectValues = this.props.persons.map(person => {
         return {
           value: person.get('id'),
-          label: (person.get('displayName')) ? person.get('displayName') : person.get('id')
+          label: person.get('displayName') + ' (' + person.get('fullName') + ')'
         };
       });
       let spotSelectValues = this.props.spots.map(spot => {

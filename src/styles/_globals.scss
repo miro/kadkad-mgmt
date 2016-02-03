@@ -39,6 +39,11 @@ a:hover {
 button, .btn {
   @extend .pure-button;
 }
+.btn,
+.btn:visited,
+.btn:hover {
+  color: $white;
+}
 
 .btn-primary {
   @extend .pure-button-primary;

@@ -114,3 +114,10 @@ export function getLatestImages() {
       .end((error, response) => (error) ? reject(error) : resolve(response.body));
   });
 }
+
+export function getSpotLocations() {
+  return new Promise((resolve, reject) => {
+    request.get(baseUrl + 'spots/locations')
+      .end((error, response) => (error) ? reject(error) : resolve(response.body));
+  });
+}

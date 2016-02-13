@@ -108,6 +108,8 @@ export function deleteFlag(flagName) {
 }
 
 
+// # These requires no authentication
+//
 export function fetchKpi() {
   return dispatch => {
     api.getKpi()
@@ -120,5 +122,13 @@ export function fetchLatestImages() {
     api.getLatestImages()
       .then(latest => dispatch(setData('latestImages', latest)));
   }
+}
+
+export const SPOT_LOCATIONS = 'SPOT_LOCATIONS';
+export function fetchSpotLocations() {
+  return dispatch => {
+    api.getSpotLocations()
+      .then(locations => dispatch(setData(SPOT_LOCATIONS, locations)));
+  };
 }
 

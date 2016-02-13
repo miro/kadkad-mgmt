@@ -47,6 +47,10 @@
   @extend .card__purpose;
   background-color: $purpose--image;
 }
+.card__purpose--spot {
+  @extend .card__purpose;
+  background-color: $purpose--spot;
+}
 
 .card__title {
   margin-top: 0;

@@ -18,6 +18,7 @@ export const SpotClusterMap = React.createClass({
 
   render: function() {
     return <div className="spot-cluster__wrapper">
+      <h3 className="card__purpose--spot"><i className="icon-sijainti"></i> Tallennetut Spotit</h3>
       <section className="spot-cluster__map__wrapper">
         <GoogleMapLoader
           containerElement={<div {...this.props} className="spot-cluster__container" />}

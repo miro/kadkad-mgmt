@@ -3,7 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import Slider from 'react-slick';
 
 import ImageHilight from './ImageHilight';
-
+import Spinner from './Spinner';
 
 export default React.createClass({
   mixins: [PureRenderMixin],
@@ -24,7 +24,9 @@ export default React.createClass({
   },
 
   render: function () {
-    const images = this.props.images || [];
+    const imagesDefault = [];
+    const images = this.props.images || imagesDefault;
+
     // note: for some reason Slider requires that the element is wrapped with <div>
     const imageComponents = images.map(image => <div key={image.id}><ImageHilight model={image} /></div>);
 
@@ -37,7 +39,10 @@ export default React.createClass({
       </div>;
     }
     else {
-      return <h4>Ladataan viimeisimpiä kuvia...</h4>
+      return <div className="image-reel__wrapper--loading">
+        <h4>Ladataan viimeisimpiä kuvia...</h4>
+        <Spinner className="spinner" />
+      </div>
     }
 
   }

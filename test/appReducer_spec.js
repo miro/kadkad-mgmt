@@ -78,7 +78,7 @@ const ITEMS_PER_PAGE = defaultState.paging[VIEW_NAME].itemsInPage;
 const PAGING = 'paging'; // property where the paging data is saved in the state
 
 describe('appReducer (paging)', () => {
-  it('handles basic TURN_PAGE to forward', () => {
+  it('handles basic PAGE_TURN to forward', () => {
     const totalItemsInThisTest = ITEMS_PER_PAGE * 2;
     const action = actions.turnPage(VIEW_NAME, true, totalItemsInThisTest);
 
@@ -92,7 +92,7 @@ describe('appReducer (paging)', () => {
   });
 
 
-  it('handles basic TURN_PAGE to forward and back', () => {
+  it('handles basic PAGE_TURN to forward and back', () => {
     const totalItemsInThisTest = ITEMS_PER_PAGE * 2;
 
     // first action
@@ -117,7 +117,7 @@ describe('appReducer (paging)', () => {
   });
 
 
-  it('does not let TURN_PAGE to overflow', () => {
+  it('does not let PAGE_TURN to overflow', () => {
     const totalItemsInThisTest = ITEMS_PER_PAGE - 1;
 
     const action = actions.turnPage(VIEW_NAME, true, totalItemsInThisTest);
@@ -132,7 +132,7 @@ describe('appReducer (paging)', () => {
   });
 
 
-  it('does not let TURN_PAGE to overflow when there is only one item', () => {
+  it('does not let PAGE_TURN to overflow when there is only one item', () => {
     const totalItemsInThisTest = 1;
 
     const action = actions.turnPage(VIEW_NAME, true, totalItemsInThisTest);
@@ -147,7 +147,7 @@ describe('appReducer (paging)', () => {
   });
 
 
-  it('does not let TURN_PAGE to underflow', () => {
+  it('does not let PAGE_TURN to underflow', () => {
     // is "underflow" even a term?
     const tryToTurnToNegativePage = actions.turnPage(VIEW_NAME, false, 10);
 
@@ -160,7 +160,7 @@ describe('appReducer (paging)', () => {
     }));
   });
 
-  it('TURN_PAGE shows second page containing only one item', () => {
+  it('PAGE_TURN shows second page containing only one item', () => {
     const totalItemsInThisTest = ITEMS_PER_PAGE + 1;
     const turnNextPage = actions.turnPage(VIEW_NAME, true, totalItemsInThisTest);
     const nextState = appReducer(initialState, turnNextPage);

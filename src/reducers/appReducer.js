@@ -107,7 +107,6 @@ function turnPage(state, viewName, turnForward, totalItemCount) {
 
 export default function(state = Map(), action) {
   // TODO get action types from some const cfg object
-  // TODO enforce <TYPE>_<VERB> format in every action
   // TODO tests for message and flag related operations
   switch (action.type) {
   case 'TAB_CHANGE':
@@ -127,7 +126,7 @@ export default function(state = Map(), action) {
 
   case 'USER_UPDATE':
     return updateUser(state, action.profile, action.loggedIn);
-  case 'TURN_PAGE':
+  case 'PAGE_TURN':
     return turnPage(state, action.viewName, action.turnForward, action.totalItemCount);
   default:
     return state;

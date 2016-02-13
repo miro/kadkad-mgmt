@@ -38,7 +38,7 @@ export function userLogout() {
 
 export function turnPage(viewName, turnForward, totalItemCount) {
   return {
-    type: 'TURN_PAGE',
+    type: 'PAGE_TURN',
     viewName,
     turnForward,
     totalItemCount

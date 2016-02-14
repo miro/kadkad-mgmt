@@ -9,7 +9,7 @@ import * as appActions from '../actions/appActions';
 
 import {imageFilter} from '../services/filter';
 
-import {ImageFiltersContainer, IMAGE_FILTER_STATE, FILTERED_IMAGE_IDS} from './ImageFilters';
+import {ImageFiltersContainer, IMAGE_FILTER_STATE, FILTERED_IMAGE_IDS, FILTERS_SET_KEY} from './ImageFilters';
 import {PageControlsContainer} from './PageControls';
 import {ImageList} from '../components/ImageList';
 
@@ -32,10 +32,17 @@ export const ImageEditView = React.createClass({
     const startIndex = currentPage * itemsInPage;
     const endIndex = startIndex + itemsInPage;
 
-    let filteredImages = _.filter(this.props.allImages, image => {
-      return _.find(filteredImageIds, imageId => imageId === image.get('id'));
-    });
-    return filteredImages.slice(startIndex, endIndex);
+    var imagesList = [];
+
+    if (this.props.filtersSet) {
+      imagesList = _.filter(this.props.allImages, image => {
+        return _.find(filteredImageIds, imageId => imageId === image.get('id'));
+      });
+    } else {
+      imagesList = this.props.allImages;
+    }
+
+    return imagesList.slice(startIndex, endIndex);
   },
 
   handleFiltersChange() {
@@ -63,7 +70,7 @@ export const ImageEditView = React.createClass({
           viewName={VIEW_NAME}
           totalItemCount={totalImagesCount} />
 
-        {filteredImageIds.length > 0 ?
+        {!this.props.filtersSet || filteredImageIds.length > 0 ?
           <ImageList
             images={imagesOnThisPage}
             persons={persons}
@@ -99,6 +106,7 @@ function mapStateToProps(state) {
     persons: state.models.get('persons').toArray(),
     spots: state.models.get('spots').toArray(),
 
+    filtersSet: state.app.getIn(['appState', VIEW_NAME, IMAGE_FILTER_STATE, FILTERS_SET_KEY]),
     filteredImageIds: state.app.getIn(['appState', VIEW_NAME, IMAGE_FILTER_STATE, FILTERED_IMAGE_IDS]).toArray()
   };
 }

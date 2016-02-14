@@ -9,6 +9,7 @@ import {imageFilter} from '../services/filter';
 
 export const IMAGE_FILTER_STATE = 'imageFilterState';
 
+export const FILTERS_SET_KEY = 'filtersInitialized';
 export const TEXT_FILTER_KEY = 'textFilter';
 export const SHOW_ONLY_INCOMPLETE_KEY = 'showOnlyIncomplete'; // argh, naming things...
 export const FILTERED_IMAGE_IDS = 'filteredImagesIds';
@@ -40,6 +41,7 @@ export const ImageFilters = React.createClass({
     const filteredImageIds = _.map(imageFilter(this.props.allImages, filteringState), image => image.get('id'));
 
     filteringState[FILTERED_IMAGE_IDS] = filteredImageIds;
+    filteringState[FILTERS_SET_KEY] = true;
 
     this.props.dispatch(setData([this.props.viewName, IMAGE_FILTER_STATE], filteringState));
 

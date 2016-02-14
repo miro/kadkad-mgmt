@@ -1,9 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux'
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
-import * as modelActions from '../actions/modelActions';
 import * as appActions from '../actions/appActions';
 
 export const PageControls = React.createClass({

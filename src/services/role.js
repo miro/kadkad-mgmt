@@ -1,7 +1,6 @@
 // # roleService
 //      direct copy of https://github.com/miro/dakdak-api/blob/development/services/role.js
 //      these must be kept in sync!
-import _ from 'lodash';
 
 export const UNREGISTERED = 'UNREGISTERED';
 export const USER = 'USER';

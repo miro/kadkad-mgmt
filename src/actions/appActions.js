@@ -45,6 +45,13 @@ export function turnPage(viewName, turnForward, totalItemCount) {
   };
 }
 
+export function resetPage(viewName) {
+  return {
+    type: 'PAGE_RESET',
+    viewName
+  };
+}
+
 export const INVITATION_ERROR_MESSAGE = 'INVITATION_ERROR_MESSAGE';
 export const INVITATION_REDEEMED_FLAG = 'INVITATION_REDEEMED_FLAG';
 export const INVITATION_NO_MORE_TRIES_LEFT_FLAG = 'INVITATION_NO_MORE_TRIES_LEFT_FLAG';

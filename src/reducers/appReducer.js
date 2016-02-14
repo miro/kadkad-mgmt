@@ -105,6 +105,13 @@ function turnPage(state, viewName, turnForward, totalItemCount) {
   }
 }
 
+function resetPage(state, viewName) {
+  const newPageNumber = 0;
+  return state.setIn(['paging', viewName, 'currentPage'], newPageNumber);
+}
+
+
+
 export default function(state = Map(), action) {
   // TODO get action types from some const cfg object
   // TODO tests for message and flag related operations
@@ -126,8 +133,13 @@ export default function(state = Map(), action) {
 
   case 'USER_UPDATE':
     return updateUser(state, action.profile, action.loggedIn);
+
   case 'PAGE_TURN':
     return turnPage(state, action.viewName, action.turnForward, action.totalItemCount);
+  case 'PAGE_RESET':
+    return resetPage(state, action.viewName);
+
+
   default:
     return state;
   }

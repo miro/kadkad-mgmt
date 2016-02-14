@@ -10,7 +10,9 @@ export const defaultState = {
     },
 
     imageEditView: {
-      filteredImagesIds: []
+      imageFilterState: {
+        filteredImagesIds: []
+      }
     }
   },
 

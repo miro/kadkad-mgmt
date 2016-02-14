@@ -9,7 +9,7 @@ import * as appActions from '../actions/appActions';
 
 import {imageFilter} from '../services/filter';
 
-import {ImageFiltersContainer, TEXT_FILTER_KEY, SHOW_ONLY_INCOMPLETE_KEY} from './ImageFilters';
+import {ImageFiltersContainer, IMAGE_FILTER_STATE, FILTERED_IMAGE_IDS} from './ImageFilters';
 import {PageControlsContainer} from './PageControls';
 import {ImageList} from '../components/ImageList';
 
@@ -17,7 +17,6 @@ import {ImageList} from '../components/ImageList';
 // TODO: add "back to top" -button
 
 const VIEW_NAME = 'imageEditView';
-const FILTERED_IMAGE_IDS = 'filteredImagesIds';
 
 export const ImageEditView = React.createClass({
   mixins: [PureRenderMixin],
@@ -28,20 +27,10 @@ export const ImageEditView = React.createClass({
     this.props.dispatch(modelActions.getAllModels('spots'));
   },
 
-  getFilteredImages() {
-    const filteringOptions = {
-      filterString: this.props.viewState.get(TEXT_FILTER_KEY),
-      showOnlyUncomplete: this.props.viewState.get(SHOW_ONLY_INCOMPLETE_KEY)
-    };
-
-    return imageFilter(this.props.allImages, filteringOptions);
-  },
-
   getImagesOnCurrentPage(filteredImageIds) {
     const {currentPage, itemsInPage} = this.props.pagingState;
     const startIndex = currentPage * itemsInPage;
     const endIndex = startIndex + itemsInPage;
-
 
     let filteredImages = _.filter(this.props.allImages, image => {
       return _.find(filteredImageIds, imageId => imageId === image.get('id'));
@@ -50,16 +39,12 @@ export const ImageEditView = React.createClass({
   },
 
   handleFiltersChange() {
+    // filters were changed -> reset paging to zero
     this.props.dispatch(appActions.resetPage(VIEW_NAME));
-
-    const filteredIds = _.map(this.getFilteredImages(), image => image.get('id'));
-    this.props.dispatch(appActions.setData([VIEW_NAME, FILTERED_IMAGE_IDS], filteredIds));
-
   },
 
   render: function() {
     const {persons, spots, dispatch, filteredImageIds} = this.props;
-
 
     const totalImagesCount = filteredImageIds.length;
     const imagesOnThisPage = this.getImagesOnCurrentPage(filteredImageIds);
@@ -69,7 +54,6 @@ export const ImageEditView = React.createClass({
         <h2 className="view__title">
           <i className="icon-kuvat"></i> Kuvien tietojen muokkaus
         </h2>
-
 
         <ImageFiltersContainer
           viewName={VIEW_NAME}
@@ -111,14 +95,11 @@ function mapStateToProps(state) {
     viewState: state.app.getIn(['appState', VIEW_NAME]),
     pagingState: state.app.getIn(['paging', VIEW_NAME]).toJS(),
 
-    filterString: state.app.getIn(['appState', VIEW_NAME, TEXT_FILTER_KEY]),
-    showOnlyUncomplete: state.app.getIn(['appState', VIEW_NAME, SHOW_ONLY_INCOMPLETE_KEY]),
-
     allImages: state.models.get('images').toArray(),
     persons: state.models.get('persons').toArray(),
     spots: state.models.get('spots').toArray(),
 
-    filteredImageIds: state.app.getIn(['appState', VIEW_NAME, FILTERED_IMAGE_IDS])
+    filteredImageIds: state.app.getIn(['appState', VIEW_NAME, IMAGE_FILTER_STATE, FILTERED_IMAGE_IDS]).toArray()
   };
 }
 

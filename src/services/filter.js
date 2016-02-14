@@ -7,17 +7,17 @@ export function imageFilter(images, opts) {
   console.log('filtering', opts);
 
   // Parse opts
-  const filterString = opts.filterString ? opts.filterString.toLowerCase() : false;
-  const showOnlyUncompleteImages = opts.showOnlyUncomplete;
+  const textFilter = opts.textFilter ? opts.textFilter.toLowerCase() : false;
+  const showOnlyIncomplete = opts.showOnlyIncomplete;
 
-  if (filterString) {
+  if (textFilter) {
     images = _.filter(images, image => {
-      return matchFound(image, 'title', filterString) ||
-        matchFound(image, 'trickName', filterString);
+      return matchFound(image, 'title', textFilter) ||
+        matchFound(image, 'trickName', textFilter);
     });
   }
 
-  if (showOnlyUncompleteImages) {
+  if (showOnlyIncomplete) {
     images = _.filter(images, image => {
       return keyIsNotSet(image, 'spotId') ||
         keyIsNotSet(image, 'riderId');

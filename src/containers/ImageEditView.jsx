@@ -69,12 +69,18 @@ export const ImageEditView = React.createClass({
           totalItemCount={totalImagesCount}
         />
 
-        <ImageList
-          images={imagesOnThisPage}
-          persons={persons}
-          spots={spots}
-          dispatch={dispatch}
-          {...bindActionCreators(modelActions, dispatch)} />
+        {filteredImages.length > 0 ?
+          <ImageList
+            images={imagesOnThisPage}
+            persons={persons}
+            spots={spots}
+            dispatch={dispatch}
+            {...bindActionCreators(modelActions, dispatch)} />
+          :
+          <div>
+            <p>Ei osumia - höllennä siivilöintiehtojasi</p>
+          </div>
+        }
 
         <PageControlsContainer
           viewName={VIEW_NAME}

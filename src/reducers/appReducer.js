@@ -1,4 +1,5 @@
 import {List, Map, fromJS} from 'immutable';
+import {isObject} from 'lodash';
 
 export const defaultState = {
   // everything related to the app/system itself
@@ -70,6 +71,8 @@ function updateUser(state, profile, loggedIn) {
 //    - flags: same as messages, but only key-boolean -store
 function setData(state, key, value) {
   const path = ['appState'].concat(key);
+  value = isObject(value) ? fromJS(value) : value;
+
   return state.setIn(path, value);
 }
 

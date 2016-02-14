@@ -2,10 +2,14 @@ import {List, Map, fromJS} from 'immutable';
 
 export const defaultState = {
   // everything related to the app/system itself
-  appState: { kpi: {
-    pixelCount: '???',
-    imageCount: '???'
-  }},
+  appState: {
+    kpi: {
+      pixelCount: '???',
+      imageCount: '???',
+    },
+
+    imageEditView: {}
+  },
 
   flags: {},
 

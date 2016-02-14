@@ -6,6 +6,9 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import * as modelActions from '../actions/modelActions';
 import * as appActions from '../actions/appActions';
 
+import {imageFilter} from '../services/filter';
+
+import {ImageFiltersContainer, TEXT_FILTER_KEY} from './ImageFilters';
 import {PageControlsContainer} from './PageControls';
 import {ImageList} from '../components/ImageList';
 
@@ -23,14 +26,43 @@ export const ImageEditView = React.createClass({
     this.props.dispatch(modelActions.getAllModels('spots'));
   },
 
-  render: function() {
-    const {imagesOnThisPage, persons, spots, startIndex, endIndex, totalImagesCount, dispatch} = this.props;
+  handleFiltersChange() {
+    console.log('changed!');
+    this.props.dispatch(appActions.resetPage(VIEW_NAME));
+  },
 
-    if (imagesOnThisPage.length > 0) {
+  getFilteredImages() {
+    const filteringString = this.props.viewState[TEXT_FILTER_KEY];
+    return imageFilter(this.props.allImages, filteringString);
+  },
+
+  getImagesOnCurrentPage(filteredImages) {
+    const {currentPage, itemsInPage} = this.props.pagingState;
+    const startIndex = currentPage * itemsInPage;
+    const endIndex = startIndex + itemsInPage;
+
+    return filteredImages.slice(startIndex, endIndex);
+  },
+
+  render: function() {
+    const {persons, spots, dispatch} = this.props;
+
+    const filteredImages = this.getFilteredImages();
+    const imagesOnThisPage = this.getImagesOnCurrentPage(filteredImages);
+
+    const totalImagesCount = filteredImages.length;
+
+
+    if (this.props.allImages.length > 0) {
       return <div>
         <h2 className="view__title">
           <i className="icon-kuvat"></i> Kuvien tietojen muokkaus
         </h2>
+
+
+        <ImageFiltersContainer
+          viewName={VIEW_NAME}
+          onFiltersChange={this.handleFiltersChange} />
 
         <PageControlsContainer
           viewName={VIEW_NAME}
@@ -60,18 +92,11 @@ export const ImageEditView = React.createClass({
 
 
 function mapStateToProps(state) {
-  const images = state.models.get('images').toArray();
-
-  const {currentPage, itemsInPage} = state.app.getIn(['paging', VIEW_NAME]).toJS();
-  const startIndex = currentPage * itemsInPage;
-  const endIndex = startIndex + itemsInPage;
-
   return {
-    imagesOnThisPage: images.slice(startIndex, endIndex),
-    totalImagesCount: images.length,
-    startIndex,
-    endIndex,
+    viewState: state.app.getIn(['appState', VIEW_NAME]),
+    pagingState: state.app.getIn(['paging', VIEW_NAME]).toJS(),
 
+    allImages: state.models.get('images').toArray(),
     persons: state.models.get('persons').toArray(),
     spots: state.models.get('spots').toArray()
   };

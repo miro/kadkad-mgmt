@@ -42,6 +42,7 @@
     "immutable": "^3.7.5",
     "jsdom": "^6.5.1",
     "jsonwebtoken": "^5.5.0",
+    "lodash": "^4.3.0",
     "mocha": "^2.3.0",
     "odometer": "^0.4.7",
     "purecss-sass": "^0.6.0",

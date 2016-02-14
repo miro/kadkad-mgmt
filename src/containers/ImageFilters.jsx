@@ -6,27 +6,35 @@ import {setData} from '../actions/appActions';
 
 
 export const TEXT_FILTER_KEY = 'textFilter';
+export const SHOW_ONLY_INCOMPLETE_KEY = 'showOnlyIncomplete'; // argh, naming things...
 
 export const ImageFilters = React.createClass({
   mixins: [PureRenderMixin],
 
-  handleInputChange(event) {
+  handleFilterStringChange(event) {
     // TODO: throttle
+    this.props.dispatch(setData([this.props.viewName, TEXT_FILTER_KEY], event.target.value));
+    this.props.onFiltersChange();
+  },
 
-    this.props.onFiltersChange ? this.props.onFiltersChange() : null;
+  handleButtonClick() {
+    // Toggle current value
+    const currentValue = this.props.appState.getIn([this.props.viewName, SHOW_ONLY_INCOMPLETE_KEY]);
+    this.props.dispatch(setData([this.props.viewName, SHOW_ONLY_INCOMPLETE_KEY], !currentValue));
 
-    let payload = {};
-    payload[TEXT_FILTER_KEY] = event.target.value;
-
-    this.props.dispatch(setData(this.props.viewName, payload));
+    this.props.onFiltersChange();
   },
 
   render: function() {
     return (
-      <input
-        type="text"
-        onChange={this.handleInputChange}
-        placeholder="Hakusana" />
+      <div className="image-filters__wrapper">
+        <input
+          type="text"
+          onChange={this.handleFilterStringChange}
+          placeholder="Filtteröi..." />
+
+        <button onClick={this.handleButtonClick}>Näytä vain näytä vain</button>
+      </div>
     );
   }
 });
@@ -34,7 +42,7 @@ export const ImageFilters = React.createClass({
 
 function mapStateToProps(state) {
   return {
-    appState: state.app
+    appState: state.app.get('appState')
   };
 }
 

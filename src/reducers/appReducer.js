@@ -8,7 +8,9 @@ export const defaultState = {
       imageCount: '???',
     },
 
-    imageEditView: {}
+    imageEditView: {
+      filteredImagesIds: []
+    }
   },
 
   flags: {},

@@ -2,13 +2,14 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux'
 import PureRenderMixin from 'react-addons-pure-render-mixin';
+import _ from 'lodash';
 
 import * as modelActions from '../actions/modelActions';
 import * as appActions from '../actions/appActions';
 
 import {imageFilter} from '../services/filter';
 
-import {ImageFiltersContainer, TEXT_FILTER_KEY} from './ImageFilters';
+import {ImageFiltersContainer, TEXT_FILTER_KEY, SHOW_ONLY_INCOMPLETE_KEY} from './ImageFilters';
 import {PageControlsContainer} from './PageControls';
 import {ImageList} from '../components/ImageList';
 
@@ -16,6 +17,7 @@ import {ImageList} from '../components/ImageList';
 // TODO: add "back to top" -button
 
 const VIEW_NAME = 'imageEditView';
+const FILTERED_IMAGE_IDS = 'filteredImagesIds';
 
 export const ImageEditView = React.createClass({
   mixins: [PureRenderMixin],
@@ -26,32 +28,41 @@ export const ImageEditView = React.createClass({
     this.props.dispatch(modelActions.getAllModels('spots'));
   },
 
-  handleFiltersChange() {
-    console.log('changed!');
-    this.props.dispatch(appActions.resetPage(VIEW_NAME));
-  },
-
   getFilteredImages() {
-    const filteringString = this.props.viewState[TEXT_FILTER_KEY];
-    return imageFilter(this.props.allImages, filteringString);
+    const filteringOptions = {
+      filterString: this.props.viewState.get(TEXT_FILTER_KEY),
+      showOnlyUncomplete: this.props.viewState.get(SHOW_ONLY_INCOMPLETE_KEY)
+    };
+
+    return imageFilter(this.props.allImages, filteringOptions);
   },
 
-  getImagesOnCurrentPage(filteredImages) {
+  getImagesOnCurrentPage(filteredImageIds) {
     const {currentPage, itemsInPage} = this.props.pagingState;
     const startIndex = currentPage * itemsInPage;
     const endIndex = startIndex + itemsInPage;
 
+
+    let filteredImages = _.filter(this.props.allImages, image => {
+      return _.find(filteredImageIds, imageId => imageId === image.get('id'));
+    });
     return filteredImages.slice(startIndex, endIndex);
   },
 
+  handleFiltersChange() {
+    this.props.dispatch(appActions.resetPage(VIEW_NAME));
+
+    const filteredIds = _.map(this.getFilteredImages(), image => image.get('id'));
+    this.props.dispatch(appActions.setData([VIEW_NAME, FILTERED_IMAGE_IDS], filteredIds));
+
+  },
+
   render: function() {
-    const {persons, spots, dispatch} = this.props;
+    const {persons, spots, dispatch, filteredImageIds} = this.props;
 
-    const filteredImages = this.getFilteredImages();
-    const imagesOnThisPage = this.getImagesOnCurrentPage(filteredImages);
 
-    const totalImagesCount = filteredImages.length;
-
+    const totalImagesCount = filteredImageIds.length;
+    const imagesOnThisPage = this.getImagesOnCurrentPage(filteredImageIds);
 
     if (this.props.allImages.length > 0) {
       return <div>
@@ -66,10 +77,9 @@ export const ImageEditView = React.createClass({
 
         <PageControlsContainer
           viewName={VIEW_NAME}
-          totalItemCount={totalImagesCount}
-        />
+          totalItemCount={totalImagesCount} />
 
-        {filteredImages.length > 0 ?
+        {filteredImageIds.length > 0 ?
           <ImageList
             images={imagesOnThisPage}
             persons={persons}
@@ -84,8 +94,7 @@ export const ImageEditView = React.createClass({
 
         <PageControlsContainer
           viewName={VIEW_NAME}
-          totalItemCount={totalImagesCount}
-        />
+          totalItemCount={totalImagesCount} />
       </div>;
     }
     else {
@@ -102,9 +111,14 @@ function mapStateToProps(state) {
     viewState: state.app.getIn(['appState', VIEW_NAME]),
     pagingState: state.app.getIn(['paging', VIEW_NAME]).toJS(),
 
+    filterString: state.app.getIn(['appState', VIEW_NAME, TEXT_FILTER_KEY]),
+    showOnlyUncomplete: state.app.getIn(['appState', VIEW_NAME, SHOW_ONLY_INCOMPLETE_KEY]),
+
     allImages: state.models.get('images').toArray(),
     persons: state.models.get('persons').toArray(),
-    spots: state.models.get('spots').toArray()
+    spots: state.models.get('spots').toArray(),
+
+    filteredImageIds: state.app.getIn(['appState', VIEW_NAME, FILTERED_IMAGE_IDS])
   };
 }
 

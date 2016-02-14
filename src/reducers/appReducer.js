@@ -67,7 +67,8 @@ function updateUser(state, profile, loggedIn) {
 //    - messages: basically key-value store
 //    - flags: same as messages, but only key-boolean -store
 function setData(state, key, value) {
-  return state.setIn(['appState', key], value);
+  const path = ['appState'].concat(key);
+  return state.setIn(path, value);
 }
 
 function setFlag(state, flagName) {

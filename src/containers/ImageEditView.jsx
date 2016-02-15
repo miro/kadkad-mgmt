@@ -79,7 +79,7 @@ export const ImageEditView = React.createClass({
             {...bindActionCreators(modelActions, dispatch)} />
           :
           <div>
-            <p>Ei osumia - höllennä siivilöintiehtojasi</p>
+            <p>Ei osumia - höllennä hakuehtojasi</p>
           </div>
         }
 

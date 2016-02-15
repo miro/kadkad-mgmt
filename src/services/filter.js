@@ -4,8 +4,6 @@
 import _ from 'lodash';
 
 export function imageFilter(images, opts) {
-  console.log('filtering', opts);
-
   // Parse opts
   const textFilter = opts.textFilter ? opts.textFilter.toLowerCase() : false;
   const showOnlyIncomplete = opts.showOnlyIncomplete;

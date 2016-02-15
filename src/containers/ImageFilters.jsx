@@ -6,6 +6,7 @@ import _ from 'lodash';
 import {setData} from '../actions/appActions';
 import {imageFilter} from '../services/filter';
 
+import ToggleButton from '../components/ToggleButton';
 
 export const IMAGE_FILTER_STATE = 'imageFilterState';
 
@@ -25,7 +26,7 @@ export const ImageFilters = React.createClass({
     this.handleFiltersChanged(payload);
   },
 
-  handleButtonClick() {
+  handleIncompleteClick() {
     const currentValue = this.props.appState.getIn([this.props.viewName, IMAGE_FILTER_STATE, SHOW_ONLY_INCOMPLETE_KEY]);
 
     let payload = {};
@@ -50,16 +51,25 @@ export const ImageFilters = React.createClass({
   },
 
   render: function() {
-    return (
-      <div className="image-filters__wrapper">
+    const showOnlyIncomplete = this.props.appState.getIn([this.props.viewName, IMAGE_FILTER_STATE, SHOW_ONLY_INCOMPLETE_KEY]);
+
+    return <section className="image-filters__wrapper">
+      <h4 className="image-filters__title">Hakuehdot</h4>
+
+      <div className="image-filters__inputs-container">
         <input
+          className="image-filters__text-input"
           type="text"
           onChange={this.handleFilterStringChange}
-          placeholder="Filtteröi..." />
+          placeholder="Hakusana" />
 
-        <button onClick={this.handleButtonClick}>Näytä vain näytä vain</button>
+        <ToggleButton
+          className="image-filters__toggle"
+          handleClick={this.handleIncompleteClick}
+          caption="Näytä vain täyttämättömät"
+          isActive={showOnlyIncomplete} />
       </div>
-    );
+    </section>;
   }
 });
 

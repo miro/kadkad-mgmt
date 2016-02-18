@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
+import {Map} from 'immutable';
 
 import * as app from '../actions/appActions';
 
@@ -96,10 +97,13 @@ export const LandingView = React.createClass({
 });
 
 function mapStateToProps(state) {
+  const kpi = state.app.getIn(['appState', 'kpi']);
+  const kpiFallback = {};
+
   return {
     loggedIn: state.app.getIn(['user', 'loggedIn']),
     latestImages: state.app.getIn(['appState', 'latestImages']),
-    kpi: state.app.getIn(['appState', 'kpi']),
+    kpi: Map.isMap(kpi) ? kpi.toJS() : kpiFallback,
     showSpotMap: state.app.getIn(['flags', SHOW_SPOTMAP_FLAG])
   };
 }

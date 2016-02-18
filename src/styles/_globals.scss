@@ -1,3 +1,6 @@
+// TODO: we really need to do some general styles for header elements,
+// currently I am constantly finetuning margins on them
+
 @import url(https://fonts.googleapis.com/css?family=Titillium+Web:400,700italic,700);
 
 html, body {
@@ -39,6 +42,11 @@ a:hover {
 button, .btn {
   @extend .pure-button;
 }
+.btn,
+.btn:visited,
+.btn:hover {
+  color: $white;
+}
 
 .btn-primary {
   @extend .pure-button-primary;
@@ -51,7 +59,7 @@ button, .btn {
   color: $white;
   border-radius: 4px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  background: rgb(66, 184, 221);
+  background: $blue--light;
 }
 
 .app__title {

@@ -38,10 +38,17 @@ export function userLogout() {
 
 export function turnPage(viewName, turnForward, totalItemCount) {
   return {
-    type: 'TURN_PAGE',
+    type: 'PAGE_TURN',
     viewName,
     turnForward,
     totalItemCount
+  };
+}
+
+export function resetPage(viewName) {
+  return {
+    type: 'PAGE_RESET',
+    viewName
   };
 }
 
@@ -108,6 +115,8 @@ export function deleteFlag(flagName) {
 }
 
 
+// # These requires no authentication
+//
 export function fetchKpi() {
   return dispatch => {
     api.getKpi()
@@ -120,5 +129,13 @@ export function fetchLatestImages() {
     api.getLatestImages()
       .then(latest => dispatch(setData('latestImages', latest)));
   }
+}
+
+export const SPOT_LOCATIONS = 'SPOT_LOCATIONS';
+export function fetchSpotLocations() {
+  return dispatch => {
+    api.getSpotLocations()
+      .then(locations => dispatch(setData(SPOT_LOCATIONS, locations)));
+  };
 }
 

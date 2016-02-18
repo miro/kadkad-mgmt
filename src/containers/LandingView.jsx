@@ -6,16 +6,22 @@ import * as app from '../actions/appActions';
 
 import {InvitationCardContainer} from './Invitation';
 import {LoginButtonContainer} from './LoginButtons';
+import {SpotClusterMapContainer as SpotCluster} from './SpotClusterMap';
 
 import ImageReel from '../components/ImageReel';
 import Odometer from '../components/Odometer';
 
+const SHOW_SPOTMAP_FLAG = 'SHOW_SPOTMAP_FLAG';
 
 export const LandingView = React.createClass({
   mixins: [PureRenderMixin],
 
   componentWillMount() {
     this.props.dispatch(app.fetchLatestImages());
+  },
+
+  onShowMapClick() {
+    this.props.dispatch(app.setFlag(SHOW_SPOTMAP_FLAG, true));
   },
 
   render() {
@@ -27,8 +33,20 @@ export const LandingView = React.createClass({
 
       <InvitationCardContainer />
 
+      {this.props.showSpotMap ?
+        <SpotCluster />
+        :
+        <div className="spot-map__placeholder" onClick={this.onShowMapClick}>
+          <p>
+            <i className="icon-kartta"></i>
+            <i className="icon-sijainti"></i>
+          </p>
+          <h3>Näytä Spotit kartalla</h3>
+        </div>
+      }
+
       <div className="card__wrapper">
-        <h3 className="card__purpose">Täh?</h3>
+        <h3 className="card__purpose"><i className="icon-kommentti"></i> Täh?</h3>
         <div className="card__content">
 
           <h2 className="card__title">Olé!</h2>
@@ -81,7 +99,8 @@ function mapStateToProps(state) {
   return {
     loggedIn: state.app.getIn(['user', 'loggedIn']),
     latestImages: state.app.getIn(['appState', 'latestImages']),
-    kpi: state.app.getIn(['appState', 'kpi'])
+    kpi: state.app.getIn(['appState', 'kpi']),
+    showSpotMap: state.app.getIn(['flags', SHOW_SPOTMAP_FLAG])
   };
 }
 

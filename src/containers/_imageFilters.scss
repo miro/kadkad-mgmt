@@ -1,0 +1,37 @@
+$image-filters__input-height: 40px;
+
+.image-filters__wrapper {
+  margin-bottom: 15px;
+  padding: 10px;
+
+  background-color: $bg-color--dark;
+
+  .toggle-button {
+    height: $image-filters__input-height;
+    box-sizing: border-box;
+  }
+
+  @include viewports (up-to tiny) {
+    .image-filters__text-input,
+    .toggle-button {
+      width: 100%;
+    }
+  }
+}
+
+.image-filters__title {
+  margin: 2px 0 8px 0;
+}
+
+.image-filters__inputs-container {
+}
+
+.image-filters__text-input {
+  height: $image-filters__input-height;
+  box-sizing: border-box;
+
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+

@@ -6,6 +6,7 @@ import Select from 'react-select';
 
 import Badge from './Badge';
 import SpotForm from './SpotForm';
+import {DEFAULT_MAP_CENTER} from '../constants';
 
 
 // Styles for the search input field on the map.
@@ -55,7 +56,7 @@ export default React.createClass({
       state.center = markers[0].position;
     } else {
       // spot has no markers yet - set map center to Kajaani city
-      state.center = { lat: 64.2270644, lng: 27.7198246 };
+      state.center = DEFAULT_MAP_CENTER;
     }
 
     return state;

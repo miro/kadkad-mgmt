@@ -1,10 +1,22 @@
-$image-filters__input-height: 30px;
+$image-filters__input-height: 40px;
 
 .image-filters__wrapper {
   margin-bottom: 15px;
   padding: 10px;
 
   background-color: $bg-color--dark;
+
+  .toggle-button {
+    height: $image-filters__input-height;
+    box-sizing: border-box;
+  }
+
+  @include viewports (up-to tiny) {
+    .image-filters__text-input,
+    .toggle-button {
+      width: 100%;
+    }
+  }
 }
 
 .image-filters__title {
@@ -22,15 +34,4 @@ $image-filters__input-height: 30px;
   margin-bottom: 10px;
 }
 
-.image-filters__toggle {
-  height: $image-filters__input-height;
-  box-sizing: border-box;
-}
-
-@include viewports (up-to tiny) {
-  .image-filters__text-input,
-  .image-filters__toggle {
-    width: 100%;
-  }
-}
 

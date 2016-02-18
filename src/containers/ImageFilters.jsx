@@ -64,7 +64,6 @@ export const ImageFilters = React.createClass({
           placeholder="Hakusana" />
 
         <ToggleButton
-          className="image-filters__toggle"
           handleClick={this.handleIncompleteClick}
           caption="Näytä vain täyttämättömät"
           isActive={showOnlyIncomplete} />

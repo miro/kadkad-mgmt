@@ -1,11 +1,20 @@
 import {List, Map, fromJS} from 'immutable';
+import {isObject} from 'lodash';
 
 export const defaultState = {
   // everything related to the app/system itself
-  appState: { kpi: {
-    pixelCount: '???',
-    imageCount: '???'
-  }},
+  appState: {
+    kpi: {
+      pixelCount: '???',
+      imageCount: '???',
+    },
+
+    imageEditView: {
+      imageFilterState: {
+        filteredImagesIds: []
+      }
+    }
+  },
 
   flags: {},
 
@@ -63,7 +72,10 @@ function updateUser(state, profile, loggedIn) {
 //    - messages: basically key-value store
 //    - flags: same as messages, but only key-boolean -store
 function setData(state, key, value) {
-  return state.setIn(['appState', key], value);
+  const path = ['appState'].concat(key);
+  value = isObject(value) ? fromJS(value) : value;
+
+  return state.setIn(path, value);
 }
 
 function setFlag(state, flagName) {
@@ -105,6 +117,13 @@ function turnPage(state, viewName, turnForward, totalItemCount) {
   }
 }
 
+function resetPage(state, viewName) {
+  const newPageNumber = 0;
+  return state.setIn(['paging', viewName, 'currentPage'], newPageNumber);
+}
+
+
+
 export default function(state = Map(), action) {
   // TODO get action types from some const cfg object
   // TODO tests for message and flag related operations
@@ -126,8 +145,13 @@ export default function(state = Map(), action) {
 
   case 'USER_UPDATE':
     return updateUser(state, action.profile, action.loggedIn);
+
   case 'PAGE_TURN':
     return turnPage(state, action.viewName, action.turnForward, action.totalItemCount);
+  case 'PAGE_RESET':
+    return resetPage(state, action.viewName);
+
+
   default:
     return state;
   }

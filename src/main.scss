@@ -24,13 +24,16 @@
 @import './components/imageHilight';
 @import './components/badge';
 @import './components/spinner';
+@import './components/toggleButton';
 
 // # Container specific styles
 @import './containers/header';
 @import './containers/uploadView';
 @import './containers/imageEditView';
+@import './containers/pageControls';
 @import './containers/tabNavigation';
 @import './containers/landing';
 @import './containers/invitation';
 @import './containers/loginButtons';
 @import './containers/spotClusterMap';
+@import './containers/imageFilters';

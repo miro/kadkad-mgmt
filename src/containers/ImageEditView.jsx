@@ -2,20 +2,24 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux'
 import PureRenderMixin from 'react-addons-pure-render-mixin';
+import _ from 'lodash';
 
 import * as modelActions from '../actions/modelActions';
 import * as appActions from '../actions/appActions';
 
+import {imageFilter} from '../services/filter';
+
+import {ImageFiltersContainer, IMAGE_FILTER_STATE, FILTERED_IMAGE_IDS, FILTERS_SET_KEY} from './ImageFilters';
+import {PageControlsContainer} from './PageControls';
 import {ImageList} from '../components/ImageList';
 
-// NOTE: do we need filters in here..?
+// TODO: show loading indicator instead of "no images, upload some" -text if first fetch isn't ready yet
+// TODO: add "back to top" -button
 
 const VIEW_NAME = 'imageEditView';
 
 export const ImageEditView = React.createClass({
   mixins: [PureRenderMixin],
-
-  getInitialState: () => ({ page: 0, itemsInPage: 10 }),
 
   componentDidMount() {
     this.props.dispatch(modelActions.getAllModels('images'));
@@ -23,65 +27,87 @@ export const ImageEditView = React.createClass({
     this.props.dispatch(modelActions.getAllModels('spots'));
   },
 
-  // page related functions
-  turnNextPage() { this.changePage(true, this.props.totalImagesCount) },
-  turnPreviousPage() {this.changePage(false, this.props.totalImagesCount) },
-  changePage(turnForward, totalCount) {
-    this.props.dispatch(appActions.turnPage(VIEW_NAME, turnForward, totalCount));
+  getImagesOnCurrentPage(filteredImageIds) {
+    const {currentPage, itemsInPage} = this.props.pagingState;
+    const startIndex = currentPage * itemsInPage;
+    const endIndex = startIndex + itemsInPage;
+
+    var imagesList = [];
+
+    if (this.props.filtersSet) {
+      imagesList = _.filter(this.props.allImages, image => {
+        return _.find(filteredImageIds, imageId => imageId === image.get('id'));
+      });
+    } else {
+      imagesList = this.props.allImages;
+    }
+
+    return imagesList.slice(startIndex, endIndex);
+  },
+
+  handleFiltersChange() {
+    // filters were changed -> reset paging to zero
+    this.props.dispatch(appActions.resetPage(VIEW_NAME));
   },
 
   render: function() {
-    const {imagesOnThisPage, persons, spots, startIndex, endIndex, totalImagesCount, dispatch} = this.props;
+    const {persons, spots, dispatch, filteredImageIds} = this.props;
 
-    const pagingControls = <div className="paging__controls">
-      <button onClick={this.turnPreviousPage} className="paging__previous btn-primary">
-        <i className="icon-nuoli-vasen"></i>
-      </button>
-      <p className="paging__state">
-        {startIndex+1} ... {endIndex} ({totalImagesCount} kuvaa yhteensä)
-      </p>
-      <button onClick={this.turnNextPage} className="paging__next btn-primary">
-        <i className="icon-nuoli-oikea"></i>
-      </button>
-    </div>;
+    const totalImagesCount = filteredImageIds.length;
+    const imagesOnThisPage = this.getImagesOnCurrentPage(filteredImageIds);
 
+    if (this.props.allImages.length > 0) {
+      return <div>
+        <h2 className="view__title">
+          <i className="icon-kuvat"></i> Kuvien tietojen muokkaus
+        </h2>
 
-    return (imagesOnThisPage.length > 0) ?
-    <div>
-      <h2 className="view__title">
-        <i className="icon-kuvat"></i> Kuvien tietojen muokkaus
-      </h2>
+        <ImageFiltersContainer
+          viewName={VIEW_NAME}
+          onFiltersChange={this.handleFiltersChange} />
 
-      {pagingControls}
-      <ImageList
-        images={imagesOnThisPage}
-        persons={persons}
-        spots={spots}
-        dispatch={dispatch}
-        {...bindActionCreators(modelActions, dispatch)} />
-      {pagingControls}
+        <PageControlsContainer
+          viewName={VIEW_NAME}
+          totalItemCount={totalImagesCount} />
 
-    </div> :
-    <p>Ei vielä yhtään kuvaa - uploadaa jotain!</p>
+        {!this.props.filtersSet || filteredImageIds.length > 0 ?
+          <ImageList
+            images={imagesOnThisPage}
+            persons={persons}
+            spots={spots}
+            dispatch={dispatch}
+            {...bindActionCreators(modelActions, dispatch)} />
+          :
+          <div>
+            <p>Ei osumia - höllennä hakuehtojasi</p>
+          </div>
+        }
+
+        <PageControlsContainer
+          viewName={VIEW_NAME}
+          totalItemCount={totalImagesCount} />
+      </div>;
+    }
+    else {
+      return <div>
+        <p>Ei vielä yhtään kuvaa - uploadaa jotain!</p>
+      </div>;
+    }
   }
 });
 
 
 function mapStateToProps(state) {
-  const images = state.models.get('images').toArray();
-
-  const {currentPage, itemsInPage} = state.app.getIn(['paging', VIEW_NAME]).toJS();
-  const startIndex = currentPage * itemsInPage;
-  const endIndex = startIndex + itemsInPage;
-
   return {
-    imagesOnThisPage: images.slice(startIndex, endIndex),
-    totalImagesCount: images.length,
-    startIndex,
-    endIndex,
+    viewState: state.app.getIn(['appState', VIEW_NAME]),
+    pagingState: state.app.getIn(['paging', VIEW_NAME]).toJS(),
 
+    allImages: state.models.get('images').toArray(),
     persons: state.models.get('persons').toArray(),
-    spots: state.models.get('spots').toArray()
+    spots: state.models.get('spots').toArray(),
+
+    filtersSet: state.app.getIn(['appState', VIEW_NAME, IMAGE_FILTER_STATE, FILTERS_SET_KEY]),
+    filteredImageIds: state.app.getIn(['appState', VIEW_NAME, IMAGE_FILTER_STATE, FILTERED_IMAGE_IDS]).toArray()
   };
 }
 
